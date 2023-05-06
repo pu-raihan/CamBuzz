@@ -8,59 +8,129 @@ import PlaceIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/EmailOutlined";
 import MoreIcon from "@mui/icons-material/MoreVertRounded";
 import Posts from "../../components/posts/Posts";
+import Update from "../../components/update/Update";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import { Link, useLocation } from "react-router-dom";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const Profile = () => {
+
+  const [updateOpen, setUpdateOpen] = useState(false);
+
+  const username = useLocation().pathname.split("/")[2];
+
+  const { currentUser } = useContext(AuthContext);
+
+  const { isLoading, error, data } = useQuery(["user"], () =>
+    makeRequest.get("/users/" + username).then((res) => {
+      return res.data;
+    })
+  );
+
+  const { isLoading: relLoading, data: relationData } = useQuery(
+    ["relation"],
+    () =>
+      makeRequest.get("/relations?followed=" + username).then((res) => {
+        return res.data;
+      })
+  );
+
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation(
+    (following) => {
+      if (following)
+        return makeRequest.delete("/relations?username=" + username);
+      return makeRequest.post("/relations", { username });
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(["relation"]);
+      },
+    }
+  );
+
+  const handleFollow = () => {
+    mutation.mutate(relationData.includes(currentUser.username));
+  };
+
   return (
     <div className="profile">
-      <div className="images">
-        <img
-          src="https://images.indianexpress.com/2023/01/shah-rukh-khan-3.jpg"
-          alt=""
-          className="cover"
-        />
-        <img src="../prof.jpg" alt="" className="profilePic" />
-      </div>
-      <div className="profileContainer">
-        <div className="uInfo">
-          <div className="left">
-            <div className="l1">
-              <a href="http://facebook.com">
-                <FacebookIcon fontSize="large" />
-              </a>
-              <a href="http://instagram.com">
-                <InstagramIcon fontSize="large" />
-              </a>
-            </div>
-            <div className="l1">
-              <a href="http://twitter.com">
-                <TwitterIcon fontSize="large" />
-              </a>
-              <a href="http://github.com">
-                <GitHubIcon fontSize="large" />
-              </a>
-            </div>
+      {isLoading ? (
+        "Loading..."
+      ) : (
+        <>
+          <div className="images">
+            <img src={"/cover/" + data.coverPic} alt="" className="cover" />
+            <img
+              src={"/profile/" + data.profilePic}
+              alt=""
+              className="profilePic"
+            />
           </div>
-          <div className="center">
-            <span>Raihan</span>
-            <div className="info">
-              <div className="item">
-                <PlaceIcon />
-                <span>Kerala</span>
+          <div className="profileContainer">
+            <div className="uInfo">
+              <div className="left">
+                <div className="l1">
+                  <a href="http://facebook.com">
+                    <FacebookIcon fontSize="large" />
+                  </a>
+                  <a href="http://instagram.com">
+                    <InstagramIcon fontSize="large" />
+                  </a>
+                </div>
+                <div className="l1">
+                  <a href="http://twitter.com">
+                    <TwitterIcon fontSize="large" />
+                  </a>
+                  <a href="http://github.com">
+                    <GitHubIcon fontSize="large" />
+                  </a>
+                </div>
               </div>
-              <div className="item">
-                <WebIcon />
-                <span>Website</span>
+              <div className="center">
+                <span>{data.username}</span>
+                <div className="info">
+                  <div className="item">
+                    <PlaceIcon />
+                    <span>{data.city}</span>
+                  </div>
+                  <div className="item">
+                    <WebIcon />
+                    <span>{data.website}</span>
+                  </div>
+                </div>
+                {relLoading ? (
+                  "Loading..."
+                ) : username === currentUser.username ? (
+                  <button onClick={() => setUpdateOpen(true)}>Update</button>
+                ) : (
+                  <button onClick={handleFollow}>
+                    {relationData.includes(currentUser.username)
+                      ? "Following"
+                      : "Follow"}
+                  </button>
+                )}
               </div>
+              <div className="right">
+                <Link
+                  style={{ textDecoration: "none", color: "inherit" }}
+                  to='#'
+                  onClick={(e) => {
+                    window.location.href = "mailto:" + data.email;
+                    e.preventDefault();
+                  }}
+                ><EmailIcon /></Link>
+                <MoreIcon />
+              </div>{error && error}
             </div>
-            <button>Follow</button>
+            <Posts username={username} />
           </div>
-          <div className="right">
-            <EmailIcon />
-            <MoreIcon />
-          </div>
-        </div>
-      <Posts/>
-      </div>
+        </>
+      )}
+      {updateOpen && <Update setUpdateOpen={setUpdateOpen} user={data} />}
     </div>
   );
 };

@@ -2,15 +2,15 @@
 
 .leftBar {
   @include themify($themes) {
-    flex: 2;
+    flex: 3;
     position: sticky;
     top: 111px;
     height: calc(100vh - 111px);
     overflow: scroll;
     background: themed("bg");
-    color: themed("textColor");
-    
-    @include mobile{
+    color: themed("tColor");
+
+    @include mobile {
       display: none;
     }
     &::-webkit-scrollbar {
@@ -33,22 +33,48 @@
         span {
           font-size: 12px;
         }
+        // .resCard {
+        //   display: flex;
+        //   flex-direction: column;
+        //   border-radius: 30px;
+        //   background: #bab;
+        //   align-items: center;
 
-        .user {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+        //   .top {
+        //     display: flex;
+        //     gap: 20px;
+        //     padding: 15px;
+        //     padding-bottom:5px ;
 
-          img {
-            width: 30px;
-            height: 30px;
-            border-radius: 50px;
-            object-fit: cover;
-          }
-          span {
-            font-size: 14px;
-          }
-        }
+        //     .topItem {
+        //       background: themed("bg2");
+        //       width: 60px;
+        //       height: 60px;
+        //       border-radius: 50%;
+        //     }
+        //   }
+        //   .bottom{
+        //     display: flex;
+        //     gap: 20px;
+        //     padding: 15px;
+        //     padding-top: 5px;
+
+        //     .left{
+        //       background: themed("bg2");
+        //       width: 60px;
+        //       height: 100px;
+        //       border-radius: 20px;
+        //     }
+        //     .right{
+        //       background: themed("bg3");
+        //       width: 140px;
+        //       height: 100px;
+        //       border-radius: 20px;
+        //     }
+        //   }
+        // }
+
+      
         .item {
           display: flex;
           align-items: center;
@@ -62,6 +88,12 @@
             font-size: 14px;
           }
         }
+      }
+    }
+    .rightbar {
+      display: none;
+      @include tablet {
+        display: flex;
       }
     }
   }

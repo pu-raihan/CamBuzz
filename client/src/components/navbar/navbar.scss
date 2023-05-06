@@ -11,7 +11,7 @@
     position: sticky;
     top: 0;
     background-color: themed("bg");
-    color: themed("textColor");
+    color: themed("tColor");
     z-index: 999;
 
     .left {
@@ -37,15 +37,17 @@
           background: transparent;
           border: none;
           width: 300px;
-          color: themed("textColor");
-
-          @include mobile {
-            display: none;
-          }
+          color: themed("tColor");
 
           @include tablet {
             width: 200px;
           }
+          @include mobile {
+            width: 100px;
+          }
+        }
+        input:focus {
+          outline: none;
         }
       }
     }
@@ -55,25 +57,96 @@
       align-items: center;
       gap: 20px;
 
-      @include mobile {
-        display: none;
-      }
-
-      .user {
+      .profcard {
+        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        border-radius: 10px;
+        background: linear-gradient(themed("bg3"), themed("bg2"));
+        padding: 12px;
         display: flex;
         align-items: center;
-        font-weight: bold;
-        gap: 5px;
+        gap: 10px;
 
         @include tablet {
-          display: none;
-        }
-
-        img {
-          width: 30px;
-          height: 30px;
+          padding: 2px;
           border-radius: 50%;
-          object-fit: cover;
+          background: transparent;
+        }
+        @include mobile {
+          padding: 2px;
+          border-radius: 50%;
+          background: transparent;
+          flex-direction: column-reverse;
+          position: relative;
+        }
+        .profil {
+          display: flex;
+          flex-direction: column;
+          min-height: 0;
+          align-items: center;
+          gap: 5px;
+          background: transparent;
+          font-size: 12px;
+          color: #fff;
+
+          @include mobile {
+            position: absolute;
+            top: 75px;
+          }
+          .goto {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            gap: 2px;
+            border-radius: 10px;
+            background: themed("btn2");
+            cursor: pointer;
+          }
+          .logout {
+            width: 60px;
+            display: flex;
+            align-items: center;
+            padding: 5px;
+            gap: 2px;
+            border-radius: 10px;
+            background: themed("btn2");
+            cursor: pointer;
+          }
+        }
+        .prof {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .user {
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            font-weight: bold;
+            gap: 5px;
+
+            @include tablet {
+              display: none;
+            }
+            p {
+              font-weight: 400;
+              font-size: 10px;
+            }
+          }
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: 30%;
+            object-fit: cover;
+
+            @include tablet {
+              border-radius: 50%;
+              border: 3px solid #000;
+              border-color: themed("bgInv");
+            }
+          }
         }
       }
     }

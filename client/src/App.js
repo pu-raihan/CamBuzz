@@ -5,12 +5,12 @@ import Profile from "./pages/profile/Profile";
 import Navbar from "./components/navbar/Navbar";
 import LeftBar from "./components/leftbar/LeftBar";
 import RightBar from "./components/rightbar/RightBar";
+import VerifyMail from "./pages/VerifyMail/VerifyMail";
 import "./style.scss";
 
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
   Outlet,
   Navigate,
 } from "react-router-dom";
@@ -19,6 +19,9 @@ import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Resources from "./components/resources/Resources";
+import Details from "./components/details/Details";
+import Menubar from "./components/menubar/Menubar";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -34,11 +37,12 @@ function App() {
           <Navbar />
           <div style={{ display: "flex" }}>
             <LeftBar />
-            <div style={{ flex: 5 }}>
+            <div style={{ flex: 7 }}>
               <Outlet />
             </div>
             <RightBar />
           </div>
+          <Menubar />
         </div>
       </QueryClientProvider>
     );
@@ -47,6 +51,9 @@ function App() {
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
+    }
+    else if (!currentUser.emailVerified) {
+      return <Navigate to="/verifyemail" />;
     }
     return children;
   };
@@ -68,6 +75,14 @@ function App() {
           path: "/profile/:id",
           element: <Profile />,
         },
+        {
+          path: "/resources",
+          element: <Resources />,
+        },
+        {
+          path: "/resources/:resource",
+          element: <Details />,
+        },
       ],
     },
     {
@@ -77,6 +92,10 @@ function App() {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/verifyemail",
+      element: <VerifyMail/>,
     },
   ]);
 

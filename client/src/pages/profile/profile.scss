@@ -2,6 +2,7 @@
 
 .profile {
   @include themify($themes) {
+    min-height: 100vh;
     background: themed("bgSoft");
 
     .images {
@@ -56,7 +57,7 @@
         border-radius: 20px;
         height: 170px;
         background: themed("bg");
-        color: themed("textColor");
+        color: themed("tColor");
         padding: 50px;
         padding-top: 80px;
         padding-bottom: 20px;
@@ -90,7 +91,7 @@
             gap: 20px;
 
             a {
-              color: themed("textColorSoft");
+              color: themed("colorSoft");
             }
           }
         }
@@ -117,7 +118,7 @@
               align-items: center;
               font-weight: 500;
               gap: 5px;
-              color: themed("textColorSoft");
+              color: themed("colorSoft");
 
               span {
                 font-size: 12px;
@@ -128,7 +129,7 @@
             border: none;
             border-radius: 5px;
             padding: 10px 20px;
-            background: rgb(100, 37, 87);
+            background: themed("btn");
             color: #fff;
             cursor: pointer;
           }

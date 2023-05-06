@@ -1,0 +1,154 @@
+@import "../../style.scss";
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  height: 80px;
+
+  position: sticky;
+  top: 0;
+  background-color: #2b2d2f;
+  color: #fff;
+  z-index: 999;
+
+  .left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    img {
+      width: 60px;
+      height: 50px;
+      object-fit: cover;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      border: 1px solid #888;
+      border-radius: 5px;
+      padding: 5px;
+      gap: 10px;
+
+      input {
+        background: transparent;
+        border: none;
+        width: 300px;
+        color: #fff;
+
+        @include tablet {
+          width: 200px;
+        }
+        @include mobile {
+          width: 100px;
+        }
+      }
+      input:focus {
+        outline: none;
+      }
+    }
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    .profcard {
+      -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+      -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+      border-radius: 10px;
+      background: linear-gradient(#414348, #373333);
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      @include tablet {
+        padding: 2px;
+        border-radius: 50%;
+        background: transparent;
+      }
+      @include mobile {
+        padding: 2px;
+        border-radius: 50%;
+        background: transparent;
+        flex-direction: column-reverse;
+        position: relative;
+      }
+      .profil {
+        display: flex;
+        height: 50px;
+        flex-direction: column;
+        min-height: 0;
+        align-items: center;
+        gap: 5px;
+        background: transparent;
+        font-size: 12px;
+        color: #fff;
+
+        @include mobile {
+          position: absolute;
+          top: 75px;
+        }
+        .goto {
+          width: 60px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+          gap: 2px;
+          border-radius: 10px;
+          background: linear-gradient(#414348, #373333);
+          cursor: pointer;
+        }
+        .logout {
+          width: 60px;
+          display: flex;
+          align-items: center;
+          padding: 5px;
+          gap: 2px;
+          border-radius: 10px;
+          background: linear-gradient(#414348, #373333);
+          cursor: pointer;
+        }
+      }
+      .prof {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .user {
+          display: flex;
+          flex-direction: column;
+          align-items: left;
+          font-weight: bold;
+          gap: 5px;
+
+          @include tablet {
+            display: none;
+          }
+          p {
+            font-weight: 400;
+            font-size: 10px;
+          }
+        }
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 30%;
+          object-fit: cover;
+
+          @include tablet {
+            border-radius: 50%;
+            border: 3px solid #000;
+            border-color: linear-gradient(#414348, #373333);
+            
+          }
+        }
+      }
+    }
+  }
+}

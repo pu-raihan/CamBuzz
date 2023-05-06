@@ -30,12 +30,12 @@ const RightBar = () => {
                     </div>
                 </div>
                 <div className="item">
-                    <span>Latest feed</span>
+                    <span>PU Forum</span>
                     <div className="user">
                         <div className="userInfo">
                             <img src="/DarkRound.png" alt="" />
                             <p>
-                            <span>Raihan</span> Updated profile pic
+                            <span>Raihan</span> Started a poll
                             </p>
                         </div>
                         <span>1 min ago</span>
@@ -44,19 +44,19 @@ const RightBar = () => {
                         <div className="userInfo">
                             <img src="/DarkRound.png" alt="" />
                             <p>
-                            <span>Raihan</span> Updated profile pic
+                            <span>razvin</span> hello friends!
                             </p>
                         </div>
-                        <span>1 min ago</span>
+                        <span>5 min ago</span>
                     </div>
                     <div className="user">
                         <div className="userInfo">
                             <img src="/DarkRound.png" alt="" />
                             <p>
-                            <span>Raihan</span> Updated profile pic
+                            <span>Nawal</span> Shared a post
                             </p>
                         </div>
-                        <span>1 min ago</span>
+                        <span>13 min ago</span>
                     </div>
                 </div>
                 

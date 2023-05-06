@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
 
@@ -10,6 +10,7 @@ const Register = () => {
     password: "",
   });
 
+  const navigate = useNavigate();
   const [err, setErr] = useState(null);
 
   const handleChange = (e) => {
@@ -21,19 +22,19 @@ const Register = () => {
     e.preventDefault();
     try {
       await axios.post("http://localhost:8800/api/auth/register", inputs);
+      navigate("/login");
     } catch (err) {
       setErr(err.response.data);
     }
   };
-  
+
   return (
     <div className="register">
       <div className="card">
         <div className="left">
           <img src="/lightLogo.png" alt="" />
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
-            alias totam
+            An exclusive Social Media partner and Resource locator for pondicherry University.
           </p>
           <div className="log">
             <span>Already have an account?</span>
@@ -63,7 +64,7 @@ const Register = () => {
               name="password"
               onChange={handleChange}
             />
-            {err && err}
+            <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
             <button onClick={handleClick}>Register</button>
           </form>
         </div>

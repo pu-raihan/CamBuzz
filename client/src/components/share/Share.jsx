@@ -30,17 +30,14 @@ const Share = () => {
     },
     {
       onSuccess: () => {
-        // Invalidate and refetch
         queryClient.invalidateQueries(["posts"]);
       },
     }
   );
-
   const handleClick = async (e) => {
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    console.log(imgUrl);
     mutation.mutate({ desc, img: imgUrl });
     setDesc("");
     setFile(null);
@@ -51,8 +48,9 @@ const Share = () => {
       <div className="container">
         <div className="top">
           <div className="left">
-            <img src={currentUser.profilePic} alt="" />
-            <input
+            <img src={"/profile/"+currentUser.profilePic} alt="" />
+            <textarea
+              maxLength="400"
               type="text"
               placeholder={`What's on your mind ${currentUser.username}?`}
               onChange={(e) => setDesc(e.target.value)}

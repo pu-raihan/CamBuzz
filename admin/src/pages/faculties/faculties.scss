@@ -1,0 +1,195 @@
+@import "../../style.scss";
+
+.faculties {
+  background: #b6b6b6;
+  color: #eae9f0;
+  height: calc(100vh - 210px);
+  display: flex;
+  padding: 50px 50px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+
+  @include tablet {
+  }
+
+  @include mobile {
+    height: calc(100vh - 71px);
+    padding: 0px 10px ;
+  }
+  .top {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    justify-content: space-between;
+    height: 60px;
+    @include tablet {
+      width: 80%;
+    }
+
+    @include mobile {
+      height: 10vh;
+      width: 100%;
+    }
+
+    button {
+      flex: 3;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    span {
+      color: #3b393a;
+      font-size: 20px;
+      font-weight: bold;
+      flex: 7;
+    }
+  }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+    border-radius: 10px;
+    width: 60%;
+    height: calc(100vh - 275px);
+    overflow-y: scroll;
+    overflow-x: hidden;
+    font-size: large;
+    bottom: 0;
+   
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #666;
+    }
+
+    @include tablet {
+      width: 80%;
+    }
+
+    @include mobile {
+      height:calc(100% - 160px);
+      width: 100%;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .faculty {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .left {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        padding: 30px;
+
+        .name {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          p {
+            color: #898989;
+            font-size: 10px;
+            &:last-child {
+              color: rgb(255, 255, 255);
+              font-size: inherit;
+            }
+          }
+        }
+        span {
+          padding: 3px;
+          color: #898989;
+          font-size: 10px;
+          &:last-child {
+            color: #bcb9b9;
+            font-size: 10px;
+          }
+        }
+      }
+      .right {
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+
+        .buttons {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          justify-content: space-evenly;
+          top: 40px;
+          right: 30px;
+          border-radius: 3px;
+          padding: 5px;
+          background: rgb(50, 52, 53);
+
+          button {
+            background: transparent;
+            border-radius: 3px;
+            width: 70px;
+            padding: 5px;
+            border: none;
+            color: white;
+            cursor: pointer;
+
+            &:first-child {
+              color: rgb(252, 5, 5);
+            }
+          }
+        }
+      }
+    }
+
+    .add {
+      display: flex;
+      align-items: center;
+      border-radius: 10px;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      font-size: large;
+      background: #4b494a;
+      color: #c2bec0;
+      -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+      -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+      cursor: pointer;
+
+      @include tablet {
+        width: 80%;
+      }
+
+      @include mobile {
+        width: 100%;
+      }
+
+      p {
+        font-size: 1.5em;
+        margin-right: 10px;
+        font-weight: 600;
+      }
+    }
+  }
+}

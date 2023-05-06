@@ -1,0 +1,49 @@
+@import "../../style.scss";
+
+.home {
+  background: #b6b6b6;
+  color: #ffffff;
+  height: calc(100vh - 311px);
+  display: flex;
+  padding: 100px 50px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @include tablet {
+    gap: 30px;
+  }
+  @include mobile {
+  height: calc(100vh - 191px);
+  padding: 40px 40px;
+  }
+
+  .card {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    justify-content: center;
+    border-radius: 25px;
+    width: 20vw;
+    height: 180px;
+    font-size: large;
+    background: linear-gradient(#4b4849, #352f39);
+    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.19);
+
+    @include tablet {
+      width: 40vw;
+    }
+
+    @include mobile {
+      height: 20vh;
+      width: 80vw;
+    }
+  }
+}

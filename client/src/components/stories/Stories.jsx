@@ -1,30 +1,38 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import "./stories.scss";
+import { useQuery } from "@tanstack/react-query";
+import { makeRequest } from "../../axios";
+import Upload from "../storyUpload/Upload";
 
-const Stories = () => {
+const Stories = ({ username }) => {
   const { currentUser } = useContext(AuthContext);
+  const [uploadOpen, setUploadOpen] = useState(false);
 
-  //dummy
-  const stories = [
-    { id: 1, name: "Nadhu", img: "dummy/stry1.jpg" },
-    { id: 2, name: "Jaffar", img: "dummy/stry2.jpg" },
-    { id: 3, name: "Sreehari", img: "dummy/stry3.jpg" },
-    { id: 4, name: "Razin", img: "dummy/stry4.jpg" },
-  ];
+  const { isLoading, error, data } = useQuery(["stories"], () =>
+    makeRequest.get("/stories?username=" + username).then((res) => {
+      return res.data;
+    })
+  );
 
+  
   return (
     <div className="stories">
       <div className="story">
-        <img src={currentUser.profilePic} alt="" />
-        <button>+</button>
+        <img src={"/profile/" + currentUser.profilePic} alt="" />
+       <button onClick={()=>setUploadOpen(true)}>+</button>
       </div>
-      {stories.map((story) => (
-        <div className="story" key={story.id}>
-          <img src={story.img} alt="" />
-          <span>{story.name}</span>
-        </div>
-      ))}
+      {error
+        ? "Something went wrong!"
+        : isLoading
+        ? "loading stories"
+        : data.map((story) => (
+            <div className="story" key={story.sid}>
+              <img src={"/stories/" + story.img} alt="" />
+              <span>{story.username}</span>
+            </div>
+          ))}
+      {uploadOpen && <Upload setUploadOpen={setUploadOpen} user={data} />}
     </div>
   );
 };

@@ -1,74 +1,104 @@
 @import "../../style.scss";
 
 .stories {
-  display: flex;
-  gap: 10px;
-  height: 200px;
-  margin-bottom: 30px;
+  @include themify($themes) {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    height: 200px;
+    margin-bottom: 30px;
+    overflow-x: scroll;
+    padding: 10px;
 
-  
-  @include tablet {
-    height: 150px;
-    justify-content: space-between;
-  }
+    &::-webkit-scrollbar {
+      width: 10px;
+    }
 
-  @include mobile {
-    height: 90px;
-    justify-content: space-between;
-  }
-  
-  .story {
-    flex: 1;
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
+    &::-webkit-scrollbar-track {
+      border-radius: 10px;
+      background: themed("bg");
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #555;
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: #666;
+    }
+
+    @include tablet {
+      height: 120px;
+    }
 
     @include mobile {
-      flex: none;
-      width: 60px;
       height: 90px;
-    }
+      gap: 10px;
+      margin-bottom: 10px;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    span {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      color: white;
-      font-weight: 500;
-
-      @include mobile {
-        left: 5px;
-        bottom: 5px;
-        font-size: 0.7em;
+      &::-webkit-scrollbar {
+        display: none;
       }
     }
-    button {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      color: white;
-      background: #8e2664bd;
-      border-radius: 50%;
-      height: 30px;
-      width: 30px;
-      cursor: pointer;
-      font-size: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
+    .story {
+      display: inline-block;
+      flex: none;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      width: calc(20% - 17px);
+
+      @include tablet {
+        border-radius: 15px;
+      }
 
       @include mobile {
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        margin:  auto;
+        width: calc(20% - 6px);
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      span {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        font-weight: 500;
+
+        @include mobile {
+          left: 5px;
+          bottom: 5px;
+          font-size: 0.7em;
+        }
+      }
+      button {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        color: white;
+        background: #8e2664bd;
+        border-radius: 50%;
+        height: 30px;
+        width: 30px;
+        cursor: pointer;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          margin: auto;
+        }
       }
     }
   }

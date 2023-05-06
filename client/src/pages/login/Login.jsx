@@ -8,10 +8,16 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [checked, setChecked] = useState(false);
+
 
   const [err, setErr] = useState(null);
 
   const navigate = useNavigate();
+
+  const handleCheck = () => {
+    setChecked(!checked);
+  };
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -19,14 +25,25 @@ const Login = () => {
   };
 
   const { login } = useContext(AuthContext);
+  const { facLogin } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      await login(inputs);
-      navigate("/");
-    } catch (err) {
-      setErr(err.response.data);
+    if (checked) {
+      try {
+        await facLogin(inputs);
+        navigate("/");
+      } catch (err) {
+        setErr(err.response.data);
+      }
+    }
+    else {
+      try {
+        await login(inputs);
+        navigate("/");
+      } catch (err) {
+        setErr(err.response.data);
+      }
     }
   };
 
@@ -36,8 +53,7 @@ const Login = () => {
         <div className="left">
           <img src="/lightLogo.png" alt="" />
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
-            alias totam
+            An exclusive Social Media partner and Resource locator for pondicherry University.
           </p>
           <div className="reg">
             <span>Don't you have an account?</span>
@@ -61,8 +77,14 @@ const Login = () => {
               name="password"
               onChange={handleChange}
             />
-            {err && err}
+            <label className="fac">
+              <input
+                type="checkbox"
+                onChange={handleCheck} />Are you a faculty?
+              <span className="checkmark"></span>
+            </label>
             <button onClick={handleLogin}>Login</button>
+            <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
           </form>
         </div>
       </div>

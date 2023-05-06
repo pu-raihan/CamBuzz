@@ -15,7 +15,10 @@
     border-radius: 15px;
     min-height: 60%;
     overflow: hidden;
-
+    
+    @include tablet {
+      width: 80%;
+    }
     @include mobile {
       flex-direction: column-reverse;
       width: 90%;
@@ -41,12 +44,16 @@
         gap: 10px;
       }
 
-      img {
-        width: 200px;
-
+        img {
+        width: 70%;
+        @include tablet {
+          width: 60%;
+          margin-top: 13%;
+        }
         @include mobile {
           flex: 1;
-          width: 100px;
+          margin-top: 0;
+          width: 80px;
         }
       }
       p {
@@ -81,7 +88,7 @@
           border-radius: 5px;
           font-weight: bold;
           cursor: pointer;
-          
+
           @include mobile {
             width: 100%;
           }
