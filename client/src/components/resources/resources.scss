@@ -4,7 +4,8 @@
   @include themify($themes) {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 40px;
     padding: 17px 16px 0 16px;
     background-color: themed("bgSoft");
     flex-direction: column;

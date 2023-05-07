@@ -32,7 +32,10 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                setCurrentLocation({ lat: latitude, lng: longitude });
+                setCurrentLocation({ 
+                    // lat: latitude, lng: longitude 
+                    lat:12.015620324613108,lng: 79.85482424187616
+                    });
             },
             (error) => {
                 if (error.code===1)

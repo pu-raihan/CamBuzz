@@ -20,7 +20,6 @@ const Details = () => {
         all: true, zoomLevel: 15,
     });
     const [mapOpen, setMapopen] = useState(false);
-    const [sortedData, setSortedData] = useState([]);
     const [err, setErr] = useState(null);
 
 
@@ -31,6 +30,7 @@ const Details = () => {
             return res.data;
         })
     );
+    const [sortedData, setSortedData] = useState(data);
 
     const [currentLocation, setCurrentLocation] = useState(null);
 
@@ -50,7 +50,7 @@ const Details = () => {
                         }
                     });
                 }
-                setErr(error.message+"...Please allow location access")
+                setErr(error.message + "...Please allow location access")
                 console.error(error);
             }
         );
@@ -63,8 +63,9 @@ const Details = () => {
             const dataWithDistance = data.map((item) => {
                 const directionsService = new window.google.maps.DirectionsService();
                 const origin = new window.google.maps.LatLng(
-                    currentLocation.lat,
-                    currentLocation.lng
+                    // currentLocation.lat,
+                    // currentLocation.lng
+                    12.015620324613108, 79.85482424187616
                 );
                 const destination = new window.google.maps.LatLng(
                     item.coordinates.x,
@@ -78,6 +79,7 @@ const Details = () => {
                 directionsService.route(request, (result, status) => {
                     if (status === window.google.maps.DirectionsStatus.OK) {
                         item.distance = result.routes[0].legs[0].distance.value;
+                        console.log(item.distance);
                         item.directions = result
                         setSortedData((prevSortedData) =>
                             [...prevSortedData, item].sort((a, b) => a.distance - b.distance)
@@ -104,21 +106,25 @@ const Details = () => {
     };
     return (
         <div className="details">
-            <h1>{resource}</h1><MapFilledIcon onClick={() => handleClick(data, true)} />
+            <h1>{resource}</h1><MapFilledIcon onClick={() => handleClick(sortedData, true)} />
             {error
                 ? "Something went wrong!"
                 : isLoading
                     ? "loading..."
                     : sortedData ? sortedData.map((resitem) => (
-                        <div className="resItem" resitem={resitem} key={resitem.id}>
-                            <p>{resitem.id}</p>
-                            <p>{resitem.name}</p>
-                            {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
-                            <button onClick={() => handleClick(resitem, false)} >Goto Maps<MapIcon /></button>
-
+                        <div className="resourceItem" resitem={resitem} key={resitem.id}>
+                            <div className="itemTop">
+                                <p className='name'>{resitem.name}</p>
+                                <p className='remarks'>{resitem.remarks}</p>
+                            </div>
+                            <div className="itemBottom">
+                                <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
+                                {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
+                                <MapIcon onClick={() => handleClick(resitem, false)} />
+                            </div>
                         </div>
                     )) : <span style={{ margin: "auto" }}>No resources in database</span>
-            }{err&&err}
+            }{err && err}
             {mapOpen &&
                 <div className="map" >
                     <div className="close">
