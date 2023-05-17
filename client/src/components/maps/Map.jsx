@@ -167,7 +167,11 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
             <div className="google-map" >
                 {!isdir && <>
                     <GoogleMapReact
+<<<<<<< HEAD
                         bootstrapURLKeys={{ key: API_KEY }}
+=======
+                        bootstrapURLKeys={{ key: {Google_Map_API}}
+>>>>>>> 9f7c265a681330fd6a20e7237197abacdbb3a1f7
                         center={center}
                         defaultZoom={zoomLevel}
                     >
@@ -196,7 +200,11 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
                     </button></>}
                 {isdir && <>
                     <DirectionMap
+<<<<<<< HEAD
                         googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}`}
+=======
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key={Google_Map_API}`}
+>>>>>>> 9f7c265a681330fd6a20e7237197abacdbb3a1f7
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}
