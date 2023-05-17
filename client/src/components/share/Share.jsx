@@ -38,7 +38,7 @@ const Share = () => {
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    mutation.mutate({ desc, img: imgUrl });
+    mutation.mutate({ desc, img: imgUrl, type: currentUser.type });
     setDesc("");
     setFile(null);
   };
@@ -48,7 +48,7 @@ const Share = () => {
       <div className="container">
         <div className="top">
           <div className="left">
-            <img src={"/profile/"+currentUser.profilePic} alt="" />
+            <img src={"/profile/" + currentUser.profilePic} alt="" />
             <textarea
               maxLength="400"
               type="text"
@@ -56,7 +56,7 @@ const Share = () => {
               onChange={(e) => setDesc(e.target.value)}
               value={desc}
             />
-          </div>  
+          </div>
           <div className="right">
             {file && (
               <img className="file" alt="" src={URL.createObjectURL(file)} />
@@ -74,7 +74,7 @@ const Share = () => {
             />
             <label htmlFor="file">
               <div className="item">
-                <Image/>
+                <Image />
                 <span>Add Image</span>
               </div>
             </label>

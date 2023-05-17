@@ -4,7 +4,6 @@ import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
 import Navbar from "./components/navbar/Navbar";
 import LeftBar from "./components/leftbar/LeftBar";
-import RightBar from "./components/rightbar/RightBar";
 import VerifyMail from "./pages/VerifyMail/VerifyMail";
 import "./style.scss";
 
@@ -22,6 +21,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Resources from "./components/resources/Resources";
 import Details from "./components/details/Details";
 import Menubar from "./components/menubar/Menubar";
+import Chats from "./components/chat/Chats";
+import Requests from "./pages/requests/Requests";
+import Events from "./pages/events/Events";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -40,7 +42,9 @@ function App() {
             <div style={{ flex: 7 }}>
               <Outlet />
             </div>
-            <RightBar />
+            <div className="rightbar">
+            <Chats />
+            </div>
           </div>
           <Menubar />
         </div>
@@ -82,6 +86,18 @@ function App() {
         {
           path: "/resources/:resource",
           element: <Details />,
+        },
+        {
+          path: "/chats",
+          element: <Chats />,
+        },
+        {
+          path: "/requests",
+          element: <Requests />,
+        },
+        {
+          path: "/events",
+          element: <Events />,
         },
       ],
     },

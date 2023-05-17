@@ -90,11 +90,5 @@
         }
       }
     }
-    .rightbar {
-      display: none;
-      @include tablet {
-        display: flex;
-      }
-    }
   }
 }

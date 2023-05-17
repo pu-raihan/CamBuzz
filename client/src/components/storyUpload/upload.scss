@@ -1,6 +1,6 @@
 @import "../../style.scss";
 
-.upload {
+.stryupload {
   @include themify($themes) {
     position: fixed;
     top: 0;
@@ -56,7 +56,7 @@
         flex-wrap: wrap;
         gap: 20px;
 
-        .files {
+        .stryfiles {
           display: flex;
           flex-wrap: wrap;
           gap: 50px;

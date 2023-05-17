@@ -1,8 +1,7 @@
 @import "../../style.scss";
 
-.rightBar {
+.chats {
   @include themify($themes) {
-    flex: 4;
     position: sticky;
     top: 111px;
     height: calc(100vh - 111px);
@@ -10,17 +9,10 @@
     background: themed("bgSoft");
     color: themed("tColor");
 
-    @include tablet {
-      display: none;
-    }
-
-    @include mobile {
-      display: none;
-    }
-
     &::-webkit-scrollbar {
       display: none;
     }
+    
     .container {
       padding: 20px;
 
@@ -31,7 +23,13 @@
         padding: 20px;
         background: themed("bg");
         margin-bottom: 15px;
-
+        &:last-child {
+          height: 50vh;
+        }
+        .noData{
+            margin: auto;
+            font-weight: 600;
+        }
         span {
           font-size: 12px;
           color: gray;

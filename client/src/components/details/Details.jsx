@@ -30,6 +30,11 @@ const Details = () => {
             return res.data;
         })
     );
+    const { isLoading: headLoading, error: headError, data: headData } = useQuery(["reshead"], () =>
+        makeRequest.get("/reshead/" + resource).then((res) => {
+            return res.data;
+        })
+    );
     const [sortedData, setSortedData] = useState(data);
 
     const [currentLocation, setCurrentLocation] = useState(null);
@@ -41,21 +46,22 @@ const Details = () => {
                 setCurrentLocation({ lat: latitude, lng: longitude });
             },
             (error) => {
-                if ("Notification" in window && Notification.permission !== "granted") {
-                    Notification.requestPermission().then((permission) => {
-                        if (permission === "granted") {
-                            console.log("User has granted permission for location access")
-                        } else if (permission === "denied") {
-                            console.log("User has denied permission for location access")
-                        }
-                    });
+                if (error.code === 1) {
+                    if ("Notification" in window && Notification.permission !== "granted") {
+                        Notification.requestPermission().then((permission) => {
+                            if (permission === "granted") {
+                                console.log("User has granted permission for location access")
+                            } else if (permission === "denied") {
+                                console.log("User has denied permission for location access")
+                            }
+                        });
+                    }
+                    setErr(error.message + "...Please allow location access")
                 }
-                setErr(error.message + "...Please allow location access")
                 console.error(error);
             }
         );
     }, []);
-
 
     useEffect(() => {
         setSortedData([])
@@ -106,7 +112,16 @@ const Details = () => {
     };
     return (
         <div className="details">
-            <h1>{resource}</h1><MapFilledIcon onClick={() => handleClick(sortedData, true)} />
+            {headError
+                ? "Titles couldn't load!"
+                : headLoading
+                    ? "loading..."
+                    : <>
+                        <h1>{headData[0].heading}</h1>
+                        <div className="allbtn" onClick={() => handleClick(sortedData, true)}>
+                            <span>View All</span><MapFilledIcon />
+                        </div>
+                    </>}
             {error
                 ? "Something went wrong!"
                 : isLoading

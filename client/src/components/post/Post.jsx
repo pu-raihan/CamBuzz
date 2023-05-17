@@ -42,8 +42,8 @@ const Post = ({ post }) => {
     }
   );
   const delMutation = useMutation(
-    (postid) => {
-      return makeRequest.delete("/posts/" + postid);
+    (postData) => {
+      return makeRequest.delete("/posts?postid="+ postData.postid+"&type="+postData.type);
     },
     {
       onSuccess: () => {
@@ -57,7 +57,8 @@ const Post = ({ post }) => {
   };
 
   const handleDelete = () => {
-    delMutation.mutate(post.postid);
+   
+    delMutation.mutate({postid:post.postid,type:currentUser.type});
   };
 
   return (
@@ -104,7 +105,7 @@ const Post = ({ post }) => {
             Share
           </div>
         </div>
-        {commentOpen && <Comments postid={post.postid} />}
+        {commentOpen && <Comments postid={post.postid} comments={cData} />}
       </div>
     </div>
   );

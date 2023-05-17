@@ -5,8 +5,10 @@ $themes: (
     bgInv: #1a0711,
     bg2:rgb(238, 221, 233),
     bg3:rgb(235, 209, 209),
+    bg4:#53102f,
     bgSoft: rgb(238, 228, 232),
     bgGrey:#fcfcfc,
+    bgTrans:#360913b8,
     colorSoft: #555,
     border: lightgray,
     btn:#761a51,
@@ -19,7 +21,9 @@ $themes: (
     bgInv: white,
     bg2:rgb(92, 17, 52),
     bg3:rgb(77, 23, 49),
+    bg4:#531336,
     bgGrey:#201f22,
+    bgTrans:#360c1eb8,
     bgSoft: rgb(62, 58, 58),
     colorSoft: lightgray,
     border: #444,
@@ -60,5 +64,12 @@ $themes: (
 @mixin tablet {
   @media (max-width: 960px) {
     @content;
+  }
+}
+
+.rightbar{
+  flex: 4;
+  @include mobile {
+    display: none;
   }
 }

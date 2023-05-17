@@ -13,7 +13,7 @@ const Home = () => {
         </div>
       </Link>
       <Link
-        to="/faculties"
+        to="/classes"
         style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="card">
@@ -21,7 +21,7 @@ const Home = () => {
         </div>
       </Link>
       <Link
-        to="/faculties"
+        to="/resources"
         style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="card">

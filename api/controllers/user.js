@@ -14,9 +14,12 @@ export const getUser = (req, res) => {
 
 export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
+  var secret = req.body.type;
   if (!token) return res.status(401).json("Not logged in");
-
-  jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
+  if (secret === "faculty") secret = "facultysecret";
+  if (secret === "student") secret = "cambuzzsecret";
+console.log(secret);
+  jwt.verify(token, secret, (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
 
     const q =

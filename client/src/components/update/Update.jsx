@@ -62,7 +62,7 @@ const Update = ({ setUpdateOpen, user }) => {
     coverUrl = cover ? await upload(cover,"coverupload") : user.coverPic;
     profileUrl = profile ? await upload(profile,"profupload") : user.profilePic;
 
-    mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
+    mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl,type:currentUser.type });
     
     setUpdateOpen(false);
   };

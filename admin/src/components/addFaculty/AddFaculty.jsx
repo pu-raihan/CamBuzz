@@ -4,7 +4,7 @@ import { makeRequest } from "../../axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CloseIcon from '@mui/icons-material/CloseRounded';
 
-const AddFaculty = ({ setUpdateOpen, user }) => {
+const AddFaculty = ({ setUpdateOpen }) => {
 
   const [texts, setTexts] = useState();
 

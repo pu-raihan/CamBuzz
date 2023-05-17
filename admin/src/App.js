@@ -15,6 +15,8 @@ import { useContext } from "react";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Faculties from "./pages/faculties/Faculties";
+import Classes from "./pages/classes/Classes";
+import Resources from "./components/resources/Resources";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -57,6 +59,14 @@ function App() {
         {
           path: "/faculties",
           element: <Faculties />,
+        },
+        {
+          path: "/classes",
+          element: <Classes />,
+        },
+        {
+          path: "/resources",
+          element: <Resources />,
         },
       ],
     },

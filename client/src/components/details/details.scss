@@ -18,6 +18,16 @@
     h1 {
       color: themed("colorSoft");
     }
+    .allbtn{
+      display: flex;
+      font-weight: bold;
+      font-size: 15px;
+      width: 80%;
+      gap: 5px;
+      align-items:center ;
+      justify-content: flex-end;
+      color: themed("tColor");
+    }
     .resourceItem {
       display: flex;
       align-items: center;
@@ -160,6 +170,8 @@
             display: flex;
             width: 100px;
             align-items: center;
+            color: rgb(104, 14, 86);
+            
             p {
               font-weight: bold;
               overflow-wrap: break-word;

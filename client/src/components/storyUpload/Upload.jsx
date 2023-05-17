@@ -5,9 +5,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import CloseIcon from "@mui/icons-material/CloseRounded";
 
-const Upload = ({ setUploadOpen, user }) => {
+const Upload = ({ setUploadOpen, currentUser }) => {
   const [file, setFile] = useState(null);
- 
+
   const upload = async () => {
     try {
       const formData = new FormData();
@@ -35,17 +35,17 @@ const Upload = ({ setUploadOpen, user }) => {
     e.preventDefault();
     let imgUrl = "";
     if (file) imgUrl = await upload();
-    mutation.mutate({img: imgUrl });
+    mutation.mutate({ img: imgUrl, type: currentUser.type });
     setFile(null);
     setUploadOpen(false)
   };
 
   return (
-    <div className="upload">
+    <div className="stryupload">
       <div className="wrapper">
         <h1>Post Your Story</h1>
         <form>
-          <div className="files">
+          <div className="stryfiles">
             <label htmlFor="stryFile">
               <div className="imgContainer">
                 <img

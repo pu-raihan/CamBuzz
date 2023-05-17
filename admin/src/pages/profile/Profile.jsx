@@ -109,7 +109,6 @@ const Profile = () => {
                 <MoreIcon />
               </div>{error && error}
             </div>
-            <Posts username={username} />
           </div>
         </>
       )}

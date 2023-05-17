@@ -32,22 +32,23 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const { latitude, longitude } = position.coords;
-                setCurrentLocation({ 
+                setCurrentLocation({
                     // lat: latitude, lng: longitude 
-                    lat:12.015620324613108,lng: 79.85482424187616
-                    });
+                    lat: 12.015620324613108, lng: 79.85482424187616
+                });
             },
             (error) => {
-                if (error.code===1)
-                if ('Notification' in window) {
-                    Notification.requestPermission().then(function (result) {
-                      if (result === 'granted') {
-                        new Notification('Notification Title', {
-                          body: 'Notification body',
+                if (error.code === 1) {
+                    if ("Notification" in window && Notification.permission !== "granted") {
+                        Notification.requestPermission().then((permission) => {
+                            if (permission === "granted") {
+                                console.log("User has granted permission for location access")
+                            } else if (permission === "denied") {
+                                console.log("User has denied permission for location access")
+                            }
                         });
-                      }
-                    });
-                  }
+                    }
+                }
                 console.error(error);
             }
         );
@@ -68,6 +69,8 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
     const [directions, setDirections] = useState();
     const [isdir, setDir] = useState(false);
 
+    const API_KEY = "AIzaSyDu00JSkZfu02qMlyKgL__x0LK888YcxCA"
+
     const LocationPin = ({ text, icon }) => (
         <div className="pin">
             {icon === "you" && <MyLocationIcon className="pin-icon" style={{ color: "blue" }} />}
@@ -77,7 +80,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
             {icon === "toilet" && <ToiletIcon className="pin-icon" />}
             {icon === "health" && <HealthIcon className="pin-icon" />}
             {icon === "atm" && <AtmIcon className="pin-icon" />}
-            {icon === "school" && <SchoolIcon className="pin-icon" />}
+            {icon === "dept" && <SchoolIcon className="pin-icon" />}
             {icon === "hostel" && <HostelIcon className="pin-icon" />}
             {icon === "bus" && <BusIcon className="pin-icon" />}
             {icon === "lab" && <LabIcon className="pin-icon" />}
@@ -110,6 +113,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
             }
         });
     };
+
     const DirectionMap = withScriptjs(
         withGoogleMap(({ location, currentLocation }) => {
 
@@ -163,7 +167,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
             <div className="google-map" >
                 {!isdir && <>
                     <GoogleMapReact
-                        bootstrapURLKeys={{ key: 'AIzaSyBXhaJMNIv_YOWDe3gx-VVdHcnUxyAqLLY' }}
+                        bootstrapURLKeys={{ key: API_KEY }}
                         center={center}
                         defaultZoom={zoomLevel}
                     >
@@ -192,7 +196,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
                     </button></>}
                 {isdir && <>
                     <DirectionMap
-                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBXhaJMNIv_YOWDe3gx-VVdHcnUxyAqLLY`}
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${API_KEY}`}
                         loadingElement={<div style={{ height: `100%` }} />}
                         containerElement={<div style={{ height: `100%` }} />}
                         mapElement={<div style={{ height: `100%` }} />}

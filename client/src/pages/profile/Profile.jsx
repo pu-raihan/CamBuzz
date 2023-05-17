@@ -7,6 +7,7 @@ import WebIcon from "@mui/icons-material/Language";
 import PlaceIcon from "@mui/icons-material/LocationOn";
 import EmailIcon from "@mui/icons-material/EmailOutlined";
 import MoreIcon from "@mui/icons-material/MoreVertRounded";
+import ClassIcon from '@mui/icons-material/Class';
 import Posts from "../../components/posts/Posts";
 import Update from "../../components/update/Update";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -18,6 +19,7 @@ import { AuthContext } from "../../context/authContext";
 const Profile = () => {
 
   const [updateOpen, setUpdateOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
 
   const username = useLocation().pathname.split("/")[2];
 
@@ -91,7 +93,7 @@ const Profile = () => {
                 </div>
               </div>
               <div className="center">
-                <span>{data.username}</span>
+                <span>{data.username}</span>{data.type === 'faculty' && <span style={{ fontSize: "12px", color: "#0f0" }}>Faculty</span>}
                 <div className="info">
                   <div className="item">
                     <PlaceIcon />
@@ -114,16 +116,23 @@ const Profile = () => {
                   </button>
                 )}
               </div>
-              <div className="right">
-                <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
-                  to='#'
-                  onClick={(e) => {
-                    window.location.href = "mailto:" + data.email;
-                    e.preventDefault();
-                  }}
-                ><EmailIcon /></Link>
-                <MoreIcon />
+              <div className="rightPart">
+                <div className="rTop">
+                  <Link
+                    style={{ textDecoration: "none", color: "inherit" }}
+                    to='#'
+                    onClick={(e) => {
+                      window.location.href = "mailto:" + data.email;
+                      e.preventDefault();
+                    }}
+                  ><EmailIcon /></Link>
+                  <MoreIcon onClick={() => setMoreOpen(!moreOpen)} />
+                  {moreOpen &&
+                    <button>Chat</button>
+                  }</div>
+                <div className="rBottom">
+                  <ClassIcon /> {data.class}
+                </div>
               </div>{error && error}
             </div>
             <Posts username={username} />

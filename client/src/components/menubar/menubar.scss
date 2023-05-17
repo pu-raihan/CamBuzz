@@ -4,10 +4,10 @@
   @include themify($themes) {
     display: none;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding: 15px 20px;
     height: 40px;
-    border-bottom: 1px solid themed("border");
+    border-top: 1px solid themed("border");
     position: sticky;
     bottom: 0;
     background-color: themed("bg");

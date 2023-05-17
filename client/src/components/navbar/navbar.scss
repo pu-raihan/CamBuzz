@@ -40,7 +40,7 @@
           color: themed("tColor");
 
           @include tablet {
-            width: 200px;
+            width: 160px;
           }
           @include mobile {
             width: 100px;
@@ -51,7 +51,20 @@
         }
       }
     }
+    .mid {
+      display: flex;
+      width: 100%;
+      padding: 0px 20px;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 20px;
 
+      @include tablet {
+      }
+      @include mobile {
+        display: none;
+      }
+    }
     .right {
       display: flex;
       align-items: center;
@@ -148,6 +161,87 @@
             }
           }
         }
+      }
+    }
+    .results {
+      position: fixed;
+      top: 80px;
+      max-height: 60vh;
+      min-height: 4vh;
+      border-radius: 10px;
+      background-color: themed("bgTrans");
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+      justify-content: flex-start;
+      z-index: 998;
+      overflow: scroll;
+      padding: 10px 0 20px;
+      border: 2px solid themed("border");
+      color: #dcdada;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      @include mobile {
+        max-height: 40vh;
+        font-size: 0.8em;
+      }
+      .close {
+        display: flex;
+        width: 90%;
+        color: #aaa;
+        align-items: center;
+        font-size: 12px;
+        justify-content: space-between;
+      }
+      .result {
+        display: flex;
+        align-items: center;
+        width: 86%;
+        padding: 15px;
+        gap: 20px;
+        border-radius: 10px;
+        background: #252225;
+        @include mobile {
+          width: 80%;
+          gap: 5px;
+          padding: 10px;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+          object-fit: cover;
+          border-radius: 50%;
+          @include mobile {
+            width: 30px;
+            height: 30px;
+          }
+        }
+        .name {
+          overflow: hidden;
+          width: 40%;
+          @include mobile {
+            width: calc(100% - 45px);
+          }
+        }
+        .type {
+          font-size: 10px;
+          color: #aba8a8;
+          @include mobile {
+            display: none;
+          }
+        }
+        .arrowForward {
+          @include mobile {
+            display: none;
+          }
+        }
+      }
+      .faculty {
+        background: #470226;
       }
     }
   }

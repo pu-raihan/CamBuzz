@@ -6,15 +6,9 @@ import { makeRequest } from "../../axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const Comments = ({ postid }) => {
+const Comments = ({ postid,comments }) => {
   const { currentUser } = useContext(AuthContext);
   const [ desc, setDesc ] = useState("");
-
-  const { isLoading, error, data } = useQuery(["comments"], () =>
-    makeRequest.get("/comments?postid=" + postid).then((res) => {
-      return res.data;
-    })
-  );
 
   const queryClient = useQueryClient();
 
@@ -47,9 +41,7 @@ const Comments = ({ postid }) => {
         />
         <button onClick={handleClick}>Share</button>
       </div>
-      {isLoading
-        ? "loading..."
-        : data.map((comment) => (
+      {comments?.map((comment) => (
             <div className="comment" key={comment.cid}>
                <Link
                 to={`/profile/${comment.username}`}
@@ -57,7 +49,7 @@ const Comments = ({ postid }) => {
               ><img src={"/profile/"+comment.profilePic} alt="" />
               </Link><div className="info">
                 <span>{comment.username}</span>
-                <p>{comment.desc}</p>{error&&error}
+                <p>{comment.desc}</p>
               </div>
               <span className="date">
                 {moment(comment.createdAt).fromNow()}

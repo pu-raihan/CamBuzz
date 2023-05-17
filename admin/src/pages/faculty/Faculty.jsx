@@ -6,7 +6,7 @@ import { useState } from "react";
 import Dialog from "../../components/dialog/Dialog";
 import { useNavigate } from "react-router";
 const Faculty = ({faculty}) => {
-
+ 
   const [moreOpen, setMoreOpen] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
 

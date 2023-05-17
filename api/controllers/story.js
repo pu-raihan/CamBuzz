@@ -5,10 +5,12 @@ import moment from "moment";
 export const getStories = (req, res) => {
   const username = req.query.username;
   const token = req.cookies.accessToken;
-
+  var secret = req.query.type;
   if (!token) return res.status(401).json("Not logged in");
+  if (secret === "faculty") secret = "facultysecret";
+  if (secret === "student") secret = "cambuzzsecret";
 
-  jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
+  jwt.verify(token, secret, (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
 
     const q =
@@ -30,9 +32,12 @@ export const getStories = (req, res) => {
 
 export const addStory = (req, res) => {
   const token = req.cookies.accessToken;
+  var secret = req.body.type;
   if (!token) return res.status(401).json("Not logged in");
+  if (secret === "faculty") secret = "facultysecret";
+  if (secret === "student") secret = "cambuzzsecret";
 
-  jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
+  jwt.verify(token, secret, (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
 
     const q =

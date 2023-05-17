@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/", getPosts);
 router.post("/", addPost);
-router.delete("/:postid", deletePost);
+router.delete("/", deletePost);
 
 export default router;
