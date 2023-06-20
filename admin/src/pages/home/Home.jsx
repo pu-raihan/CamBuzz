@@ -28,13 +28,6 @@ const Home = () => {
           RESOURCES
         </div>
       </Link>
-      <Link
-        to="/faculties"
-        style={{ textDecoration: "none", color: "inherit" }}
-      >
-        <div className="card">
-          ADMINS
-        </div></Link>
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDu00JSkZfu02qMlyKgL__x0LK888YcxCA",
+  apiKey: GOOGLEMAP_API_KEY,
   authDomain: "cambuzz-b0650.firebaseapp.com",
   projectId: "cambuzz",
   storageBucket: "cambuzz.appspot.com",

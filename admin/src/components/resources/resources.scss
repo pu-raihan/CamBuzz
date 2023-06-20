@@ -1,56 +1,59 @@
 @import "../../style.scss";
 
 .resources {
-  @include themify($themes) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    padding: 17px 16px 0 16px;
-    background-color: themed("bgSoft");
-    flex-direction: column;
-    height: 82vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 17px 20% 0 20%;
+  background-color: #666;
+  flex-direction: column;
+  height: calc(100vh - 128px);
+
+  &::-webkit-scrollbar{
+    display: none;
+  }
+
+  @include mobile {
+    gap: 0;
+  }
+  h1 {
+    color: #222;
     @include mobile {
-      gap: 0;
+      font-size: xx-large;
     }
-    h1 {
-      color: themed("colorSoft");
-      @include mobile {
-        font-size: xx-large;
-      }
+  }
+  .list {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    overflow: scroll;
+    justify-content: center;
+  
+    @include mobile {
+      justify-content: space-evenly;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      padding-top: 340px;
     }
-    .list {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .item {
+      -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+      -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
       display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      overflow: scroll;
-      justify-content: center;
-
+      align-items: center;
+      gap: 10px;
+      padding: 25px;
+      margin-left: 5px;
+      color: #DDD;
+      background: #333;
+      border-radius: 10px;
       @include mobile {
-        justify-content: space-evenly;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        padding-top: 340px;
-      }
-      &::-webkit-scrollbar {
-        display: none;
-      }
-
-      .item {
-        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        padding: 25px;
-        margin-left: 5px;
-        color: themed("tColor");
-        background: themed("bgGrey");
-        border-radius: 10px;
-        @include mobile {
-          width: 75vw;
-        }
+        width: 75vw;
       }
     }
   }

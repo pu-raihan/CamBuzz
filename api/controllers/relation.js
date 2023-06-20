@@ -15,7 +15,9 @@ export const addRelation = (req, res) => {
   if (!token) return res.status(401).json("Not logged in");
 
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) return res.status(403).json("Token invalid!");
+    if (err)
+    jwt.verify(token, "facultysecret", (err, userInfo) => {
+      if (err) return res.status(403).json("Token invalid!");
 
     const q = "insert into relationships(`follower`,`followed`) values(?)";
 
@@ -26,6 +28,7 @@ export const addRelation = (req, res) => {
       return res.status(200).json("followed");
     });
   });
+});
 };
 
 export const deleteRelation = (req, res) => {
@@ -33,7 +36,9 @@ export const deleteRelation = (req, res) => {
   if (!token) return res.status(401).json("Not logged in");
 
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) return res.status(403).json("Token invalid!");
+    if (err) 
+    jwt.verify(token, "facultysecret", (err, userInfo) => {
+      if (err) return res.status(403).json("Token invalid!");
 
     const q = "delete from relationships where follower= ? and followed=? ";
 
@@ -42,4 +47,5 @@ export const deleteRelation = (req, res) => {
       return res.status(200).json("Unfollowed");
     });
   });
+});
 };
