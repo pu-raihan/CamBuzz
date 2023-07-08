@@ -41,7 +41,7 @@ happening on campus <br><br>
 * Firebase authentication
 * Jason Web Token <br><br>
 ## Documentation
-* [Presentation]()
-* [Report]()
+* [Presentation](https://github.com/pu-raihan/CamBuzz/blob/main/Cambuzz-Presentation.pptx)
+* [Report](https://github.com/pu-raihan/CamBuzz/blob/main/21352030-CamBuzz-Final%20review%20report.pdf)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/04ad319c-60e3-4af9-8cf9-87fc631e2af7/deploy-status)](https://app.netlify.com/sites/cambuzz/deploys)
