@@ -1,4 +1,5 @@
 # CamBuzz
+### Social Media cum Resource Locator
 MCA Final year Project done by [Muhammed Raihan P A](https://github.com/pu-raihan) Submitted to Computer Science Department of Pondicherry University, Puducherry.<br><br>
 Cambuzz is an innovative ***Social Media*** website cum ***Campus Resource Locator*** tailored specifically for the university
 community, including students and faculty members. Its primary objective is to create a
