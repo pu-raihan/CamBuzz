@@ -18,16 +18,6 @@ export const getChats = (req, res) => {
 
   const q = `SELECT IF(sender=?, receiver, sender) AS username, MAX(time) AS time, MAX((SELECT profilePic FROM users WHERE username = IF(sender=?, receiver, sender))) AS profilePic FROM chats WHERE sender = ? OR receiver = ? GROUP BY IF(sender=?, receiver, sender) ORDER BY time DESC;`;
 
-  const q = `SELECT 
-    IF(sender='raihan.io', receiver, sender) AS username,
-    MAX(time) AS time,
-    MAX((SELECT profilePic FROM users WHERE username = IF(sender='raihan.io', receiver, sender))) AS profilePic 
-FROM chats 
-WHERE sender = 'raihan.io' OR receiver = 'raihan.io' 
-GROUP BY IF(sender='raihan.io', receiver, sender) 
-ORDER BY time DESC;`;
-
-
   db.query(
     q,
     [
