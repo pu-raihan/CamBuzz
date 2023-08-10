@@ -32,7 +32,7 @@ const Events = () => {
                     ? "loading events"
                     : data.length ? data.map((event) =>
                         <div className="event" key={event.id} >
-                            <img src={"/events/" + event.img} onClick={() => handleImage(event.img)} />
+                            <img src={"/events/" + event.img} onClick={() => handleImage(event.img)} alt="" />
                             <div className="eventDetails">
                                 <p>{event.desc}</p>
                                 <span>Date : {moment(event.date).calendar(null, {
@@ -49,7 +49,7 @@ const Events = () => {
                 <span>+ Add new event</span>
             </div>}
             {imageOpen && <div className="imagebox">
-                <img src={"/events/" + image} />
+                <img src={"/events/" + image} alt="" />
                 <button className="close" onClick={() => setImageOpen(false)}>
                     <CloseIcon />
                 </button></div>}
