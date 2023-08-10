@@ -34,10 +34,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({
                     lat: latitude, lng: longitude 
-<<<<<<< HEAD
                     // lat: 12.015620324613108, lng: 79.85482424187616
-=======
->>>>>>> 891a828c89ea96e18ddc6a521501bb5aa02036aa
                 });
             },
             (error) => {
