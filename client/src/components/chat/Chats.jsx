@@ -44,7 +44,7 @@ const Chats = () => {
                         <span>Chats</span>
                         {isLoading
                             ? "loading..."
-                            : data.length?data.map((item) => (
+                            : data?data.map((item) => (
                                 <div key={item.time} className="user" onClick={() => gotoChat(item.username, item.profilePic)}>
                                     <div className="userInfo">
                                         <img src={"/profile/" + item.profilePic} alt="" />

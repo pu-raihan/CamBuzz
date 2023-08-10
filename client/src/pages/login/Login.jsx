@@ -39,7 +39,9 @@ const Login = () => {
     }
     else {
       try {
+        console.log("login1");
         await login(inputs);
+        console.log("login2");
         navigate("/");
       } catch (err) {
         setErr(err.response.data);

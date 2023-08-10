@@ -69,7 +69,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
     const [directions, setDirections] = useState();
     const [isdir, setDir] = useState(false);
 
-    const API_KEY = GOOGLEMAP_API_KEY
+    const API_KEY = process.env.GOOGLE_API
 
     const LocationPin = ({ text, icon }) => (
         <div className="pin">

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "build": "webpack --config webpack.config.js"
   },
   "keywords": [],
   "author": "raihan",
@@ -20,6 +21,9 @@
     "moment": "^2.29.4",
     "multer": "^1.4.5-lts.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.22"
-  }
+    "nodemon": "^2.0.22",
+    "webpack": "^5.87.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {}
 }
