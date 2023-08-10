@@ -80,7 +80,7 @@ export const login = (req, res) => {
         res
           .cookie("accessToken", token, {
             httpOnly: true, 
-            samesite: "none",
+            sameSite: "none",
           })
           .status(200)
           .json(others);
