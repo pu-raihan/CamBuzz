@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: process.env.GOOGLE_API,
+  apiKey: "{process.env.GOOGLE_API}",
   authDomain: "cambuzz-b0650.firebaseapp.com",
   projectId: "cambuzz",
   storageBucket: "cambuzz.appspot.com",
