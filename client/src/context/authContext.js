@@ -32,20 +32,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const update = async (username) => {
     const res = await axios.post(
-<<<<<<< HEAD
       "https://cambuzz.onrender.com/api/auth/update?username=" + username
-=======
-      "https://cambuzz.onrender.comapi/auth/update?username=" + username
->>>>>>> 891a828c89ea96e18ddc6a521501bb5aa02036aa
     );
     setCurrentUser(res.data);
   };
   const logout = async () => {
-<<<<<<< HEAD
-    await axios.post("http://cambuzz.onrender.com/api/auth/logout");
-=======
     await axios.post("https://cambuzz.onrender.com/api/auth/logout");
->>>>>>> 891a828c89ea96e18ddc6a521501bb5aa02036aa
     localStorage.removeItem("user");
     setCurrentUser(null);
   };
