@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import "./events.scss";
 import { AuthContext } from "../../context/authContext";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import moment from "moment";
 import CloseIcon from "@mui/icons-material/CloseRounded";
