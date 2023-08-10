@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { AuthContext } from "../../context/authContext";
+
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import PrinterIcon from '@mui/icons-material/Print';
 import FoodIcon from '@mui/icons-material/LocalDining';
