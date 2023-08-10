@@ -20,6 +20,7 @@ import multer from "multer";
 import cookieParser from "cookie-parser";
 
 app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://cambuzz.netlify.app');
   res.header("Access-Control-Allow-Credentials", true);
   next();
 });
