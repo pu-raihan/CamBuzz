@@ -27,11 +27,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-<<<<<<< HEAD
-    origin: ["https://cambuzz.netlify.app", "http://localhost:3000/"]
-=======
     origin: ["https://cambuzz.netlify.app/", "http://localhost:3000/", "http://localhost:3001"], credentials:true
->>>>>>> 891a828c89ea96e18ddc6a521501bb5aa02036aa
   })
 );
 
