@@ -20,7 +20,7 @@ import multer from "multer";
 import cookieParser from "cookie-parser";
 
 app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', ['https://cambuzz.netlify.app',"http://localhost:3000"]);
+  //res.header('Access-Control-Allow-Origin', ['https://cambuzz.netlify.app',"http://localhost:3000"]);
   res.header("Access-Control-Allow-Credentials", true);
   next();
 });
@@ -28,7 +28,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    credentials:true,
+    origin: "https://cambuzz.netlify.app",
+    credentials: true,
   })
 );
 
