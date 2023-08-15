@@ -45,10 +45,10 @@ const Navbar = () => {
     setResultOpen(false)
   }
   
-  //const gotoRequests = () => {
-    //navigate("/requests");
-    //window.location.reload();
-  //}
+  const gotoRequests = () => {
+    navigate("/requests");
+    window.location.reload();
+  }
   
   const handleLogout = async () => {
     try {
@@ -107,12 +107,7 @@ const Navbar = () => {
       </div>
       <div className="mid">
         {currentUser.type === 'faculty' &&
-         <Link
-                to={`/requests`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-          <ReqIcon />
-           </Link>
+      <ReqIcon onClick={gotoRequests} />
         }
         <NotificationsIcon onClick={() => setNotificationOpen(true)} />
       </div>
