@@ -59,7 +59,7 @@ function App() {
     else if (!currentUser.emailVerified) {
       return <Navigate to="/verifyemail" />;
     }
-    else(currentUser) {
+    else if (currentUser) {
       return <Navigate to="/" />;
     }
     return children;
