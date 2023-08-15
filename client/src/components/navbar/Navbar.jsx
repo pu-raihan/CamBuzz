@@ -37,17 +37,15 @@ const Navbar = () => {
   const gotoProf = (username) => {
     if (username) {
       navigate("/profile/" + username);
-      window.location.reload();
     } else {
       navigate("/profile/" + currentUser.username);
-      window.location.reload();
     }
     setResultOpen(false)
   }
   
   const gotoRequests = () => {
     navigate("/requests");
-    window.location.reload();
+    //window.location.reload();
   }
   
   const handleLogout = async () => {
