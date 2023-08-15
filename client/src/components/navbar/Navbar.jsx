@@ -107,7 +107,12 @@ const Navbar = () => {
       </div>
       <div className="mid">
         {currentUser.type === 'faculty' &&
-          <ReqIcon onClick={gotoRequests} />
+         <Link
+                to={`/requests`}
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+          <ReqIcon />
+           </Link>
         }
         <NotificationsIcon onClick={() => setNotificationOpen(true)} />
       </div>
