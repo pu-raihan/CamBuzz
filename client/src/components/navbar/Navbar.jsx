@@ -45,10 +45,10 @@ const Navbar = () => {
     setResultOpen(false)
   }
   
-  const gotoRequests = () => {
-    navigate("/requests");
-    window.location.reload();
-  }
+  //const gotoRequests = () => {
+    //navigate("/requests");
+    //window.location.reload();
+  //}
   
   const handleLogout = async () => {
     try {
