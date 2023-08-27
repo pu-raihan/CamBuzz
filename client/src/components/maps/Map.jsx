@@ -69,8 +69,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
     const [directions, setDirections] = useState();
     const [isdir, setDir] = useState(false);
 
-    const API_KEY = process.env.GOOGLE_API
-
+    const API_KEY = process.env.REACT_APP_GOOGLE_API;
     const LocationPin = ({ text, icon }) => (
         <div className="pin">
             {icon === "you" && <MyLocationIcon className="pin-icon" style={{ color: "blue" }} />}
@@ -167,7 +166,6 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
             <div className="google-map" >
                 {!isdir && <>
                     <GoogleMapReact
-                        bootstrapURLKeys={{ key: API_KEY }}
                         center={center}
                         defaultZoom={zoomLevel}
                     >
