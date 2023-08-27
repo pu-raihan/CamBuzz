@@ -58,7 +58,7 @@ const Chat = ({ user, setChatOpen }) => {
             <div className="top">
                 <BackIcon onClick={() => setChatOpen(false)} />
                 <span>{user.username}</span>
-                <div className="image" onClick={() => { navigate("/profile/" + user.username); window.location.reload() }}>
+                <div className="image" onClick={() => { navigate("/profile/" + user.username) }}>
                     <img src={"/profile/" + user.profilePic} alt="" />
                 </div>
             </div>
