@@ -28,7 +28,6 @@ export const addRelation = (req, res) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json("followed");
     });
-  });
 });
 };
 
@@ -49,5 +48,4 @@ export const deleteRelation = (req, res) => {
       return res.status(200).json("Unfollowed");
     });
   });
-});
 };
