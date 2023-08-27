@@ -69,9 +69,9 @@ const Details = () => {
             const dataWithDistance = data.map((item) => {
                 const directionsService = new window.google.maps.DirectionsService();
                 const origin = new window.google.maps.LatLng(
-                    // currentLocation.lat,
-                    // currentLocation.lng
-                    12.015620324613108, 79.85482424187616
+                    currentLocation.lat,
+                    currentLocation.lng
+                    // 12.015620324613108, 79.85482424187616
                 );
                 const destination = new window.google.maps.LatLng(
                     item.coordinates.x,
