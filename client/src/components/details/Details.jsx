@@ -67,8 +67,8 @@ const Details = () => {
         setSortedData([])
         if (!isLoading && currentLocation && data) {
                 const script = document.createElement('script');
-            console.log(process.env.GOOGLE_API)
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
+            console.log("{process.env.GOOGLE_API}")
+                script.src = `https://maps.googleapis.com/maps/api/js?key={process.env.GOOGLE_API}&libraries=places`;
                 script.onload = () => {
                     const dataWithDistance = data.map((item) => {
                         const directionsService = new window.google.maps.DirectionsService();
