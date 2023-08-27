@@ -66,9 +66,6 @@ const Details = () => {
     useEffect(() => {
         setSortedData([])
         if (!isLoading && currentLocation && data) {
-            makeRequest.get('/google-maps').then((res) => {
-                console.log(res.data);
-            })
                 const script = document.createElement('script');
             console.log(process.env.GOOGLE_API)
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
