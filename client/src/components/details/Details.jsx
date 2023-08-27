@@ -9,8 +9,8 @@ import { useEffect, useState } from "react";
 import Map from "../maps/Map";
 
 const Details = () => {
-            const API_KEY = process.env.GOOGLE_API
-            console.log(API_KEY)
+            const API_KEY = process.env.GOOGLE_API;
+            console.log(API_KEY);
 
     const [itemRes, setRes] = useState({
         address: 'Pondicherry University, Puducherry.',
@@ -105,7 +105,7 @@ const Details = () => {
                 };
                 document.head.appendChild(script);
         }
-    }, [isLoading, currentLocation, data]);
+    }, [isLoading, currentLocation, data, API_KEY]);
 
     const handleClick = (resitem, all) => {
         if (!all) {
