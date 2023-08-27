@@ -66,42 +66,45 @@ const Details = () => {
     useEffect(() => {
         setSortedData([])
         if (!isLoading && currentLocation && data) {
-            const dataWithDistance = data.map((item) => {
-                    const script = document.createElement('script');
-                    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
-                    script.onload = () => {
-                const directionsService = new window.google.maps.DirectionsService();
-                const origin = new window.google.maps.LatLng(
-                    currentLocation.lat,
-                    currentLocation.lng
-                    // 12.015620324613108, 79.85482424187616
-                );
-                const destination = new window.google.maps.LatLng(
-                    item.coordinates.x,
-                    item.coordinates.y
-                );
-                const request = {
-                    origin: origin,
-                    destination: destination,
-                    travelMode: window.google.maps.TravelMode.DRIVING,
-                };
-                directionsService.route(request, (result, status) => {
-                    if (status === window.google.maps.DirectionsStatus.OK) {
-                        item.distance = result.routes[0].legs[0].distance.value;
-                        console.log(item.distance);
-                        item.directions = result
-                        setSortedData((prevSortedData) =>
-                            [...prevSortedData, item].sort((a, b) => a.distance - b.distance)
+            makeRequest.get('/google-maps').then((res) => {
+                console.log(res.data);
+            })
+                const script = document.createElement('script');
+                script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
+                script.onload = () => {
+                    const dataWithDistance = data.map((item) => {
+                        const directionsService = new window.google.maps.DirectionsService();
+                        const origin = new window.google.maps.LatLng(
+                            currentLocation.lat,
+                            currentLocation.lng
+                           // 12.015620324613108, 79.85482424187616
                         );
-                    } else {
-                        console.error(`Error fetching directions ${result}`);
-                    }
-                });
-                    };
-                    document.head.appendChild(script);
-                return item;
-            });
-            console.log(dataWithDistance);
+                        const destination = new window.google.maps.LatLng(
+                            item.coordinates.x,
+                            item.coordinates.y
+                        );
+                        const request = {
+                            origin: origin,
+                            destination: destination,
+                            travelMode: window.google.maps.TravelMode.DRIVING,
+                        };
+                        directionsService.route(request, (result, status) => {
+                            if (status === window.google.maps.DirectionsStatus.OK) {
+                                item.distance = result.routes[0].legs[0].distance.value;
+                                console.log(item.distance);
+                                item.directions = result
+                                setSortedData((prevSortedData) =>
+                                    [...prevSortedData, item].sort((a, b) => a.distance - b.distance)
+                                );
+                            } else {
+                                console.error(`Error fetching directions ${result}`);
+                            }
+                        });
+                        return item;
+                    });
+                    console.log(dataWithDistance);
+                };
+                document.head.appendChild(script);
         }
     }, [isLoading, currentLocation, data]);
 
