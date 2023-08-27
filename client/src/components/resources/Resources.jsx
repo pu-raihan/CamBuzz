@@ -18,8 +18,7 @@ const Resources = () => {
     const navigate = useNavigate();
 
     const handleClick = (targetRes) => {
-        navigate("/resources/" + targetRes)
-        window.location.reload();
+        navigate("/resources/" + targetRes);
 
     };
     return (
