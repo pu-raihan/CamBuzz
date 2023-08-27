@@ -13,15 +13,16 @@ export const getRelations = (req, res) => {
 export const addRelation = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
-
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
+    const uInfo=userInfo;
     if (err)
-    jwt.verify(token, "facultysecret", (err, userInfo) => {
-      if (err) return res.status(403).json("Token invalid!");
-
+      jwt.verify(token, "facultysecret", (err, userInfo) => {
+        if (err) return res.status(403).json("Token invalid!");
+        uInfo=userInfo;
+      });
     const q = "insert into relationships(`follower`,`followed`) values(?)";
 
-    const values = [userInfo.username, req.body.username];
+    const values = [uInfo.username, req.body.username];
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
@@ -34,15 +35,16 @@ export const addRelation = (req, res) => {
 export const deleteRelation = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
-
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) 
-    jwt.verify(token, "facultysecret", (err, userInfo) => {
-      if (err) return res.status(403).json("Token invalid!");
-
+    const uInfo=userInfo;
+    if (err)
+      jwt.verify(token, "facultysecret", (err, userInfo) => {
+        if (err) return res.status(403).json("Token invalid!");
+        uInfo=userInfo;
+      });
     const q = "delete from relationships where follower= ? and followed=? ";
 
-    db.query(q, [userInfo.username, req.query.username], (err, data) => {
+    db.query(q, [uInfo.username, req.query.username], (err, data) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json("Unfollowed");
     });
