@@ -70,6 +70,7 @@ const Details = () => {
                 console.log(res.data);
             })
                 const script = document.createElement('script');
+            console.log(process.env.GOOGLE_API)
                 script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
                 script.onload = () => {
                     const dataWithDistance = data.map((item) => {
