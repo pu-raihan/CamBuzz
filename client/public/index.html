@@ -12,10 +12,13 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <script>
+      const GOOGLE_API=process.env.GOOGLE_API
+    </script>
     <script
       async
       defer
-      src="https://maps.googleapis.com/maps/api/js?key={process.env.GOOGLE_API}"
+      src=`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_API}`
     ></script>
     <style>
       * {
