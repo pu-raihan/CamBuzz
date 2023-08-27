@@ -67,6 +67,9 @@ const Details = () => {
         setSortedData([])
         if (!isLoading && currentLocation && data) {
             const dataWithDistance = data.map((item) => {
+                    const script = document.createElement('script');
+                    script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_API}&libraries=places`;
+                    script.onload = () => {
                 const directionsService = new window.google.maps.DirectionsService();
                 const origin = new window.google.maps.LatLng(
                     currentLocation.lat,
@@ -94,6 +97,8 @@ const Details = () => {
                         console.error(`Error fetching directions ${result}`);
                     }
                 });
+                    };
+                    document.head.appendChild(script);
                 return item;
             });
             console.log(dataWithDistance);
