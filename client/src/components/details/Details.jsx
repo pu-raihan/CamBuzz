@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Map from "../maps/Map";
 
 const Details = () => {
-            const API_KEY = process.env.GOOGLE_API;
+            const API_KEY = process.env.REACT_APP_GOOGLE_API;
             console.log(API_KEY);
 
     const [itemRes, setRes] = useState({
