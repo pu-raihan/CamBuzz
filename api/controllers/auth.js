@@ -111,7 +111,9 @@ export const facLogin = (req, res) => {
 
         res
           .cookie("accessToken", token, {
-            httpOnly: true,
+            httpOnly: true, 
+            sameSite: "none",
+            secure: true,
           })
           .status(200)
           .json(others);
@@ -142,8 +144,10 @@ export const adminLogin = (req, res) => {
     var { password, ...others } = data[0];
     res
       .cookie("adminToken", token, {
-        httpOnly: true,
-      })
+            httpOnly: true, 
+            sameSite: "none",
+            secure: true,
+          })
       .status(200)
       .json(others);
   });
@@ -162,8 +166,10 @@ export const update = (req, res) => {
     others = { ...others, emailVerified: true};
     res
       .cookie("accessToken", token, {
-        httpOnly: true,
-      })
+            httpOnly: true, 
+            sameSite: "none",
+            secure: true,
+          })
       .status(200)
       .json(others);
   });
