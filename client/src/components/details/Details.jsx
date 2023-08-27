@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import Map from "../maps/Map";
 
 const Details = () => {
-            console.log("G API = "+process.env.GOOGLE_API)
+            console.log("G API = {process.env.GOOGLE_API}")
             console.log(`G API = {process.env.GOOGLE_API}`)
 
     const [itemRes, setRes] = useState({
