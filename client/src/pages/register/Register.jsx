@@ -22,7 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await axios.post("https://cambuzz.onrender.com/api/auth/register", inputs);
-      navigate("/login");
+      navigate("/");
     } catch (err) {
       setErr(err.response.data);
     }
