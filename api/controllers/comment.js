@@ -17,8 +17,9 @@ export const addComment = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) return res.status(403).json("Token invalid!");
+    jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
+    if (err) jwt.verify(token, "facultysecret", (err2, userInfo) => {
+      if (err2) return res.status(403).json("Token invalid!");
 
     const q =
       "insert into comments(`desc`,`createdAt`,`username`,`postid`) values(?)";
@@ -35,4 +36,5 @@ export const addComment = (req, res) => {
       return res.status(200).json("New commment posted");
     });
   });
+    });
 };
