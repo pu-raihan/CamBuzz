@@ -15,7 +15,8 @@ export const addLike = (req, res) => {
   if (!token) return res.status(401).json("Not logged in");
 
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) return res.status(403).json("Token invalid!");
+    if (err) jwt.verify(token, "facultysecret", (err2, userInfo) => {
+      if (err2) return res.status(403).json("Token invalid!");
 
     const q = "insert into likes(`username`,`postid`) values(?)";
 
@@ -26,6 +27,7 @@ export const addLike = (req, res) => {
       return res.status(200).json("Post liked");
     });
   });
+  });
 };
 
 export const deleteLike = (req, res) => {
@@ -33,7 +35,8 @@ export const deleteLike = (req, res) => {
   if (!token) return res.status(401).json("Not logged in");
 
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
-    if (err) return res.status(403).json("Token invalid!");
+    if (err) jwt.verify(token, "facultysecret", (err2, userInfo) => {
+      if (err2) return res.status(403).json("Token invalid!");
 
     const q = "delete from likes where username= ? and postid=? ";
 
@@ -41,5 +44,6 @@ export const deleteLike = (req, res) => {
       if (err) return res.status(500).json(err);
       return res.status(200).json("Post unliked");
     });
+  });
   });
 };
