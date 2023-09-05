@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import { useContext } from "react";
+import Loader from "../loader/Loader";
 
 const Posts = ({username}) => {
   const { currentUser } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Posts = ({username}) => {
       {error
         ? "Something went wrong!"
         : isLoading
-        ? "loading posts"
+        ?<Loader size={30} color={"#360913"} noBg={true}/>
         : data.map((post) => <Post post={post} key={post.postid} />)}
     </div>
   );

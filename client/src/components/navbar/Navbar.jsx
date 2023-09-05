@@ -17,6 +17,7 @@ import { AuthContext } from "../../context/authContext";
 import { makeRequest } from "../../axios";
 import Dialog from "../dialog/Dialog";
 import Notification from "../notification/Notification";
+import Loader from "../loader/Loader";
 
 const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
@@ -28,7 +29,9 @@ const Navbar = () => {
 
   const [searchText, setSearchText] = useState();
   const [err, setErr] = useState(null);
+  const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const { logout } = useContext(AuthContext);
 
@@ -54,17 +57,28 @@ const Navbar = () => {
     } catch (err) {
       setErr(err.response.data);
     }
-    navigate("/login");
+    navigate("/");
   };
-  const handleChange = (e) => {
-    setSearchText(e.target.value);
-    makeRequest.get("/search/" + e.target.value).then((res) => {
-      setData(res.data)
-    }).catch(error => {
-      if (error.response.status === 409)
-        setData(null)
-      console.log(error);
-    });
+
+  const handleChange = async (e) => {
+    if (e.target.value) {
+      setSearchText(e.target.value);
+      try {
+        setLoading(true);
+        const res = await makeRequest.get("/search/" + e.target.value);
+        setData(res.data);
+      } catch (error) {
+        if (error.response.status === 409) {
+          setError(error.response.data);
+          setData(null);
+        }
+      }
+    }
+    else {
+      setData(null);
+      setSearchText(undefined);
+    }
+    setLoading(false);
   };
 
   const div1Ref = useRef(null);
@@ -115,9 +129,7 @@ const Navbar = () => {
             <div className="profil">
               <div className="goto" onClick={() => gotoProf()}>
                 <AccountIcon style={{ fontSize: "medium" }} />
-
                 <span>Profile</span>
-
               </div>
               <div className="logout" onClick={() => setDialogOpen(true)}>
                 <PowerIcon style={{ fontSize: "medium" }} />
@@ -139,15 +151,17 @@ const Navbar = () => {
       {notificationOpen && <Notification setNotificationOpen={setNotificationOpen} qst="Do you really wanna logout?" />}
       {resultOpen &&
         <div className="results" style={{ left: distanceFromLeft, width: div1Width }}>
-          <div className="close"> <span>{data &&data.length+" results"} </span>
-          <CloseIcon style={{fontSize:"medium"}} onClick={()=>setResultOpen(false)}/></div>
-          {searchText ? data ?data.map((result) =>
+          <div className="close">
+            {loading && <Loader size={25} color={"white"}/>}
+            <span>{data && searchText && data.length + " results"} </span>
+            <CloseIcon style={{ fontSize: "medium" }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
+          {searchText ? data ? data.map((result) =>
             <div className={result.type === 'faculty' ? "result faculty" : "result"} key={result.id} onClick={() => gotoProf(result.username)}>
               <img src={"/profile/" + result.profilePic} alt="" />
               <p className="name">{result.username}</p>
               <p className="type">{result.type}</p>
-              <ArrowForwardIcon style={{ right: "0" }} className="arrowForward"/>
-            </div>) : `No results found for '${searchText}'!` : `Search users`}
+              <ArrowForwardIcon style={{ right: "0" }} className="arrowForward" />
+            </div>) : loading ? 'Loading' : error : `Search users`}
         </div>}
     </div>
   );

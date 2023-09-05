@@ -11,11 +11,13 @@ import { useContext, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
+import Loader from "../loader/Loader";
 
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const { currentUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const { isLoading, error, data } = useQuery(["likes", post.postid], () =>
     makeRequest.get("/likes?postid=" + post.postid).then((res) => {
@@ -38,12 +40,13 @@ const Post = ({ post }) => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["likes"]);
+        setLoading(false);
       },
     }
   );
   const delMutation = useMutation(
     (postData) => {
-      return makeRequest.delete("/posts?postid="+ postData.postid+"&type="+postData.type);
+      return makeRequest.delete("/posts?postid=" + postData.postid + "&type=" + postData.type);
     },
     {
       onSuccess: () => {
@@ -52,13 +55,14 @@ const Post = ({ post }) => {
     }
   );
 
-  const handleLike = () => {
+  const handleLike = async () => {
+    setLoading(true)
     mutation.mutate(data.includes(currentUser.username));
   };
 
   const handleDelete = () => {
-   
-    delMutation.mutate({postid:post.postid,type:currentUser.type});
+
+    delMutation.mutate({ postid: post.postid, type: currentUser.type });
   };
 
   return (
@@ -83,22 +87,26 @@ const Post = ({ post }) => {
           )}
         </div>
         <div className="content">
-          <img src={"/posts/" + post.img} alt="" />
+          <img src={"/posts/" + post.img} alt="Unable to load" />
           <p>{post.desc}</p>
         </div>
         <div className="info">
           <div className="item">
-            {isLoading ? (
-              "loading"
-            ) : data.includes(currentUser.username) ? (
-              <LikedIcon style={{ color: "#6b173e" }} onClick={handleLike} />
-            ) : (
-              <LikeIcon style={{ color: "#6b173e" }} onClick={handleLike} />
-            )}
-            {data?data.length+" Likes":error}
+            <div className="likeico" style={{ position: "relative" }}>
+              {isLoading ?
+                (<Loader size={35} color={"black"} noBg={true} />)
+                : data.includes(currentUser.username) ? <>
+                  <LikedIcon style={{ color: "#6b173e" }} onClick={handleLike} />
+                  {loading && <Loader size={10} color={"white"} noBg={true} />}</>
+                  : <>
+                    <LikeIcon style={{ color: "#6b173e" }} onClick={handleLike} />
+                    {loading && <Loader size={10} color={"black"} noBg={true} />}</>
+              }
+            </div>
+            {data ? data.length + " Likes" : error}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-            <CommentIcon />{cLoading?"Loading...":cData?cData.length+" Comments":cError}
+            <CommentIcon />{cLoading ? <Loader size={15} noBg={true} /> : cData ? cData.length + " Comments" : cError}
           </div>
           <div className="item">
             <ShareIcon />
