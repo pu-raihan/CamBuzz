@@ -9,7 +9,7 @@ const Login = () => {
     password: "",
   });
   const [checked, setChecked] = useState(false);
-
+  const [loading, setLoading] = useState(false);
 
   const [err, setErr] = useState(null);
 
@@ -29,22 +29,30 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setErr(null);
     if (checked) {
       try {
         await facLogin(inputs);
-        navigate("/");
       } catch (err) {
         setErr(err.response.data);
+      } finally {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        navigate("/");
+        window.location.reload();
+        setLoading(false);
       }
     }
     else {
       try {
-        console.log("login1");
         await login(inputs);
-        console.log("login2");
-        navigate("/");
       } catch (err) {
         setErr(err.response.data);
+      } finally {
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        navigate("/");
+        window.location.reload();
+        setLoading(false);
       }
     }
   };
@@ -52,6 +60,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="card">
+        {loading && <Loader />}
         <div className="left">
           <img src="/lightLogo.png" alt="" />
           <p>
