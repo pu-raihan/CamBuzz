@@ -20,7 +20,7 @@ const Posts = ({username}) => {
       {error
         ? "Something went wrong!"
         : isLoading
-        ?<Loader size={30} color={"#360913"} noBg={true}/>
+        ?<Loader size={30} dColor={"white"} lColor={"#360913"} noBg={true}/>
         : data.map((post) => <Post post={post} key={post.postid} />)}
     </div>
   );
