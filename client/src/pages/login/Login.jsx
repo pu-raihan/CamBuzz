@@ -22,7 +22,6 @@ const Login = () => {
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    setErr(null);
   };
 
   const { login } = useContext(AuthContext);
@@ -35,24 +34,24 @@ const Login = () => {
     if (checked) {
       try {
         await facLogin(inputs);
-      } catch (err) {
-        setErr(err.response.data);
-      } finally {
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/");
         window.location.reload();
+      } catch (err) {
+        setErr(err.response.data);
+      } finally {
         setLoading(false);
       }
     }
     else {
       try {
         await login(inputs);
-      } catch (err) {
-        setErr(err.response.data);
-      } finally {
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/");
         window.location.reload();
+      } catch (err) {
+        setErr(err.response.data);
+      } finally {
         setLoading(false);
       }
     }
@@ -61,7 +60,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="card">
-        {loading && <Loader />}
+        {loading && <Loader lColor={"white"} dColor={"white"} />}
         <div className="left">
           <img src="/lightLogo.png" alt="" />
           <p>

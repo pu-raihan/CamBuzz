@@ -97,16 +97,16 @@ const Post = ({ post }) => {
                 (<Loader size={35} color={"black"} noBg={true} />)
                 : data.includes(currentUser.username) ? <>
                   <LikedIcon style={{ color: "#6b173e" }} onClick={handleLike} />
-                  {loading && <Loader size={10} color={"white"} noBg={true} />}</>
+                  {loading && <Loader size={10} dColor={"white"} lColor={"white"} noBg={true} />}</>
                   : <>
                     <LikeIcon style={{ color: "#6b173e" }} onClick={handleLike} />
-                    {loading && <Loader size={10} color={"black"} noBg={true} />}</>
+                    {loading && <Loader size={10} lColor={"black"} dColor={"white"} noBg={true} />}</>
               }
             </div>
             {data ? data.length + " Likes" : error}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-            <CommentIcon />{cLoading ? <Loader size={15} noBg={true} /> : cData ? cData.length + " Comments" : cError}
+            <CommentIcon />{!cLoading ? <Loader size={15} lColor={"white"} dColor={"white"} noBg={false} /> : cData ? cData.length + " Comments" : cError}
           </div>
           <div className="item">
             <ShareIcon />
