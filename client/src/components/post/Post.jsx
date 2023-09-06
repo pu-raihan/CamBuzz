@@ -106,7 +106,7 @@ const Post = ({ post }) => {
             {data ? data.length + " Likes" : error}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-            <CommentIcon />{!cLoading ? <Loader size={15} lColor={"white"} dColor={"white"} noBg={false} /> : cData ? cData.length + " Comments" : cError}
+            <CommentIcon />{cLoading ? <Loader size={15} lColor={"white"} dColor={"white"} noBg={false} /> : cData ? cData.length + " Comments" : cError}
           </div>
           <div className="item">
             <ShareIcon />
