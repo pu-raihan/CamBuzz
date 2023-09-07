@@ -21,7 +21,7 @@ const Register = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://cambuzz.onrender.com/api/auth/register", inputs);
+      await axios.post("https://cambuzz-api.onrender.com/api/auth/register", inputs);
       navigate("/");
     } catch (err) {
       setErr(err.response.data);

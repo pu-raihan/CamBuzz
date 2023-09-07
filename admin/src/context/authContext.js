@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     const res = await axios.post(
-      "https://cambuzz.onrender.com/api/auth/adminlogin",
+      "https://cambuzz-api.onrender.com/api/auth/adminlogin",
       inputs,
       {
         withCredentials: true,
@@ -20,7 +20,7 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await axios.post("https://cambuzz.onrender.com/api/auth/logout");
+    await axios.post("https://cambuzz-api.onrender.com/api/auth/logout");
     localStorage.removeItem("admin");
     setCurrentUser(null);
   };
