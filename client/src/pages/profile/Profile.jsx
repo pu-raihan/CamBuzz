@@ -15,6 +15,7 @@ import { makeRequest } from "../../axios";
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
+import Loader from "../../components/loader/Loader";
 
 const Profile = () => {
 
@@ -24,6 +25,7 @@ const Profile = () => {
   const username = useLocation().pathname.split("/")[2];
 
   const { currentUser } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
 
   const { isLoading, error, data } = useQuery(["user"], () =>
     makeRequest.get("/users/" + username).then((res) => {
@@ -50,11 +52,13 @@ const Profile = () => {
     {
       onSuccess: () => {
         queryClient.invalidateQueries(["relation"]);
+        setLoading(false)
       },
     }
   );
 
   const handleFollow = () => {
+    setLoading(true)
     mutation.mutate(relationData.includes(currentUser.username));
   };
 
@@ -113,6 +117,7 @@ const Profile = () => {
                     {relationData.includes(currentUser.username)
                       ? "Following"
                       : "Follow"}
+                    {loading && <Loader size={20} lColor={"white"} dColor={"white"} />}
                   </button>
                 )}
               </div>
