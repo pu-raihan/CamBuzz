@@ -152,7 +152,7 @@ const Navbar = () => {
       {resultOpen &&
         <div className="results" style={{ left: distanceFromLeft, width: div1Width }}>
           <div className="close">
-            {loading && <Loader size={25} color={"white"}/>}
+            {loading && <Loader size={25} lColor={"white"} dColor={"white"}/>}
             <span>{data && searchText && data.length + " results"} </span>
             <CloseIcon style={{ fontSize: "medium" }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
           {searchText ? data ? data.map((result) =>
