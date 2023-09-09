@@ -28,37 +28,37 @@ const Chat = ({ user, setChatOpen }) => {
     }
 
     const navigate = useNavigate();
-    
-  const queryClient = useQueryClient();
 
-  const mutation = useMutation(
-    (newMessage) => {
-      return makeRequest.post("/chats", newMessage);
-    },
-    {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["chats"]);
-      },
-    }
-  );
+    const queryClient = useQueryClient();
+
+    const mutation = useMutation(
+        (newMessage) => {
+            return makeRequest.post("/chats", newMessage);
+        },
+        {
+            onSuccess: () => {
+                queryClient.invalidateQueries(["chats"]);
+            },
+        }
+    );
     const sendMessage = async (e) => {
         e.preventDefault();
         const messageData = {
             sender: currentUser.username,
             receiver: user.username,
             message: newMessage,
-            forum:false
+            forum: false
         };
         mutation.mutate(messageData);
         setNewMessage("");
-      };
+    };
 
     return (
         <div className="chatbox ">
             <div className="top">
                 <BackIcon onClick={() => setChatOpen(false)} />
                 <span>{user.username}</span>
-                <div className="image" onClick={() => { navigate("/profile/" + user.username) }}>
+                <div className="image" onClick={() => { navigate("/profile/" + user.username); window.location.reload() }}>
                     <img src={"/profile/" + user.profilePic} alt="" />
                 </div>
             </div>
@@ -74,7 +74,7 @@ const Chat = ({ user, setChatOpen }) => {
                             <div className="message-time">{formattedDate(message.time)}</div>
                         </div>
                     ))}
-                    {error&&error}
+                {error && error}
             </div>
             <div className="send">
                 <input
@@ -82,7 +82,7 @@ const Chat = ({ user, setChatOpen }) => {
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                 />
-                <SendIcon style={{color:"#fff"}} onClick={sendMessage}/>
+                <SendIcon style={{ color: "#fff" }} onClick={sendMessage} />
             </div>
         </div>
 

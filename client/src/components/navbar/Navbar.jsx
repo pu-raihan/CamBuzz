@@ -40,17 +40,19 @@ const Navbar = () => {
   const gotoProf = (username) => {
     if (username) {
       navigate("/profile/" + username);
+      window.location.reload();
     } else {
       navigate("/profile/" + currentUser.username);
+      window.location.reload();
     }
     setResultOpen(false)
   }
-  
+
   const gotoRequests = () => {
     navigate("/requests");
-    //window.location.reload();
+    window.location.reload();
   }
-  
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -119,7 +121,7 @@ const Navbar = () => {
       </div>
       <div className="mid">
         {currentUser.type === 'faculty' &&
-      <ReqIcon onClick={gotoRequests} />
+          <ReqIcon onClick={gotoRequests} />
         }
         <NotificationsIcon onClick={() => setNotificationOpen(true)} />
       </div>
@@ -152,7 +154,7 @@ const Navbar = () => {
       {resultOpen &&
         <div className="results" style={{ left: distanceFromLeft, width: div1Width }}>
           <div className="close">
-            {loading && <Loader size={25} lColor={"white"} dColor={"white"}/>}
+            {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
             <span>{data && searchText && data.length + " results"} </span>
             <CloseIcon style={{ fontSize: "medium" }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
           {searchText ? data ? data.map((result) =>

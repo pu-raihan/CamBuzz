@@ -17,15 +17,19 @@ const Menubar = () => {
 
   const gotoRes = () => {
     navigate("/resources");
+    window.location.reload();
   }
   const gotoChat = () => {
     navigate("/chats");
+    window.location.reload();
   }
   const gotoEvents = () => {
     navigate("/events");
+    window.location.reload();
   }
   const gotoRequests = () => {
     navigate("/requests");
+    window.location.reload();
   }
 
   return (

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Map from "../maps/Map";
 
 const Details = () => {
+
     const API_KEY = process.env.REACT_APP_GOOGLE_API;
     const [itemRes, setRes] = useState({
         address: 'Pondicherry University, Puducherry.',
@@ -66,42 +67,42 @@ const Details = () => {
     useEffect(() => {
         setSortedData([])
         if (!isLoading && currentLocation && data) {
-                const script = document.createElement('script');
-                script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
-                script.onload = () => {
-                    const dataWithDistance = data.map((item) => {
-                        const directionsService = new window.google.maps.DirectionsService();
-                        const origin = new window.google.maps.LatLng(
-                            currentLocation.lat,
-                            currentLocation.lng
-                           // 12.015620324613108, 79.85482424187616
-                        );
-                        const destination = new window.google.maps.LatLng(
-                            item.coordinates.x,
-                            item.coordinates.y
-                        );
-                        const request = {
-                            origin: origin,
-                            destination: destination,
-                            travelMode: window.google.maps.TravelMode.DRIVING,
-                        };
-                        directionsService.route(request, (result, status) => {
-                            if (status === window.google.maps.DirectionsStatus.OK) {
-                                item.distance = result.routes[0].legs[0].distance.value;
-                                console.log(item.distance);
-                                item.directions = result
-                                setSortedData((prevSortedData) =>
-                                    [...prevSortedData, item].sort((a, b) => a.distance - b.distance)
-                                );
-                            } else {
-                                console.error(`Error fetching directions ${result}`);
-                            }
-                        });
-                        return item;
+            const script = document.createElement('script');
+            script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}`;
+            script.onload = () => {
+                const dataWithDistance = data.map((item) => {
+                    const directionsService = new window.google.maps.DirectionsService();
+                    const origin = new window.google.maps.LatLng(
+                        currentLocation.lat,
+                        currentLocation.lng
+                        // 12.015620324613108, 79.85482424187616
+                    );
+                    const destination = new window.google.maps.LatLng(
+                        item.coordinates.x,
+                        item.coordinates.y
+                    );
+                    const request = {
+                        origin: origin,
+                        destination: destination,
+                        travelMode: window.google.maps.TravelMode.DRIVING,
+                    };
+                    directionsService.route(request, (result, status) => {
+                        if (status === window.google.maps.DirectionsStatus.OK) {
+                            item.distance = result.routes[0].legs[0].distance.value;
+                            console.log(item.distance);
+                            item.directions = result
+                            setSortedData((prevSortedData) =>
+                                [...prevSortedData, item].sort((a, b) => a.distance - b.distance)
+                            );
+                        } else {
+                            console.error(`Error fetching directions ${result}`);
+                        }
                     });
-                    console.log(dataWithDistance);
-                };
-                document.head.appendChild(script);
+                    return item;
+                });
+                console.log(dataWithDistance);
+            };
+            document.head.appendChild(script);
         }
     }, [isLoading, currentLocation, data, API_KEY]);
 
