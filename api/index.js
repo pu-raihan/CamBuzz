@@ -27,8 +27,8 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: //"https://cambuzz.netlify.app",
-    "https://cambuzz.onrender.com",
+    origin: "https://cambuzz.netlify.app",
+    //"https://cambuzz.onrender.com",
     credentials: true,
   })
 );
