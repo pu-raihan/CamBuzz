@@ -74,6 +74,7 @@ const Navbar = () => {
           setError(error.response.data);
           setData(null);
         }
+        console.log(error.response.data);
       }
     }
     else {

@@ -9,7 +9,7 @@ export const getResult = (req, res) => {
     keyword +
     "%' ORDER BY INSTR(username, '"+keyword+"');";
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     if (!data.length)
       return res.status(409).json(`No results found for '${keyword}'!`);
     return res.json(data);
