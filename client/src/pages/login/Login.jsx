@@ -51,6 +51,7 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } catch (err) {
+        console.log(err);
         setErr(err.response.data);
       } finally {
         setLoading(false);
@@ -96,7 +97,7 @@ const Login = () => {
               <span className="checkmark"></span>
             </label>
             <button onClick={handleLogin}>Login</button>
-            <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
+            <p style={{ color: "red", fontSize: "small" }}>{err && "error"}</p>
           </form>
         </div>
       </div>
