@@ -79,6 +79,7 @@ const Register = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
+                autocomplete="email"
                 onChange={handleChange}
               />
               <input
@@ -86,12 +87,6 @@ const Register = () => {
                 placeholder="Password"
                 name="password"
                 autocomplete="current-password"
-                onChange={handleChange}
-              />
-              <input
-                type="text"
-                placeholder="Class/Dept"
-                name="username"
                 onChange={handleChange}
               />
               <select name="clas" onChange={handleChange} value={inputs.clas}>
