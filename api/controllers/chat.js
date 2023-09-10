@@ -9,13 +9,12 @@ export const getChat = (req, res) => {
     q,
     [req.query.user1, req.query.user2, req.query.user2, req.query.user1],
     (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json(data);
     }
   );
 };
 export const getChats = (req, res) => {
-
   const q = `SELECT IF(sender=?, receiver, sender) AS username, MAX(time) AS time, MAX((SELECT profilePic FROM users WHERE username = IF(sender=?, receiver, sender))) AS profilePic FROM chats WHERE sender = ? OR receiver = ? GROUP BY IF(sender=?, receiver, sender) ORDER BY time DESC;`;
 
   db.query(
@@ -28,7 +27,7 @@ export const getChats = (req, res) => {
       req.query.username,
     ],
     (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json(data);
     }
   );
@@ -37,7 +36,7 @@ export const getChats = (req, res) => {
 export const getForum = (req, res) => {
   const q = `select * from forum order by time DESC`;
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     return res.status(200).json(data);
   });
 };
@@ -53,7 +52,7 @@ export const sendMessage = (req, res) => {
     values = [req.body.sender, req.body.message, req.body.receiver];
   }
   db.query(q, [values], (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     return res.status(200).json("New message sent");
   });
 };

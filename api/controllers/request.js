@@ -9,7 +9,7 @@ export const getRequests = (req, res) => {
     const q =
       "SELECT posts.*,users.profilePic FROM posts INNER JOIN users ON posts.username = users.username WHERE posts.published = 0 AND users.class = ?";
     db.query(q, [req.query.class], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json(data);
     });
   });
@@ -26,14 +26,14 @@ export const approveReq = (req, res) => {
     if (approved) {
       const q = "update posts set published=1 WHERE postid = ? ";
       db.query(q, [req.body.postid], (err, data) => {
-        if (err) return res.status(500).json(err);
+        if (err) return res.status(500).json(err.message);
         return res.status(200).json(data);
       });
     }
     if (!approved) {
       const q = "delete from posts where postid=?";
       db.query(q, [req.body.postid], (err, data) => {
-        if (err) return res.status(500).json(err);
+        if (err) return res.status(500).json(err.message);
         if (data.affectedRows > 0) return res.json("Post deleted");
         return res.status(403).json("Post didn't delete");
       });

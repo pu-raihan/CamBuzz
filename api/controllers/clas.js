@@ -7,7 +7,7 @@ export const getClass = (req, res) => {
   if(classname!==undefined)
   var q = `select username,fullname,profilePic from users where class='${classname}'`;
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     return res.status(200).json(data);
   });
 };
@@ -22,13 +22,13 @@ export const addClass = (req, res) => {
     const q = "select * from classes where name=?";
 
     db.query(q, [texts.name], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       if (data.length) return res.status(409).json("Class already exists!");
 
       const q = "insert into classes(`name`,`dept`,`faculty`) values(?)";
       const values = [texts.name, texts.dept, texts.faculty];
       db.query(q, [values], (err, data) => {
-        if (err) return res.status(500).json(err);
+        if (err) return res.status(500).json(err.message);
         return res.status(200).json("Class added successfully");
       });
     });

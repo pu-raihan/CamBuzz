@@ -23,7 +23,7 @@ export const getPosts = (req, res) => {
         : [userInfo.username, userInfo.username];
 
     db.query(q, values, (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json(data);
     });
   });
@@ -51,11 +51,11 @@ export const addPost = (req, res) => {
       req.body.img,
       moment(Date.now()).format("YYYY-MM-DD HH:mm:ss"),
       userInfo.username,
-      published
+      published,
     ];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json("New post created");
     });
   });
@@ -73,7 +73,7 @@ export const deletePost = (req, res) => {
 
     const q = "delete from posts where postid=? and username=?";
     db.query(q, [req.query.postid, userInfo.username], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       if (data.affectedRows > 0) return res.json("Post deleted");
       return res.status(403).json("You cannot delete others post");
     });

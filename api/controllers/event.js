@@ -3,12 +3,10 @@ import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getEvents = (req, res) => {
-  
- const q = `select * from events order by createdAt DESC`;
-
+  const q = `select * from events order by createdAt DESC`;
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     return res.status(200).json(data);
   });
 };
@@ -19,10 +17,10 @@ export const addEvent = (req, res) => {
 
   jwt.verify(token, "facultysecret", (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
-    
+
     const q =
       "insert into events(`desc`,`img`,`date`,`username`,`venue`) values(?)";
-console.log(req.body);
+    console.log(req.body);
     const values = [
       req.body.desc,
       req.body.img,
@@ -32,7 +30,7 @@ console.log(req.body);
     ];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err);
+      if (err) return res.status(500).json(err.message);
       return res.status(200).json("New event created");
     });
   });

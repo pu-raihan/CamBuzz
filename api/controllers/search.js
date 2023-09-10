@@ -7,7 +7,9 @@ export const getResult = (req, res) => {
     keyword +
     "%' or fullname LIKE '%" +
     keyword +
-    "%' ORDER BY INSTR(username, '"+keyword+"');";
+    "%' ORDER BY INSTR(username, '" +
+    keyword +
+    "');";
   db.query(q, (err, data) => {
     if (err) return res.status(500).json(err.message);
     if (!data.length)

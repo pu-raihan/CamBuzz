@@ -11,7 +11,7 @@ export const getFaculty = (req, res) => {
   const q = `select * from users where type="faculty" order by uId DESC`;
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) return res.status(500).json(err.message);
     return res.status(200).json(data);
   });
 };
@@ -48,15 +48,21 @@ export const addFaculty = (req, res) => {
           const hashedPwd = bcrypt.hashSync(texts.password, salt);
           const q =
             "insert into users(`username`,`fullname`,`email`,`password`,`type`) values(?)";
-          const values = [texts.username,texts.fullname, texts.email, hashedPwd, "faculty"];
+          const values = [
+            texts.username,
+            texts.fullname,
+            texts.email,
+            hashedPwd,
+            "faculty",
+          ];
 
-          createUserWithEmailAndPassword(auth, texts.email,texts.password)
+          createUserWithEmailAndPassword(auth, texts.email, texts.password)
             .then((user) => {
               const currUser = user.user;
               sendEmailVerification(currUser)
                 .then(() => {
                   db.query(q, [values], (err, data) => {
-                    if (err) return res.status(500).json(err);
+                    if (err) return res.status(500).json(err.message);
                     return res.status(200).json("Faculty added successfully");
                   });
                 })
