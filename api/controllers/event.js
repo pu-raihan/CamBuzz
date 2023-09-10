@@ -6,7 +6,7 @@ export const getEvents = (req, res) => {
   const q = `select * from events order by createdAt DESC`;
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err.message);
+    if (err) return res.status(500).json("database error :"+err.message);
     return res.status(200).json(data);
   });
 };
@@ -30,7 +30,7 @@ export const addEvent = (req, res) => {
     ];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       return res.status(200).json("New event created");
     });
   });

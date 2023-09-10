@@ -5,7 +5,7 @@ export const getRelations = (req, res) => {
   const q = "select follower from relationships where followed=?";
 
   db.query(q, [req.query.followed], (err, data) => {
-    if (err) return res.status(500).json(err.message);
+    if (err) return res.status(500).json("database error :"+err.message);
     return res.status(200).json(data.map((relation) => relation.follower));
   });
 };
@@ -26,7 +26,7 @@ export const addRelation = (req, res) => {
     const values = [uInfo.username, req.body.username];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       console.log("followed");
       return res.status(200).json("followed");
     });
@@ -47,7 +47,7 @@ export const deleteRelation = (req, res) => {
     const q = "delete from relationships where follower= ? and followed=? ";
 
     db.query(q, [uInfo.username, req.query.username], (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       console.log("unfollowed");
       return res.status(200).json("Unfollowed");
     });

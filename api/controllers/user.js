@@ -6,7 +6,7 @@ export const getUser = (req, res) => {
   const q = "select * from users where username=?";
 
   db.query(q, [username], (err, data) => {
-    if (err) return res.status(500).json(err.message);
+    if (err) return res.status(500).json("database error :"+err.message);
     const { password, ...info } = data[0];
     return res.json(info);
   });
@@ -37,7 +37,7 @@ export const updateUser = (req, res) => {
         userInfo.username,
       ],
       (err, data) => {
-        if (err) return res.status(500).json(err.message);
+        if (err) return res.status(500).json("database error :"+err.message);
         if (data.affectedRows > 0) return res.json("Updated");
         return res.status(403).json("You cannot update others profile");
       }
@@ -54,7 +54,7 @@ export const deleteUser = (req, res) => {
 
     const q = "delete from users where username=?";
     db.query(q, req.params.username, (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       if (data.affectedRows > 0) return res.json("User deleted");
       return res.status(403).json("Unknown error");
     });

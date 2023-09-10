@@ -11,7 +11,7 @@ export const getFaculty = (req, res) => {
   const q = `select * from users where type="faculty" order by uId DESC`;
 
   db.query(q, (err, data) => {
-    if (err) return res.status(500).json(err.message);
+    if (err) return res.status(500).json("database error :"+err.message);
     return res.status(200).json(data);
   });
 };
@@ -62,7 +62,7 @@ export const addFaculty = (req, res) => {
               sendEmailVerification(currUser)
                 .then(() => {
                   db.query(q, [values], (err, data) => {
-                    if (err) return res.status(500).json(err.message);
+                    if (err) return res.status(500).json("database error :"+err.message);
                     return res.status(200).json("Faculty added successfully");
                   });
                 })

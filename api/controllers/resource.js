@@ -6,13 +6,13 @@ export const getResources = (req, res) => {
   if (resource === "toilet") {
     const q = "SELECT * FROM dept UNION SELECT * FROM hostel;";
     db.query(q, (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       return res.status(200).json(data);
     });
   } else {
     const q = "select * from " + resource;
     db.query(q, (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       return res.status(200).json(data);
     });
   }
@@ -39,7 +39,7 @@ export const addResource = (req, res) => {
       q,
       [req.body.texts.avail, req.body.texts.name, req.body.texts.remarks],
       (err, data) => {
-        if (err) return res.status(500).json(err.message);
+        if (err) return res.status(500).json("database error :"+err.message);
         return res.status(200).json("New resource created");
       }
     );

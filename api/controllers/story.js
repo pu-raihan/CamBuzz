@@ -24,7 +24,7 @@ export const getStories = (req, res) => {
         : [userInfo.username, userInfo.username];
 
     db.query(q, values, (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       return res.status(200).json(data);
     });
   });
@@ -49,7 +49,7 @@ export const addStory = (req, res) => {
     ];
 
     db.query(q, [values], (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       return res.status(200).json("New story added");
     });
   });
@@ -64,7 +64,7 @@ export const deleteStory = (req, res) => {
 
     const q = "delete from stories where sid=? and username=?";
     db.query(q, [req.params.sid, userInfo.username], (err, data) => {
-      if (err) return res.status(500).json(err.message);
+      if (err) return res.status(500).json("database error :"+err.message);
       if (data.affectedRows > 0) return res.json("Story deleted");
       return res.status(403).json("You cannot delete others story");
     });

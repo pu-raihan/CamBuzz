@@ -8,7 +8,7 @@ export const getComments = (req, res) => {
     order by c.createdAt DESC`;
 
   db.query(q, [req.query.postid], (err, data) => {
-    if (err) return res.status(500).json(err.message);
+    if (err) return res.status(500).json("database error :"+err.message);
     return res.status(200).json(data);
   });
 };
@@ -33,7 +33,7 @@ export const addComment = (req, res) => {
         ];
 
         db.query(q, [values], (err, data) => {
-          if (err) return res.status(500).json(err.message);
+          if (err) return res.status(500).json("database error :"+err.message);
           return res.status(200).json("New commment posted");
         });
       });
