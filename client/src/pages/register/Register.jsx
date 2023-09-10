@@ -22,6 +22,7 @@ const Register = () => {
     e.preventDefault();
     try {
       await axios.post("https://cambuzz-api.onrender.com/api/auth/register", inputs);
+      await new Promise((resolve) => setTimeout(resolve, 0));
       navigate("/login");
     } catch (err) {
       setErr(err.response.data);
@@ -62,6 +63,7 @@ const Register = () => {
               type="password"
               placeholder="Password"
               name="password"
+              autocomplete="current-password"
               onChange={handleChange}
             />
             <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
