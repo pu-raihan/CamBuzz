@@ -22,6 +22,7 @@ const Login = () => {
 
   const handleChange = (e) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setErr(null)
   };
 
   const { login } = useContext(AuthContext);
