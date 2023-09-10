@@ -39,7 +39,7 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } catch (err) {
-        setErr(err);
+        setErr(err.response.data);
       } finally {
         setLoading(false);
       }
@@ -51,7 +51,7 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } catch (err) {
-        setErr(err);
+        setErr(err.response.data);
       } finally {
         setLoading(false);
       }
