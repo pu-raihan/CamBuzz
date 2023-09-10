@@ -87,6 +87,7 @@ const Login = () => {
               type="password"
               placeholder="Password"
               name="password"
+              autoComplete="current-password"
               onChange={handleChange}
             />
             <label className="fac">
