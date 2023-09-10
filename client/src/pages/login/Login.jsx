@@ -39,7 +39,7 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } catch (err) {
-        setErr(err.response.data);
+        setErr(err);
       } finally {
         setLoading(false);
       }
@@ -51,8 +51,7 @@ const Login = () => {
         navigate("/");
         window.location.reload();
       } catch (err) {
-        console.log(err);
-        setErr(err.response.data);
+        setErr(err);
       } finally {
         setLoading(false);
       }
@@ -97,7 +96,7 @@ const Login = () => {
               <span className="checkmark"></span>
             </label>
             <button onClick={handleLogin}>Login</button>
-            <p style={{ color: "red", fontSize: "small" }}>{err && "error"}</p>
+            <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
           </form>
         </div>
       </div>
