@@ -107,7 +107,7 @@ function App() {
     },
     {
       path: "/register",
-      element: <Register />,
+      element:(<QueryClientProvider client={queryClient}> <Register /></QueryClientProvider>),
     },
     {
       path: "/verifyemail",

@@ -30,8 +30,15 @@ export const register = (req, res) => {
 
         const salt = bcrypt.genSaltSync(10);
         const hashedPwd = bcrypt.hashSync(req.body.password, salt);
-        const q = "insert into users(`username`,`email`,`password`,`type`) values(?)";
-        const values = [req.body.username, email, hashedPwd,"student"];
+        const q =
+          "insert into users(`username`,`email`,`password`, `class`, `type`) values(?)";
+        const values = [
+          req.body.username,
+          email,
+          hashedPwd,
+          req.body.clas,
+          "student",
+        ];
 
         createUserWithEmailAndPassword(auth, email, req.body.password)
           .then((user) => {
@@ -39,7 +46,7 @@ export const register = (req, res) => {
             sendEmailVerification(currUser)
               .then(() => {
                 db.query(q, [values], (err, data) => {
-                  if (err) return res.status(500).json(err);
+                  if (err) return res.status(500).json(err.message);
                   return res.status(200).json("User added successfully");
                 });
               })
@@ -59,7 +66,7 @@ export const register = (req, res) => {
         .json(
           "This email does not belongs to a pondicherry university student"
         );
-  }
+  } else return res.status(500).json("This is not a valid email");
 };
 
 export const login = (req, res) => {
@@ -67,7 +74,8 @@ export const login = (req, res) => {
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length === 0) return res.status(404).json("User not found!");
-    if (data[0].type!=="student") return res.status(404).json("Not a student! check the faculty box");
+    if (data[0].type !== "student")
+      return res.status(404).json("Not a student! check the faculty box");
 
     const checkPwd = bcrypt.compareSync(req.body.password, data[0].password);
     if (!checkPwd) return res.status(400).json("Wrong username or password!");
@@ -79,7 +87,7 @@ export const login = (req, res) => {
 
         res
           .cookie("accessToken", token, {
-            httpOnly: true, 
+            httpOnly: true,
             sameSite: "none",
             secure: true,
           })
@@ -99,7 +107,8 @@ export const facLogin = (req, res) => {
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
     if (data.length === 0) return res.status(404).json("User not found!");
-    if (data[0].type!=="faculty") return res.status(404).json("Not a faculty!");
+    if (data[0].type !== "faculty")
+      return res.status(404).json("Not a faculty!");
 
     const checkPwd = bcrypt.compareSync(req.body.password, data[0].password);
     if (!checkPwd) return res.status(400).json("Wrong username or password!");
@@ -111,7 +120,7 @@ export const facLogin = (req, res) => {
 
         res
           .cookie("accessToken", token, {
-            httpOnly: true, 
+            httpOnly: true,
             sameSite: "none",
             secure: true,
           })
@@ -144,10 +153,10 @@ export const adminLogin = (req, res) => {
     var { password, ...others } = data[0];
     res
       .cookie("adminToken", token, {
-            httpOnly: true, 
-            sameSite: "none",
-            secure: true,
-          })
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
       .status(200)
       .json(others);
   });
@@ -163,13 +172,13 @@ export const update = (req, res) => {
     const token = jwt.sign({ username: data[0].username }, "cambuzzsecret");
 
     var { password, ...others } = data[0];
-    others = { ...others, emailVerified: true};
+    others = { ...others, emailVerified: true };
     res
       .cookie("accessToken", token, {
-            httpOnly: true, 
-            sameSite: "none",
-            secure: true,
-          })
+        httpOnly: true,
+        sameSite: "none",
+        secure: true,
+      })
       .status(200)
       .json(others);
   });
