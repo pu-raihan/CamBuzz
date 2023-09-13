@@ -17,7 +17,6 @@ const Menubar = () => {
 
   const gotoRes = () => {
     navigate("/resources");
-    window.location.reload();
   }
   const gotoChat = () => {
     navigate("/chats");
