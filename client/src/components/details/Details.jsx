@@ -118,19 +118,19 @@ const Details = () => {
         setMapopen(true)
     };
     return (
-        <div className="details" style={{ position: "relative" }}>
+        <div className={`details ${isLoading && "reltv"}`} >
             {headError
                 ? "Titles couldn't load!"
-                : headLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
+                : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                     : <>
                         <h1>{headData[0].heading}</h1>
-                        <div className="allbtn" onClick={() => handleClick(sortedData, true)}>
+                        <div className="allbtn" onClick={() =>{if(!err) handleClick(sortedData, true)}} >
                             <span>View All</span><MapFilledIcon />
                         </div>
                     </>}
             {error
                 ? "Something went wrong!"
-                : isLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
+                : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                     : sortedData ? sortedData.map((resitem) => (
                         <div className="resourceItem" resitem={resitem} key={resitem.id}>
                             <div className="itemTop">
@@ -144,7 +144,7 @@ const Details = () => {
                             </div>
                         </div>
                     )) : <span style={{ margin: "auto" }}>No resources in database</span>
-            }{err && err}
+            }{err && <p>err</p> }
             {mapOpen &&
                 <div className="map" >
                     <div className="close">
