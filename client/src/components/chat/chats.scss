@@ -12,7 +12,7 @@
     &::-webkit-scrollbar {
       display: none;
     }
-    
+
     .container {
       padding: 20px;
 
@@ -23,12 +23,14 @@
         padding: 20px;
         background: themed("bg");
         margin-bottom: 15px;
+
         &:last-child {
+          position: relative;
           height: 50vh;
         }
-        .noData{
-            margin: auto;
-            font-weight: 600;
+        .noData {
+          margin: auto;
+          font-weight: 600;
         }
         span {
           font-size: 12px;

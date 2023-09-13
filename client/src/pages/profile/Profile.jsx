@@ -64,86 +64,85 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      {isLoading ? (
-        "Loading..."
-      ) : (
-        <>
-          <div className="images">
-            <img src={"/cover/" + data.coverPic} alt="" className="cover" />
-            <img
-              src={"/profile/" + data.profilePic}
-              alt=""
-              className="profilePic"
-            />
-          </div>
-          <div className="profileContainer">
-            <div className="uInfo">
-              <div className="left">
-                <div className="l1">
-                  <a href="http://facebook.com">
-                    <FacebookIcon fontSize="large" />
-                  </a>
-                  <a href="http://instagram.com">
-                    <InstagramIcon fontSize="large" />
-                  </a>
-                </div>
-                <div className="l1">
-                  <a href="http://twitter.com">
-                    <TwitterIcon fontSize="large" />
-                  </a>
-                  <a href="http://github.com">
-                    <GitHubIcon fontSize="large" />
-                  </a>
-                </div>
-              </div>
-              <div className="center">
-                <span>{data.username}</span>{data.type === 'faculty' && <span style={{ fontSize: "12px", color: "#0f0" }}>Faculty</span>}
-                <div className="info">
-                  <div className="item">
-                    <PlaceIcon />
-                    <span>{data.city}</span>
-                  </div>
-                  <div className="item">
-                    <WebIcon />
-                    <span>{data.website}</span>
-                  </div>
-                </div>
-                {relLoading ? (
-                  "Loading..."
-                ) : username === currentUser.username ? (
-                  <button onClick={() => setUpdateOpen(true)}>Update</button>
-                ) : (
-                  <button onClick={handleFollow}>
-                    {relationData.includes(currentUser.username)
-                      ? "Following"
-                      : "Follow"}
-                    {loading && <Loader size={20} lColor={"white"} dColor={"white"} />}
-                  </button>
-                )}
-              </div>
-              <div className="rightPart">
-                <div className="rTop">
-                  <Link
-                    style={{ textDecoration: "none", color: "inherit" }}
-                    to='#'
-                    onClick={(e) => {
-                      window.location.href = "mailto:" + data.email;
-                      e.preventDefault();
-                    }}
-                  ><EmailIcon /></Link>
-                  <MoreIcon onClick={() => setMoreOpen(!moreOpen)} />
-                  {moreOpen &&
-                    <button>Chat</button>
-                  }</div>
-                <div className="rBottom">
-                  <ClassIcon /> {data.class}
-                </div>
-              </div>{error && error}
+      {isLoading ? <Loader lColor={"black"} dColor={"white"} />
+        : (
+          <>
+            <div className="images">
+              <img src={"/cover/" + data.coverPic} alt="" className="cover" />
+              <img
+                src={"/profile/" + data.profilePic}
+                alt=""
+                className="profilePic"
+              />
             </div>
-            <Posts username={username} />
-          </div>
-        </>
-      )}
+            <div className="profileContainer">
+              <div className="uInfo">
+                <div className="left">
+                  <div className="l1">
+                    <a href="http://facebook.com">
+                      <FacebookIcon fontSize="large" />
+                    </a>
+                    <a href="http://instagram.com">
+                      <InstagramIcon fontSize="large" />
+                    </a>
+                  </div>
+                  <div className="l1">
+                    <a href="http://twitter.com">
+                      <TwitterIcon fontSize="large" />
+                    </a>
+                    <a href="http://github.com">
+                      <GitHubIcon fontSize="large" />
+                    </a>
+                  </div>
+                </div>
+                <div className="center">
+                  <span>{data.username}</span>{data.type === 'faculty' && <span style={{ fontSize: "12px", color: "#0f0" }}>Faculty</span>}
+                  <div className="info">
+                    <div className="item">
+                      <PlaceIcon />
+                      <span>{data.city}</span>
+                    </div>
+                    <div className="item">
+                      <WebIcon />
+                      <span>{data.website}</span>
+                    </div>
+                  </div>
+                  {relLoading ? (
+                    "Loading..."
+                  ) : username === currentUser.username ? (
+                    <button onClick={() => setUpdateOpen(true)}>Update</button>
+                  ) : (
+                    <button onClick={handleFollow}>
+                      {relationData.includes(currentUser.username)
+                        ? "Following"
+                        : "Follow"}
+                      {loading && <Loader size={20} lColor={"white"} dColor={"white"} />}
+                    </button>
+                  )}
+                </div>
+                <div className="rightPart">
+                  <div className="rTop">
+                    <Link
+                      style={{ textDecoration: "none", color: "inherit" }}
+                      to='#'
+                      onClick={(e) => {
+                        window.location.href = "mailto:" + data.email;
+                        e.preventDefault();
+                      }}
+                    ><EmailIcon /></Link>
+                    <MoreIcon onClick={() => setMoreOpen(!moreOpen)} />
+                    {moreOpen &&
+                      <button>Chat</button>
+                    }</div>
+                  <div className="rBottom">
+                    <ClassIcon /> {data.class}
+                  </div>
+                </div>{error && error}
+              </div>
+              <Posts username={username} />
+            </div>
+          </>
+        )}
       {updateOpen && <Update setUpdateOpen={setUpdateOpen} user={data} />}
     </div>
   );

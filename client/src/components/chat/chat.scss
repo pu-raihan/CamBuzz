@@ -55,6 +55,7 @@
       padding: 30px;
       height: 47vh;
       overflow: scroll;
+      position: relative;
 
       &::-webkit-scrollbar {
         display: none;

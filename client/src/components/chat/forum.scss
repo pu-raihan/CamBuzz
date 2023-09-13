@@ -41,6 +41,7 @@
       height: 47vh;
       overflow: scroll;
       gap: 5px;
+      position: relative;
 
       &::-webkit-scrollbar {
         display: none;

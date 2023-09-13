@@ -42,8 +42,7 @@ const Chats = () => {
 
                     <div className="item">
                         <span>Chats</span>
-                        {isLoading
-                            ? "loading..."
+                        {isLoading ? <Loader lColor={"black"} dColor={"white"} />
                             : data?data.map((item) => (
                                 <div key={item.time} className="user" onClick={() => gotoChat(item.username, item.profilePic)}>
                                     <div className="userInfo">

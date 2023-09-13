@@ -63,8 +63,7 @@ const Chat = ({ user, setChatOpen }) => {
                 </div>
             </div>
             <div className="messages">
-                {isLoading
-                    ? "loading..."
+                {isLoading ? <Loader lColor={"black"} dColor={"white"} />
                     : data.map((message) => (
                         <div
                             key={message.time}

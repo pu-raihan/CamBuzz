@@ -120,8 +120,7 @@ const Details = () => {
         <div className="details">
             {headError
                 ? "Titles couldn't load!"
-                : headLoading
-                    ? "loading..."
+                : headLoading ? <Loader lColor={"black"} dColor={"white"} />
                     : <>
                         <h1>{headData[0].heading}</h1>
                         <div className="allbtn" onClick={() => handleClick(sortedData, true)}>
@@ -130,8 +129,7 @@ const Details = () => {
                     </>}
             {error
                 ? "Something went wrong!"
-                : isLoading
-                    ? "loading..."
+                : isLoading ? <Loader lColor={"black"} dColor={"white"} />
                     : sortedData ? sortedData.map((resitem) => (
                         <div className="resourceItem" resitem={resitem} key={resitem.id}>
                             <div className="itemTop">

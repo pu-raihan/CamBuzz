@@ -11,6 +11,7 @@
     flex-direction: column;
     height: 82vh;
     overflow: scroll;
+    position: relative;
 
     &::-webkit-scrollbar {
       display: none;

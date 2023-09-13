@@ -20,7 +20,7 @@ const Stories = ({ username }) => {
       return res.data;
     })
   );
-  
+
   const handlePrevImage = () => {
     if (currentImageIndex === 0) {
       setImageOpen(false);
@@ -40,7 +40,7 @@ const Stories = ({ username }) => {
       setCurrentImageIndex(currentImageIndex + 1);
     }
   };
-  
+
   const handleImage = (image, index) => {
     setImage(image)
     setCurrentImageIndex(index);
@@ -55,8 +55,7 @@ const Stories = ({ username }) => {
       </div>
       {error
         ? "Something went wrong!"
-        : isLoading
-          ? "loading stories"
+        : isLoading ? <Loader lColor={"black"} dColor={"white"} />
           : data.map((story, index) => (
             <div className="story" key={story.sid}>
               <img src={"/stories/" + story.img} alt="" onClick={() => handleImage(story.img, index)} />
@@ -64,12 +63,12 @@ const Stories = ({ username }) => {
             </div>
           ))}
       {imageOpen && <div className="imagebox">
-      <BackIcon onClick={handlePrevImage} className="arrows"/>
+        <BackIcon onClick={handlePrevImage} className="arrows" />
         <img src={"/stories/" + image} alt="" />
         <button className="close" onClick={() => setImageOpen(false)}>
           <CloseIcon />
         </button>
-      <ForwardIcon onClick={handleNextImage} className="arrows" />
+        <ForwardIcon onClick={handleNextImage} className="arrows" />
       </div>}
       {uploadOpen && <Upload setUploadOpen={setUploadOpen} currentUser={currentUser} />}
     </div>

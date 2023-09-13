@@ -43,7 +43,7 @@ const Forum = ({ setForumOpen }) => {
         const messageData = {
             sender: currentUser.username,
             message: newMessage,
-            forum:true,
+            forum: true,
         };
         mutation.mutate(messageData);
         setNewMessage("");
@@ -56,14 +56,13 @@ const Forum = ({ setForumOpen }) => {
                 <span>P U Forum</span>
             </div>
             <div className="messages">
-                {isLoading
-                    ? "loading..."
+                {isLoading ? <Loader lColor={"black"} dColor={"white"} />
                     : data.map((message) => (
                         <div
                             key={message.time}
                             className={`${message.sender === currentUser.username ? "me" : "other"}`}
                         >
-                            {message.sender !== currentUser.username&&<div className="message-user">{message.sender}</div>}
+                            {message.sender !== currentUser.username && <div className="message-user">{message.sender}</div>}
                             <div className="message-content">{message.message}</div>
                             <div className="message-time">{formattedDate(message.time)}</div>
                         </div>

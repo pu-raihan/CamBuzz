@@ -30,6 +30,9 @@
         flex-direction: column;
         gap: 20px;
 
+        &:last-child {
+          position: relative;
+        }
         span {
           font-size: 12px;
         }
@@ -74,7 +77,6 @@
         //   }
         // }
 
-      
         .item {
           display: flex;
           align-items: center;

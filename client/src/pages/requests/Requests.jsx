@@ -27,7 +27,7 @@ const Requests = () => {
         }
     );
 
-    const handleClick =  ( approved, postid) => {
+    const handleClick = (approved, postid) => {
         mutation.mutate({ approved, postid });
     }
 
@@ -35,8 +35,7 @@ const Requests = () => {
         <div className="requests">
             {error
                 ? "Something went wrong!"
-                : isLoading
-                    ? "loading requests"
+                : isLoading ? <Loader lColor={"black"} dColor={"white"} />
                     : data.length ?
                         data.map((request) =>
                             <div className="request" key={request.postid}>
