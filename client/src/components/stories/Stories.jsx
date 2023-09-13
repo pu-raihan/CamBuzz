@@ -56,7 +56,7 @@ const Stories = ({ username }) => {
       </div>
       {error
         ? "Something went wrong!"
-        : isLoading ? <Loader lColor={"black"} dColor={"white"} />
+        : isLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
           : data.map((story, index) => (
             <div className="story" key={story.sid}>
               <img src={"/stories/" + story.img} alt="" onClick={() => handleImage(story.img, index)} />

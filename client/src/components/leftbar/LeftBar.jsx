@@ -44,7 +44,7 @@ const LeftBar = () => {
             <span>Events</span>
             {error
               ? "Something went wrong!"
-              : isLoading ? <Loader lColor={"black"} dColor={"white"} />     
+              : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />     
                 : data.length ? data.map((event) =>
                   <div className="item" key={event.id}>
                     <img src={"/events/"+event.img} alt="" />
