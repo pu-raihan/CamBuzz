@@ -137,7 +137,7 @@ const Profile = () => {
                   <div className="rBottom">
                     <ClassIcon /> {data.class}
                   </div>
-                </div>{error && error}
+                </div>{error && error.response.data}
               </div>
               <Posts username={username} />
             </div>

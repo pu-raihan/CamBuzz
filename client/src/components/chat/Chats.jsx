@@ -54,7 +54,7 @@ const Chats = () => {
                                 </div>
                             )):<p className="noData">No chats</p>
                             }
-                        {error && error}
+                        {error && error.response.data}
                     </div>
                 </>
                 }{

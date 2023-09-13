@@ -180,6 +180,13 @@
         }
       }
     }
+    .error{
+      display: flex;
+      width: 80%;
+      justify-content: center;
+      align-items: center;
+      color: themed("tColor");
+    }
   }
 }
 .reltv{

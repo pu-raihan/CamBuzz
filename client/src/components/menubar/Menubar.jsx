@@ -24,7 +24,6 @@ const Menubar = () => {
   }
   const gotoEvents = () => {
     navigate("/events");
-    window.location.reload();
   }
   const gotoRequests = () => {
     navigate("/requests");

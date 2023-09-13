@@ -68,7 +68,7 @@ const Forum = ({ setForumOpen }) => {
                             <div className="message-time">{formattedDate(message.time)}</div>
                         </div>
                     ))}
-                {error && error}
+                {error && error.response.data}
             </div>
             <div className="send">
                 <input

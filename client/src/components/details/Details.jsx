@@ -22,9 +22,8 @@ const Details = () => {
         all: true, zoomLevel: 15,
     });
     const [mapOpen, setMapopen] = useState(false);
-    const [err, setErr] = useState(null);
+    const [err, setErr] = useState("true");
 
-    const [isLoc, setIsLoc] = useState(false);
 
 
     const resource = useLocation().pathname.split("/")[2];
@@ -48,23 +47,19 @@ const Details = () => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({ lat: latitude, lng: longitude });
-                setIsLoc(true)
+                setErr(null)
             },
             (error) => {
-                setIsLoc(false)
                 if (error.code === 1) {
                     if ("Notification" in window && Notification.permission !== "granted") {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
                                 console.log("User has granted permission for location access")
-                                setIsLoc(true)
                             } else if (permission === "denied") {
-                                setErr(error.message + "...Please allow location access")
-                                console.log("User has denied permission for location access")
+                                setErr("Please allow location access")
+                                console.log(err+"...User has denied permission for location access")
                             }
                         });
-                    } else {
-                        setIsLoc(true)
                     }
                 }
                 console.error(error);
@@ -126,7 +121,7 @@ const Details = () => {
     };
     return (
         <div className={`details ${isLoading && "reltv"}`} >
-            {isLoc ? <>
+            {err ? <>
                 {headError
                     ? "Titles couldn't load!"
                     : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
@@ -152,7 +147,7 @@ const Details = () => {
                                 </div>
                             </div>
                         )) : <span style={{ margin: "auto" }}>No resources in database</span>
-                }{err && <p>{err}</p>}
+                }
                 {mapOpen &&
                     <div className="map" >
                         <div className="close">
@@ -166,8 +161,8 @@ const Details = () => {
                         />
                     </div>}
             </>
-                : <div className="error" style={{ color: "inherit" }}>
-                    Please allow your location access
+                : <div className="error" >
+                    <p>Please allow your location access</p>
                 </div>
             }
         </div>
