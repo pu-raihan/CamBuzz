@@ -65,7 +65,7 @@ const Details = () => {
                 console.error(error);
             }
         );
-    }, []);
+    }, [err]);
 
     useEffect(() => {
         setSortedData([])
