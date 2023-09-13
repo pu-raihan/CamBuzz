@@ -36,7 +36,7 @@ const Requests = () => {
         <div className="requests">
             {error
                 ? "Something went wrong!"
-                : isLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
+                : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                     : data.length ?
                         data.map((request) =>
                             <div className="request" key={request.postid}>

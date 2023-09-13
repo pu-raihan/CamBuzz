@@ -64,7 +64,7 @@ const Profile = () => {
 
   return (
     <div className="profile">
-      {isLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
+      {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
         : (
           <>
             <div className="images">

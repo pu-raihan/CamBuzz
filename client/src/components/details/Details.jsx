@@ -24,6 +24,8 @@ const Details = () => {
     const [mapOpen, setMapopen] = useState(false);
     const [err, setErr] = useState(null);
 
+    const [isLoc, setIsLoc] = useState(true);
+
 
     const resource = useLocation().pathname.split("/")[2];
 
@@ -50,9 +52,11 @@ const Details = () => {
             (error) => {
                 if (error.code === 1) {
                     if ("Notification" in window && Notification.permission !== "granted") {
+                        setIsLoc(false)
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
                                 console.log("User has granted permission for location access")
+                                setIsLoc(true)
                             } else if (permission === "denied") {
                                 console.log("User has denied permission for location access")
                             }
@@ -119,44 +123,47 @@ const Details = () => {
     };
     return (
         <div className={`details ${isLoading && "reltv"}`} >
-            {headError
-                ? "Titles couldn't load!"
-                : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                    : <>
-                        <h1>{headData[0].heading}</h1>
-                        <div className="allbtn" onClick={() =>{if(!err) handleClick(sortedData, true)}} >
-                            <span>View All</span><MapFilledIcon />
-                        </div>
-                    </>}
-            {error
-                ? "Something went wrong!"
-                : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                    : sortedData ? sortedData.map((resitem) => (
-                        <div className="resourceItem" resitem={resitem} key={resitem.id}>
-                            <div className="itemTop">
-                                <p className='name'>{resitem.name}</p>
-                                <p className='remarks'>{resitem.remarks}</p>
+            {isLoc ? <>
+                {headError
+                    ? "Titles couldn't load!"
+                    : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
+                        : <>
+                            <h1>{headData[0].heading}</h1>
+                            <div className="allbtn" onClick={() => { if (!err) handleClick(sortedData, true) }} >
+                                <span>View All</span><MapFilledIcon />
                             </div>
-                            <div className="itemBottom">
-                                <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
-                                {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
-                                <MapIcon onClick={() => handleClick(resitem, false)} />
+                        </>}
+                {error
+                    ? "Something went wrong!"
+                    : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
+                        : sortedData ? sortedData.map((resitem) => (
+                            <div className="resourceItem" resitem={resitem} key={resitem.id}>
+                                <div className="itemTop">
+                                    <p className='name'>{resitem.name}</p>
+                                    <p className='remarks'>{resitem.remarks}</p>
+                                </div>
+                                <div className="itemBottom">
+                                    <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
+                                    {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
+                                    <MapIcon onClick={() => handleClick(resitem, false)} />
+                                </div>
                             </div>
+                        )) : <span style={{ margin: "auto" }}>No resources in database</span>
+                }{err && <p>{err}</p>}
+                {mapOpen &&
+                    <div className="map" >
+                        <div className="close">
+                            <CloseIcon onClick={() => setMapopen(false)} />
                         </div>
-                    )) : <span style={{ margin: "auto" }}>No resources in database</span>
-            }{err && <p>err</p> }
-            {mapOpen &&
-                <div className="map" >
-                    <div className="close">
-                        <CloseIcon onClick={() => setMapopen(false)} />
-                    </div>
-                    <Map
-                        currentLocation={currentLocation}
-                        location={itemRes}
-                        zoomLevel={mapOpt.zoomLevel}
-                        icon={resource}
-                    />
-                </div>}
+                        <Map
+                            currentLocation={currentLocation}
+                            location={itemRes}
+                            zoomLevel={mapOpt.zoomLevel}
+                            icon={resource}
+                        />
+                    </div>}
+            </>
+                : "Please allow your location access"}
         </div>
     );
 };
