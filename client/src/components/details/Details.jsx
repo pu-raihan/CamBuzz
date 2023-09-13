@@ -163,7 +163,10 @@ const Details = () => {
                         />
                     </div>}
             </>
-                : "Please allow your location access"}
+                : <div className="error" style={{ color: "inherit" }}>
+                    Please allow your location access
+                </div>
+            }
         </div>
     );
 };
