@@ -118,7 +118,7 @@ const Details = () => {
         setMapopen(true)
     };
     return (
-        <div className="details" style={isLoading || headLoading || { position: "relative" }}>
+        <div className="details" style={isLoading && { position: "relative" }}>
             {headError
                 ? "Titles couldn't load!"
                 : headLoading ? <Loader noBg={true} size={35} lColor={"black"} dColor={"white"} />
