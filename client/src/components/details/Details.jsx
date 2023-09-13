@@ -24,7 +24,7 @@ const Details = () => {
     const [mapOpen, setMapopen] = useState(false);
     const [err, setErr] = useState(null);
 
-    const [isLoc, setIsLoc] = useState(true);
+    const [isLoc, setIsLoc] = useState(false);
 
 
     const resource = useLocation().pathname.split("/")[2];
