@@ -7,6 +7,7 @@ import { makeRequest } from "../../axios";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import Map from "../maps/Map";
+import Loader from "../loader/Loader";
 
 const Details = () => {
 

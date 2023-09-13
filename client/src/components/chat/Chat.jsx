@@ -7,6 +7,7 @@ import { AuthContext } from "../../context/authContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import Loader from "../loader/Loader";
 
 const Chat = ({ user, setChatOpen }) => {
 

@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import Chat from "./Chat";
 import Forum from "./Forum";
+import Loader from "../loader/Loader";
 
 const Chats = () => {
 

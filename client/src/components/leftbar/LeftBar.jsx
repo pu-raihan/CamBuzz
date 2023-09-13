@@ -7,6 +7,7 @@ import "./leftBar.scss";
 import { Link } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from "../../axios";
+import Loader from "../loader/Loader";
 
 const LeftBar = () => {
   const { isLoading, error, data } = useQuery(["events"], () =>

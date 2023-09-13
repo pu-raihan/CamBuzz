@@ -6,6 +6,7 @@ import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment";
+import Loader from "../loader/Loader";
 
 const Forum = ({ setForumOpen }) => {
 

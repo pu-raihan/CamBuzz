@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
+import Loader from "../../components/loader/Loader";
 
 const Requests = () => {
     const { currentUser } = useContext(AuthContext);

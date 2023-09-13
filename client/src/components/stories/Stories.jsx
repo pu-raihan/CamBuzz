@@ -7,6 +7,7 @@ import BackIcon from '@mui/icons-material/ArrowBackIosNew';
 import ForwardIcon from '@mui/icons-material/ArrowForwardIos';
 import CloseIcon from "@mui/icons-material/CloseRounded";
 import Upload from "../storyUpload/Upload";
+import Loader from "../loader/Loader";
 
 const Stories = ({ username }) => {
   const { currentUser } = useContext(AuthContext);

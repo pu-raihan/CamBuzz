@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
 import { makeRequest } from "../../axios";
-import Loader from "../../components/loader/Loader";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
+import Loader from "../../components/loader/Loader";
 
 const Register = () => {
   const [inputs, setInputs] = useState({
