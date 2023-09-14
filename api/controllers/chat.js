@@ -28,9 +28,8 @@ export const getChats = (req, res) => {
       req.query.username,
     ],
     (err, data) => {
-      if (err) res.status(500).json("database error :"+err.message);
-      else res.status(200).json(data);
-      db.end();
+      if (err) return res.status(500).json("database error :"+err.message);
+      return res.status(200).json(data);
     }
   );
 };
