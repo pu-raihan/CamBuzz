@@ -14,6 +14,7 @@ export const getChat = (req, res) => {
     }
   );
 };
+
 export const getChats = (req, res) => {
   const q = `SELECT IF(sender=?, receiver, sender) AS username, MAX(time) AS time, MAX((SELECT profilePic FROM users WHERE username = IF(sender=?, receiver, sender))) AS profilePic FROM chats WHERE sender = ? OR receiver = ? GROUP BY IF(sender=?, receiver, sender) ORDER BY time DESC;`;
 
@@ -27,8 +28,9 @@ export const getChats = (req, res) => {
       req.query.username,
     ],
     (err, data) => {
-      if (err) return res.status(500).json("database error :"+err.message);
-      return res.status(200).json(data);
+      if (err) res.status(500).json("database error :"+err.message);
+      else res.status(200).json(data);
+      db.end();
     }
   );
 };
