@@ -6,6 +6,7 @@ import { makeRequest } from "../../axios";
 import moment from "moment";
 import CloseIcon from "@mui/icons-material/CloseRounded";
 import Upload from "./Upload";
+import Loader from "../../components/loader/Loader";
 
 const Events = () => {
     const { currentUser } = useContext(AuthContext);
@@ -28,8 +29,7 @@ const Events = () => {
         <div className="events">
             {error
                 ? "Something went wrong!"
-                : isLoading
-                    ? "loading events"
+                : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                     : data.length ? data.map((event) =>
                         <div className="event" key={event.id} >
                             <img src={"/events/" + event.img} onClick={() => handleImage(event.img)} alt="" />

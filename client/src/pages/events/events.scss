@@ -9,6 +9,7 @@
     height: 82vh;
     padding: 30px 20px;
     overflow: scroll;
+    position: relative;
 
     &::-webkit-scrollbar {
       display: none;

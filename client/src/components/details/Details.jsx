@@ -22,7 +22,7 @@ const Details = () => {
         all: true, zoomLevel: 15,
     });
     const [mapOpen, setMapopen] = useState(false);
-    const [err, setErr] = useState("true");
+    const [isLoc, setIsLoc] = useState(null);
 
 
 
@@ -47,7 +47,7 @@ const Details = () => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({ lat: latitude, lng: longitude });
-                setErr(null)
+                setIsLoc("null")
             },
             (error) => {
                 if (error.code === 1) {
@@ -56,8 +56,8 @@ const Details = () => {
                             if (permission === "granted") {
                                 console.log("User has granted permission for location access")
                             } else if (permission === "denied") {
-                                setErr("Please allow location access")
-                                console.log(err+"...User has denied permission for location access")
+                                setIsLoc(null)
+                                console.log(isLoc+"...User has denied permission for location access")
                             }
                         });
                     }
@@ -65,7 +65,7 @@ const Details = () => {
                 console.error(error);
             }
         );
-    }, [err]);
+    }, [isLoc]);
 
     useEffect(() => {
         setSortedData([])
@@ -121,13 +121,13 @@ const Details = () => {
     };
     return (
         <div className={`details ${isLoading && "reltv"}`} >
-            {err ? <>
+            {isLoc ? <>
                 {headError
                     ? "Titles couldn't load!"
                     : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                         : <>
                             <h1>{headData[0].heading}</h1>
-                            <div className="allbtn" onClick={() => { if (!err) handleClick(sortedData, true) }} >
+                            <div className="allbtn" onClick={() => handleClick(sortedData, true) } >
                                 <span>View All</span><MapFilledIcon />
                             </div>
                         </>}
