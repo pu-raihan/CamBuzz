@@ -36,11 +36,13 @@ const Share = () => {
   );
   const handleClick = async (e) => {
     e.preventDefault();
-    let imgUrl = "";
-    if (file) imgUrl = await upload();
-    mutation.mutate({ desc, img: imgUrl, type: currentUser.type });
-    setDesc("");
-    setFile(null);
+    if (!currentUser.type === "guest") {
+      let imgUrl = "";
+      if (file) imgUrl = await upload();
+      mutation.mutate({ desc, img: imgUrl, type: currentUser.type });
+      setDesc("");
+      setFile(null);
+    }
   };
 
   return (

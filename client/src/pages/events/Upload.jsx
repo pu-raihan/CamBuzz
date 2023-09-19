@@ -44,11 +44,13 @@ const Upload = ({ setUploadOpen, currentUser }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    let imgUrl = "";
-    if (file) imgUrl = await upload();
-    mutation.mutate({ ...texts, img: imgUrl, type: currentUser.type });
-    setFile(null);
-    setUploadOpen(false)
+    if (!currentUser.type === "guest") {
+      let imgUrl = "";
+      if (file) imgUrl = await upload();
+      mutation.mutate({ ...texts, img: imgUrl, type: currentUser.type });
+      setFile(null);
+      setUploadOpen(false)
+    }
   };
 
   return (
@@ -57,44 +59,44 @@ const Upload = ({ setUploadOpen, currentUser }) => {
         <h1>Create new event</h1>
         <form>
           <div className="inputs">
-          <div className="files">
-            <label htmlFor="stryFile">
-              <div className="imgContainer">
-                <img
-                  src={file && URL.createObjectURL(file)} alt="" />
-                <CloudUploadIcon className="icon" />
-              </div>
-            </label>
-          </div>
-          <div className="inputboxes">
-            <label>Name of the event</label>
-            <input
-              type="text"
-              value={texts.desc}
-              name="desc"
-              onChange={handleChange}
-            />
-            <label>Date</label>
-            <input
-              type="date"
-              value={texts.date}
-              name="date"
-              onChange={handleChange}
-            />
-            <label>Venue</label>
-            <input
-              type="text"
-              name="venue"
-              value={texts.venue}
-              onChange={handleChange}
-            />
-            <input
-              type="file"
-              id="stryFile"
-              style={{ display: "none" }}
-              onChange={(e) => setFile(e.target.files[0])}
-            />
-          </div></div>
+            <div className="files">
+              <label htmlFor="stryFile">
+                <div className="imgContainer">
+                  <img
+                    src={file && URL.createObjectURL(file)} alt="" />
+                  <CloudUploadIcon className="icon" />
+                </div>
+              </label>
+            </div>
+            <div className="inputboxes">
+              <label>Name of the event</label>
+              <input
+                type="text"
+                value={texts.desc}
+                name="desc"
+                onChange={handleChange}
+              />
+              <label>Date</label>
+              <input
+                type="date"
+                value={texts.date}
+                name="date"
+                onChange={handleChange}
+              />
+              <label>Venue</label>
+              <input
+                type="text"
+                name="venue"
+                value={texts.venue}
+                onChange={handleChange}
+              />
+              <input
+                type="file"
+                id="stryFile"
+                style={{ display: "none" }}
+                onChange={(e) => setFile(e.target.files[0])}
+              />
+            </div></div>
           <button onClick={handleClick}>Share</button>
         </form>
         <button className="close" onClick={() => setUploadOpen(false)}>

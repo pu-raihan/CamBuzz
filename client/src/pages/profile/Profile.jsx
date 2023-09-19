@@ -58,8 +58,10 @@ const Profile = () => {
   );
 
   const handleFollow = () => {
-    setLoading(true)
-    mutation.mutate(relationData.includes(currentUser.username));
+    if (!currentUser.type === "guest") {
+      setLoading(true)
+      mutation.mutate(relationData.includes(currentUser.username));
+    }
   };
 
   return (

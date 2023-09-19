@@ -38,9 +38,11 @@ const Post = ({ post }) => {
       return makeRequest.post("/likes", { postid: post.postid });
     },
     {
+      onSettled: () => {
+        setLoading(false);
+      },
       onSuccess: () => {
         queryClient.invalidateQueries(["likes"]);
-        setLoading(false);
       },
     }
   );

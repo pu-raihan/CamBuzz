@@ -1,4 +1,4 @@
-import { db } from "../connect.js";
+import { db, guestDb } from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { auth } from "../firebase.js";
@@ -131,6 +131,26 @@ export const facLogin = (req, res) => {
         console.log(error.message);
         return res.status(500).json(error.message);
       });
+  });
+};
+
+export const guestLogin = (req, res) => {
+  const q = "select * from users where username=?";
+
+  guestDb.query(q, [req.body.username], (err, data) => {
+    if (err) return res.status(500).json(err.message);
+    if (data.length === 0) return res.status(404).json("User not found!");
+
+    const token = jwt.sign({ username: data[0].username }, "guestsecret");
+    var { password, ...others } = data[0];
+    others = { ...others, emailVerified: true };
+
+    res
+      .cookie("accessToken", token, {
+        httpOnly: true,
+      })
+      .status(200)
+      .json(others);
   });
 };
 

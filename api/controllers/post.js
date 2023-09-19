@@ -1,14 +1,16 @@
-import { db } from "../connect.js";
+import { db, guestDb } from "../connect.js";
 import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getPosts = (req, res) => {
   const username = req.query.username;
   const token = req.cookies.accessToken;
-  var secret = req.query.type;
+  const type = req.query.type;
+  var secret;
   if (!token) return res.status(401).json("Not logged in");
-  if (secret === "faculty") secret = "facultysecret";
-  if (secret === "student") secret = "cambuzzsecret";
+  if (type === "faculty") secret = "facultysecret";
+  if (type === "student") secret = "cambuzzsecret";
+  if (type === "guest") secret = "guestsecret";
 
   jwt.verify(token, secret, (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
@@ -22,10 +24,16 @@ export const getPosts = (req, res) => {
         ? [username]
         : [userInfo.username, userInfo.username];
 
-    db.query(q, values, (err, data) => {
-      if (err) return res.status(500).json("database error :"+err.message);
-      return res.status(200).json(data);
-    });
+    if (type === "guest")
+      guestDb.query(q, values, (err, data) => {
+        if (err) return res.status(500).json(err.message);
+        return res.status(200).json(data);
+      });
+    else
+      db.query(q, values, (err, data) => {
+        if (err) return res.status(500).json(err.message);
+        return res.status(200).json(data);
+      });
   });
 };
 

@@ -11,19 +11,19 @@ const Update = ({ setUpdateOpen, user }) => {
   const [profile, setProfile] = useState(null);
 
   const { currentUser } = useContext(AuthContext);
-  
+
   const [texts, setTexts] = useState({
     fullname: currentUser.fullname,
-    email:currentUser.email,
+    email: currentUser.email,
     city: currentUser.city,
-    website:currentUser.website,
+    website: currentUser.website,
   });
 
-  const upload = async (file,dir) => {
+  const upload = async (file, dir) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post("/"+dir, formData);
+      const res = await makeRequest.post("/" + dir, formData);
       return res.data;
     } catch (err) {
       console.log(err);
@@ -32,7 +32,7 @@ const Update = ({ setUpdateOpen, user }) => {
 
   const handleChange = (e) => {
     setTexts((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  console.log(texts);
+    console.log(texts);
   };
 
   const queryClient = useQueryClient();
@@ -57,14 +57,16 @@ const Update = ({ setUpdateOpen, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let coverUrl;
-    let profileUrl;
-    coverUrl = cover ? await upload(cover,"coverupload") : user.coverPic;
-    profileUrl = profile ? await upload(profile,"profupload") : user.profilePic;
+    if (!currentUser.type === "guest") {
+      let coverUrl;
+      let profileUrl;
+      coverUrl = cover ? await upload(cover, "coverupload") : user.coverPic;
+      profileUrl = profile ? await upload(profile, "profupload") : user.profilePic;
 
-    mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl,type:currentUser.type });
-    
-    setUpdateOpen(false);
+      mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl, type: currentUser.type });
+
+      setUpdateOpen(false);
+    }
   };
 
   return (
@@ -141,11 +143,11 @@ const Update = ({ setUpdateOpen, user }) => {
             name="website"
             value={texts.website}
             onChange={handleChange}
-          />{err&&err}
+          />{err && err}
           <button onClick={handleSubmit}>Update</button>
         </form>
         <button className="close" onClick={() => setUpdateOpen(false)}>
-        <CloseIcon/>
+          <CloseIcon />
         </button>
       </div>
     </div>

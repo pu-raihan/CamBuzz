@@ -30,6 +30,17 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(res.data);
   };
 
+  const guestLogin = async (inputs) => {
+    const res = await axios.post(
+      "http://localhost:8800/api/auth/guestlogin",
+      inputs,
+      {
+        withCredentials: true,
+      }
+    );
+    setCurrentUser(res.data);
+  };
+
   const update = async (username) => {
     const res = await axios.post(
       "https://cambuzz-api.onrender.com/api/auth/update?username=" + username

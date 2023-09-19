@@ -27,6 +27,7 @@ const Login = () => {
 
   const { login } = useContext(AuthContext);
   const { facLogin } = useContext(AuthContext);
+  const { guestLogin } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -57,7 +58,22 @@ const Login = () => {
       }
     }
   };
-
+  
+  const handleGuestLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setErr(null);
+    try {
+      await guestLogin({username:"guest",password:"773008guest"});
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      navigate("/");
+      window.location.reload();
+    } catch (err) {
+      setErr(err.response.data);
+    } finally {
+      setLoading(false);
+    }
+  }
   return (
     <div className="login">
       <div className="card">
@@ -97,6 +113,7 @@ const Login = () => {
               <span className="checkmark"></span>
             </label>
             <button onClick={handleLogin}>Login</button>
+            <p style={{ color: "grey", fontSize: "small", paddingLeft: "5px", fontWeight: "400", cursor: "pointer" }} onClick={handleGuestLogin}>Guest Login</p>
             <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
           </form>
         </div>

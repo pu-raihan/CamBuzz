@@ -6,9 +6,9 @@ import { makeRequest } from "../../axios";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const Comments = ({ postid,comments }) => {
+const Comments = ({ postid, comments }) => {
   const { currentUser } = useContext(AuthContext);
-  const [ desc, setDesc ] = useState("");
+  const [desc, setDesc] = useState("");
 
   const queryClient = useQueryClient();
 
@@ -25,14 +25,16 @@ const Comments = ({ postid,comments }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    mutation.mutate({ desc, postid });
-    setDesc("");
+    if (!currentUser.type === "guest") {
+      mutation.mutate({ desc, postid });
+      setDesc("");
+    }
   };
 
   return (
     <div className="comments">
       <div className="write">
-        <img src={"/profile/"+currentUser.profilePic} alt="" />
+        <img src={"/profile/" + currentUser.profilePic} alt="" />
         <input
           type="text"
           placeholder="Add a comment"
@@ -42,20 +44,20 @@ const Comments = ({ postid,comments }) => {
         <button onClick={handleClick}>Share</button>
       </div>
       {comments?.map((comment) => (
-            <div className="comment" key={comment.cid}>
-               <Link
-                to={`/profile/${comment.username}`}
-                style={{ textDecoration: "none", color: "inherit" }}
-              ><img src={"/profile/"+comment.profilePic} alt="" />
-              </Link><div className="info">
-                <span>{comment.username}</span>
-                <p>{comment.desc}</p>
-              </div>
-              <span className="date">
-                {moment(comment.createdAt).fromNow()}
-              </span>
-            </div>
-          ))}
+        <div className="comment" key={comment.cid}>
+          <Link
+            to={`/profile/${comment.username}`}
+            style={{ textDecoration: "none", color: "inherit" }}
+          ><img src={"/profile/" + comment.profilePic} alt="" />
+          </Link><div className="info">
+            <span>{comment.username}</span>
+            <p>{comment.desc}</p>
+          </div>
+          <span className="date">
+            {moment(comment.createdAt).fromNow()}
+          </span>
+        </div>
+      ))}
     </div>
   );
 };

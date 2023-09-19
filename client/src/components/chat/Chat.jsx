@@ -44,14 +44,16 @@ const Chat = ({ user, setChatOpen }) => {
     );
     const sendMessage = async (e) => {
         e.preventDefault();
-        const messageData = {
-            sender: currentUser.username,
-            receiver: user.username,
-            message: newMessage,
-            forum: false
-        };
-        mutation.mutate(messageData);
-        setNewMessage("");
+        if (!currentUser.type === "guest") {
+            const messageData = {
+                sender: currentUser.username,
+                receiver: user.username,
+                message: newMessage,
+                forum: false
+            };
+            mutation.mutate(messageData);
+            setNewMessage("");
+        }
     };
 
     return (
