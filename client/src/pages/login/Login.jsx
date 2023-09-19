@@ -69,7 +69,8 @@ const Login = () => {
       navigate("/");
       window.location.reload();
     } catch (err) {
-      setErr(err.response.data);
+      //setErr(err.response.data);
+      console.log(err);
     } finally {
       setLoading(false);
     }
