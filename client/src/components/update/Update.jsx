@@ -143,7 +143,7 @@ const Update = ({ setUpdateOpen, user }) => {
             name="website"
             value={texts.website}
             onChange={handleChange}
-          />{err && err}
+          />{err && err.response.data}
           <button onClick={handleSubmit}>Update</button>
         </form>
         <button className="close" onClick={() => setUpdateOpen(false)}>

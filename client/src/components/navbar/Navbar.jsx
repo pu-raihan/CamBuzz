@@ -140,7 +140,7 @@ const Navbar = () => {
               </div>
             </div>
           )}
-          {err && err}
+          {err && err.response.data}
           <div className="prof">
             <div className="user">
               <span>{currentUser.username}</span>
