@@ -97,7 +97,7 @@ const Post = ({ post }) => {
             <div className="likeico" style={{ position: "relative" }}>
               {isLoading ?
                 (<Loader size={35} color={"black"} noBg={true} />)
-                : data.includes(currentUser.username) ? <>
+                : data?.includes(currentUser.username) ? <>
                   <LikedIcon style={{ color: "#6b173e" }} onClick={handleLike} />
                   {loading && <Loader size={10} dColor={"white"} lColor={"white"} noBg={true} />}</>
                   : <>
