@@ -40,7 +40,7 @@ export const getPosts = (req, res) => {
 export const addPost = (req, res) => {
   const token = req.cookies.accessToken;
   var secret = req.body.type;
-  var published = 0;
+  var published = 1;
   if (!token) return res.status(401).json("Not logged in");
   if (secret === "faculty") {
     secret = "facultysecret";
