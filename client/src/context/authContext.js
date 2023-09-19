@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const guestLogin = async (inputs) => {
     const res = await axios.post(
-      "http://localhost:8800/api/auth/guestlogin",
+      "https://cambuzz-api.onrender.com/api/auth/guestlogin",
       inputs,
       {
         withCredentials: true,
