@@ -46,7 +46,10 @@ export const register = (req, res) => {
             sendEmailVerification(currUser)
               .then(() => {
                 db.query(q, [values], (err, data) => {
-                  if (err) return res.status(500).json("database error :"+err.message);
+                  if (err)
+                    return res
+                      .status(500)
+                      .json("database error :" + err.message);
                   return res.status(200).json("User added successfully");
                 });
               })
@@ -72,7 +75,7 @@ export const register = (req, res) => {
 export const login = (req, res) => {
   const q = "select * from users where username=?";
   db.query(q, [req.body.username], (err, data) => {
-    if (err) return res.status(500).json("database error :"+err.message);
+    if (err) return res.status(500).json("database error :" + err.message);
     if (data.length === 0) return res.status(404).json("User not found!");
     if (data[0].type !== "student")
       return res.status(404).json("Not a student! check the faculty box");
@@ -105,7 +108,7 @@ export const facLogin = (req, res) => {
   const q = "select * from users where username=?";
 
   db.query(q, [req.body.username], (err, data) => {
-    if (err) return res.status(500).json("database error :"+err.message);
+    if (err) return res.status(500).json("database error :" + err.message);
     if (data.length === 0) return res.status(404).json("User not found!");
     if (data[0].type !== "faculty")
       return res.status(404).json("Not a faculty!");
@@ -188,7 +191,7 @@ export const update = (req, res) => {
   const q = "select * from users where username=?";
 
   db.query(q, [req.query.username], (err, data) => {
-    if (err) return res.status(500).json("database error :"+err.message);
+    if (err) return res.status(500).json("database error :" + err.message);
     if (data.length === 0) return res.status(404).json("User not found!");
 
     const token = jwt.sign({ username: data[0].username }, "cambuzzsecret");
@@ -209,6 +212,7 @@ export const update = (req, res) => {
 export const logout = (req, res) => {
   res
     .clearCookie("accessToken", {
+      httpOnly: true,
       secure: true,
       sameSite: "none",
     })
