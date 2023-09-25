@@ -4,6 +4,8 @@
   "private": true,
   "license": "ISC",
   "author": "raihan",
+  "description": "social media and resource locator",
+  "main": "electron.js",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
@@ -29,11 +31,16 @@
     "sass": "^1.59.3",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "electron": "^26.2.2",
+    "electron-builder": "^24.6.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": [
@@ -52,5 +59,28 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "build": {
+    "appId": "cambuzz.netlify.app",
+    "productName": "CamBuzz",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "build/**/*",
+      "node_modules/**/*",
+      "electron.js",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "./public",
+        "to": "public"
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "public/LightRound.png"
+    }
   }
 }
