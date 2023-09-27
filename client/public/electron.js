@@ -16,7 +16,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({width: 1200, height: 900});
     mainWindow.maximize();
     // and load the index.html of the app.
-    mainWindow.loadURL('http://localhost:3000');
+    mainWindow.loadURL('https://cambuzz.netlify.app');
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools();

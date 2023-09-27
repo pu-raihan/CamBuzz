@@ -51,13 +51,25 @@ const Details = () => {
             },
             (error) => {
                 if (error.code === 1) {
+                    dialog.showMessageBox({
+                        type: 'warning',
+                        buttons: ['Open Settings', 'Cancel'],
+                        defaultId: 0,
+                        title: 'Location Access Denied',
+                        message: 'Location access is required for this app to function correctly. Please grant access in your settings.',
+                    }).then((result) => {
+                        if (result.response === 0) {
+                            // Open the system settings where the user can enable location access
+                            electron.shell.openExternal('app-settings:');
+                        }
+                    });
                     if ("Notification" in window && Notification.permission !== "granted") {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
                                 console.log("User has granted permission for location access")
                             } else if (permission === "denied") {
                                 setIsLoc(null)
-                                console.log(isLoc+"...User has denied permission for location access")
+                                console.log(isLoc + "...User has denied permission for location access")
                             }
                         });
                     }
@@ -127,7 +139,7 @@ const Details = () => {
                     : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                         : <>
                             <h1>{headData[0].heading}</h1>
-                            <div className="allbtn" onClick={() => handleClick(sortedData, true) } >
+                            <div className="allbtn" onClick={() => handleClick(sortedData, true)} >
                                 <span>View All</span><MapFilledIcon />
                             </div>
                         </>}
