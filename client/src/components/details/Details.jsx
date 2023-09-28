@@ -51,18 +51,6 @@ const Details = () => {
             },
             (error) => {
                 if (error.code === 1) {
-                    dialog.showMessageBox({
-                        type: 'warning',
-                        buttons: ['Open Settings', 'Cancel'],
-                        defaultId: 0,
-                        title: 'Location Access Denied',
-                        message: 'Location access is required for this app to function correctly. Please grant access in your settings.',
-                    }).then((result) => {
-                        if (result.response === 0) {
-                            // Open the system settings where the user can enable location access
-                            electron.shell.openExternal('app-settings:');
-                        }
-                    });
                     if ("Notification" in window && Notification.permission !== "granted") {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
