@@ -24,7 +24,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
+const Map = ({ currentLoc, location, zoomLevel, icon }) => {
 
     const [currentLocation, setCurrentLocation] = useState(currentLoc);
 
@@ -34,7 +34,6 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({
                     lat: latitude, lng: longitude 
-                    // lat: 12.015620324613108, lng: 79.85482424187616
                 });
             },
             (error) => {
@@ -54,10 +53,9 @@ const Map = ({ currentLoc, location, zoomLevel, icon, getCurrentLoc }) => {
         );
     }, []);
 
-
     const [center, setCenter] = useState({
-        lat: location[0].coordinates.x,
-        lng: location[0].coordinates.y
+        lat: location[0].coordinates?.x,
+        lng: location[0].coordinates?.y
     });
     console.log(location[0].directions);
     const handleCenterMap = () => {

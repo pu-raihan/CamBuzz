@@ -18,13 +18,13 @@
     h1 {
       color: themed("colorSoft");
     }
-    .allbtn{
+    .allbtn {
       display: flex;
       font-weight: bold;
       font-size: 15px;
       width: 80%;
       gap: 5px;
-      align-items:center ;
+      align-items: center;
       justify-content: flex-end;
       color: themed("tColor");
     }
@@ -64,7 +64,7 @@
           padding-right: 10px;
           color: themed("tColor");
         }
-        .remarks{
+        .remarks {
           color: themed("tColorSoft");
           font-size: 10px;
         }
@@ -171,7 +171,7 @@
             width: 100px;
             align-items: center;
             color: rgb(104, 14, 86);
-            
+
             p {
               font-weight: bold;
               overflow-wrap: break-word;
@@ -180,15 +180,21 @@
         }
       }
     }
-    .error{
+    .error {
       display: flex;
+      flex-direction: column;
       width: 80%;
-      justify-content: center;
       align-items: center;
+      margin: auto;
       color: themed("tColor");
+      gap: 20px;
+      span{
+        color: red;
+        font-size: x-small;
+      }
     }
   }
 }
-.reltv{
+.reltv {
   position: relative;
 }

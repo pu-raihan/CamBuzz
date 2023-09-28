@@ -22,9 +22,7 @@ const Details = () => {
         all: true, zoomLevel: 15,
     });
     const [mapOpen, setMapopen] = useState(false);
-    const [isLoc, setIsLoc] = useState(null);
-
-
+    const [locErr, setLocErr] = useState("Location permissions required");
 
     const resource = useLocation().pathname.split("/")[2];
 
@@ -47,25 +45,34 @@ const Details = () => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({ lat: latitude, lng: longitude });
-                setIsLoc("null")
+                setLocErr(null)
             },
             (error) => {
+                console.error(error);
                 if (error.code === 1) {
                     if ("Notification" in window && Notification.permission !== "granted") {
                         Notification.requestPermission().then((permission) => {
                             if (permission === "granted") {
+                                setLocErr(null)
                                 console.log("User has granted permission for location access")
                             } else if (permission === "denied") {
-                                setIsLoc(null)
-                                console.log(isLoc + "...User has denied permission for location access")
+                                setLocErr("User has denied permission for location access")
+                                console.log(locErr + "...User has denied permission for location access")
                             }
                         });
                     }
+                    else
+                        setLocErr(error.message)
                 }
-                console.error(error);
+                else if (error.code === 2) {
+                    setLocErr("Couldn't get coordinates")
+                }
+                else {
+                    setLocErr(error.message)
+                }
             }
         );
-    }, [isLoc]);
+    }, [locErr]);
 
     useEffect(() => {
         setSortedData([])
@@ -121,49 +128,51 @@ const Details = () => {
     };
     return (
         <div className={`details ${isLoading && "reltv"}`} >
-            {isLoc ? <>
-                {headError
-                    ? "Titles couldn't load!"
-                    : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                        : <>
-                            <h1>{headData[0].heading}</h1>
-                            <div className="allbtn" onClick={() => handleClick(sortedData, true)} >
-                                <span>View All</span><MapFilledIcon />
-                            </div>
-                        </>}
-                {error
-                    ? "Something went wrong!"
-                    : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                        : sortedData ? sortedData.map((resitem) => (
-                            <div className="resourceItem" resitem={resitem} key={resitem.id}>
-                                <div className="itemTop">
-                                    <p className='name'>{resitem.name}</p>
-                                    <p className='remarks'>{resitem.remarks}</p>
-                                </div>
-                                <div className="itemBottom">
-                                    <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
-                                    {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
-                                    <MapIcon onClick={() => handleClick(resitem, false)} />
-                                </div>
-                            </div>
-                        )) : <span style={{ margin: "auto" }}>No resources in database</span>
-                }
-                {mapOpen &&
-                    <div className="map" >
-                        <div className="close">
-                            <CloseIcon onClick={() => setMapopen(false)} />
-                        </div>
-                        <Map
-                            currentLocation={currentLocation}
-                            location={itemRes}
-                            zoomLevel={mapOpt.zoomLevel}
-                            icon={resource}
-                        />
-                    </div>}
-            </>
-                : <div className="error" >
+            {locErr ?
+                <div className="error" >
+                    <span>{locErr}</span>
                     <p>Please allow your location access</p>
-                </div>
+                </div> : <>
+                    {headError
+                        ? "Titles couldn't load!"
+                        : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
+                            : <>
+                                <h1>{headData[0].heading}</h1>
+                                <div className="allbtn" onClick={() => handleClick(sortedData, true)} >
+                                    <span>View All</span><MapFilledIcon />
+                                </div>
+                            </>}
+                    {error
+                        ? "Something went wrong!"
+                        : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
+                            : sortedData ? sortedData.map((resitem) => (
+                                <div className="resourceItem" resitem={resitem} key={resitem.id}>
+                                    <div className="itemTop">
+                                        <p className='name'>{resitem.name}</p>
+                                        <p className='remarks'>{resitem.remarks}</p>
+                                    </div>
+                                    <div className="itemBottom">
+                                        <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
+                                        {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
+                                        <MapIcon onClick={() => handleClick(resitem, false)} />
+                                    </div>
+                                </div>
+                            )) : <span style={{ margin: "auto" }}>No resources in database</span>
+                    }
+                    {mapOpen &&
+                        <div className="map" >
+                            <div className="close">
+                                <CloseIcon onClick={() => setMapopen(false)} />
+                            </div>
+                            <Map
+                                currentLocation={currentLocation}
+                                location={itemRes}
+                                zoomLevel={mapOpt.zoomLevel}
+                                icon={resource}
+                            />
+                        </div>
+                    }
+                </>
             }
         </div>
     );
