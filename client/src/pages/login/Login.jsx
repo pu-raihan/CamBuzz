@@ -115,7 +115,7 @@ const Login = () => {
             </label>
             <button onClick={handleLogin}>Login</button>
             <p style={{ color: "grey", fontSize: "small", paddingLeft: "5px", fontWeight: "400", cursor: "pointer" }} onClick={handleGuestLogin}>Guest Login</p>
-            <p style={{ color: "red", fontSize: "small" }}>{err && err.response.data}</p>
+            <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
           </form>
         </div>
       </div>
