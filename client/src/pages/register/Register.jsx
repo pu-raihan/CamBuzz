@@ -38,7 +38,7 @@ const Register = () => {
     else {
       setLoading(true);
       try {
-        await axios.post("https://cambuzz-api.onrender.com/api/auth/register", inputs);
+        await axios.post("https://cambuzz.cyclic.app/api/auth/register", inputs);
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/login");
       } catch (err) {
