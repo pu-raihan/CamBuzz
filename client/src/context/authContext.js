@@ -10,7 +10,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (inputs) => {
     const res = await axios.post(
-      "https://cambuzz.cyclic.app/api/auth/login",
+      `${process.env.REACT_APP_SERVER_ADD}/api/auth/login`,
       inputs,
       {
         withCredentials: true,
@@ -21,7 +21,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const facLogin = async (inputs) => {
     const res = await axios.post(
-      "https://cambuzz.cyclic.app/api/auth/faclogin",
+      `${process.env.REACT_APP_SERVER_ADD}/api/auth/faclogin`,
       inputs,
       {
         withCredentials: true,
@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const guestLogin = async (inputs) => {
     const res = await axios.post(
-      "https://cambuzz.cyclic.app/api/auth/guestlogin",
+      `${process.env.REACT_APP_SERVER_ADD}/api/auth/guestlogin`,
       inputs,
       {
         withCredentials: true,
@@ -43,12 +43,12 @@ export const AuthContextProvider = ({ children }) => {
 
   const update = async (username) => {
     const res = await axios.post(
-      "https://cambuzz.cyclic.app/api/auth/update?username=" + username
+      `${process.env.REACT_APP_SERVER_ADD}/api/auth/update?username=` + username
     );
     setCurrentUser(res.data);
   };
   const logout = async () => {
-    await axios.post("https://cambuzz.cyclic.app/api/auth/logout");
+    await axios.post(`${process.env.REACT_APP_SERVER_ADD}/api/auth/logout`);
     localStorage.removeItem("user");
     setCurrentUser(null);
   };

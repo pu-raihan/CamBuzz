@@ -18,6 +18,8 @@ import classRoutes from "./routes/classes.js";
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
+import dotenv from 'dotenv'
+dotenv.config()
 
 app.use((req, res, next) => {
  res.header("Access-Control-Allow-Credentials", true);
@@ -27,7 +29,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://cambuzz.netlify.app",
+    origin: process.env.CLIENT_ADD,
     //"https://cambuzz.onrender.com",
     credentials: true,
   })
