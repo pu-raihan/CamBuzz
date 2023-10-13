@@ -77,11 +77,12 @@ export const login = (req, res) => {
   const performLogin = () => {
     db.query(q, [req.body.username], (err, data) => {
       var i=0;
-      if (i<3) err.message="Cannot enqueue Query after fatal error"
+      var message;
+      if (i<2) message="Cannot enqueue Query after fatal error"
       i++;
-      console.log(i);
-      if (err) {
-        if (err.message === "Cannot enqueue Query after fatal error") {
+      console.log(i+message);
+      if (message) {
+        if (message === "Cannot enqueue Query after fatal error") {
           resetDBConn();
           performLogin();
         }
