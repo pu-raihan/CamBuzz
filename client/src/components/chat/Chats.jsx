@@ -44,7 +44,7 @@ const Chats = () => {
                     <div className="item">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                            : data?data.map((item) => (
+                            : data ? data.map((item) => (
                                 <div key={item.time} className="user" onClick={() => gotoChat(item.username, item.profilePic)}>
                                     <div className="userInfo">
                                         <img src={"/profile/" + item.profilePic} alt="" />
@@ -52,9 +52,9 @@ const Chats = () => {
                                     </div>
                                     <span>{moment(item.time).fromNow()}</span>
                                 </div>
-                            )):<p className="noData">No chats</p>
-                            }
-                        {error && error.response.data}
+                            )) : <p className="noData">No chats</p>
+                        }
+                        {error.response.data && error.response.data}
                     </div>
                 </>
                 }{

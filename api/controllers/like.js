@@ -34,7 +34,7 @@ export const deleteLike = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
   const q = "delete from likes where username= ? and postid=? ";
-  
+
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
     const secret = err ? "facultysecret" : "cambuzzsecret";
     jwt.verify(token, secret, (err, userInfo) => {
@@ -44,7 +44,7 @@ export const deleteLike = (req, res) => {
         if (err) {
           return res.status(500).json("Database error: " + err.message);
         }
-        return res.status(200).json("Post liked");
+        return res.status(200).json("Post unliked");
       });
     });
   });
