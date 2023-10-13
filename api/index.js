@@ -123,6 +123,6 @@ app.use("/api/search", searchRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/classes", classRoutes);
 
-app.listen(80, () => {
+app.listen(8080, () => {
   console.log("Server Started...");
 });
