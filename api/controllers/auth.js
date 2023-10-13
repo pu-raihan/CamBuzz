@@ -1,4 +1,4 @@
-import { db, guestDb,resetDBConn } from "../connect.js";
+import { db, guestDb, resetDBConn } from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { auth } from "../firebase.js";
@@ -74,20 +74,20 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   const q = "select * from users where username=?";
+  var i = 0;
   const performLogin = () => {
     db.query(q, [req.body.username], (err, data) => {
-      var i=0;
-      var message='done';
-      if (i<2) message="Cannot enqueue Query after fatal error"
-      i++;
-      console.log(i+message);
-      if (message!=='done') {
-        if (message === "Cannot enqueue Query after fatal error") {
-          resetDBConn();
-          performLogin();
+      if (err) {
+        if (i < 3){
+        i++;
+         if (err.message === "Cannot enqueue Query after fatal error") {
+            resetDBConn();
+            return performLogin();
+          }
         }
-        return res.status(500).json("database error :" + err.message);
+        return res.status(500).json("database error :" + message);
       }
+      
       if (data.length === 0) return res.status(404).json("User not found!");
       if (data[0].type !== "student")
         return res.status(404).json("Not a student! check the faculty box");
