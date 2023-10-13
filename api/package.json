@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "node index.js",
-    "build": "webpack --config webpack.config.js"
   },
   "keywords": [],
   "author": "raihan",
