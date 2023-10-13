@@ -41,9 +41,7 @@ export const deleteLike = (req, res) => {
       if (err) return res.status(403).json("Token invalid!");
 
       db.query(q, [userInfo.username, req.body.postid], (err, data) => {
-        if (err) {
-          return res.status(500).json("Database error: " + err.message);
-        }
+        if (err) return res.status(500).json("Database error: " + err.message);
         return res.status(200).json("Post unliked");
       });
     });
