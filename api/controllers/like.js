@@ -13,17 +13,16 @@ export const getLikes = (req, res) => {
 export const addLike = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
-  const q = "insert into likes(`username`,`postid`) values(?)";
 
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
     const secret = err ? "facultysecret" : "cambuzzsecret";
     jwt.verify(token, secret, (err, userInfo) => {
       if (err) return res.status(403).json("Token invalid!");
-
-      db.query(q, [userInfo.username, req.body.postid], (err, data) => {
-        if (err) {
-          return res.status(500).json("Database error: " + err.message);
-        }
+      const q = "insert into likes(`username`,`postid`) values(?)";
+      const values = [userInfo.username, req.body.postid];
+      
+      db.query(q, [values], (err, data) => {
+        if (err) return res.status(500).json("Database error: " + err.message);
         return res.status(200).json("Post liked");
       });
     });
@@ -40,7 +39,7 @@ export const deleteLike = (req, res) => {
     jwt.verify(token, secret, (err, userInfo) => {
       if (err) return res.status(403).json("Token invalid!");
 
-      db.query(q, [userInfo.username, req.body.postid], (err, data) => {
+      db.query(q, [userInfo.username, req.query.postid], (err, data) => {
         if (err) return res.status(500).json("Database error: " + err.message);
         return res.status(200).json("Post unliked");
       });

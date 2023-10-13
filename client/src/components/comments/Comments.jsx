@@ -25,7 +25,7 @@ const Comments = ({ postid, comments }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    if (!currentUser.type === "guest") {
+    if (currentUser.type !== "guest") {
       mutation.mutate({ desc, postid });
       setDesc("");
     }

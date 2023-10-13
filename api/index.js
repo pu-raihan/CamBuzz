@@ -18,11 +18,11 @@ import classRoutes from "./routes/classes.js";
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 app.use((req, res, next) => {
- res.header("Access-Control-Allow-Credentials", true);
+  res.header("Access-Control-Allow-Credentials", true);
   next();
 });
 

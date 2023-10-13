@@ -44,7 +44,7 @@ const Chat = ({ user, setChatOpen }) => {
     );
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (!currentUser.type === "guest") {
+        if (currentUser.type !== "guest") {
             const messageData = {
                 sender: currentUser.username,
                 receiver: user.username,
