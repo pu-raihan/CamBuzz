@@ -1,4 +1,4 @@
-import { db, guestDb } from "../connect.js";
+import { db, guestDb,resetDBConn } from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { auth } from "../firebase.js";
@@ -74,34 +74,50 @@ export const register = (req, res) => {
 
 export const login = (req, res) => {
   const q = "select * from users where username=?";
-  db.query(q, [req.body.username], (err, data) => {
-    if (err) return res.status(500).json("database error :" + err.message);
-    if (data.length === 0) return res.status(404).json("User not found!");
-    if (data[0].type !== "student")
-      return res.status(404).json("Not a student! check the faculty box");
+  const performLogin = () => {
+    db.query(q, [req.body.username], (err, data) => {
+      var i=0;
+      if (i<3) err.message="Cannot enqueue Query after fatal error"
+      i++;
+      console.log(i);
+      if (err) {
+        if (err.message === "Cannot enqueue Query after fatal error") {
+          resetDBConn();
+          performLogin();
+        }
+        return res.status(500).json("database error :" + err.message);
+      }
+      if (data.length === 0) return res.status(404).json("User not found!");
+      if (data[0].type !== "student")
+        return res.status(404).json("Not a student! check the faculty box");
 
-    const checkPwd = bcrypt.compareSync(req.body.password, data[0].password);
-    if (!checkPwd) return res.status(400).json("Wrong username or password!");
-    signInWithEmailAndPassword(auth, data[0].email, req.body.password)
-      .then((user) => {
-        const token = jwt.sign({ username: data[0].username }, "cambuzzsecret");
-        var { password, ...others } = data[0];
-        others = { ...others, emailVerified: user.user.emailVerified };
+      const checkPwd = bcrypt.compareSync(req.body.password, data[0].password);
+      if (!checkPwd) return res.status(400).json("Wrong username or password!");
+      signInWithEmailAndPassword(auth, data[0].email, req.body.password)
+        .then((user) => {
+          const token = jwt.sign(
+            { username: data[0].username },
+            "cambuzzsecret"
+          );
+          var { password, ...others } = data[0];
+          others = { ...others, emailVerified: user.user.emailVerified };
 
-        res
-          .cookie("accessToken", token, {
-            httpOnly: true,
-            sameSite: "none",
-            secure: true,
-          })
-          .status(200)
-          .json(others);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        return res.status(500).json(error.message);
-      });
-  });
+          res
+            .cookie("accessToken", token, {
+              httpOnly: true,
+              sameSite: "none",
+              secure: true,
+            })
+            .status(200)
+            .json(others);
+        })
+        .catch((error) => {
+          console.log(error.message);
+          return res.status(500).json(error.message);
+        });
+    });
+  };
+  performLogin();
 };
 
 export const facLogin = (req, res) => {
