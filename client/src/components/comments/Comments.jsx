@@ -30,6 +30,12 @@ const Comments = ({ postid, comments }) => {
       setDesc("");
     }
   };
+  
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      handleClick(event);
+    }
+}
 
   return (
     <div className="comments">
@@ -40,7 +46,8 @@ const Comments = ({ postid, comments }) => {
           placeholder="Add a comment"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}
-        />
+          onKeyDown={handleKeyPress}
+          />
         <button onClick={handleClick}>Share</button>
       </div>
       {comments?.map((comment) => (

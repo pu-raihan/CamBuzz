@@ -56,6 +56,12 @@ const Chat = ({ user, setChatOpen }) => {
         }
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            sendMessage(event);
+        }
+    }
+
     return (
         <div className="chatbox ">
             <div className="top">
@@ -83,6 +89,7 @@ const Chat = ({ user, setChatOpen }) => {
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyPress}
                 />
                 <SendIcon style={{ color: "#fff" }} onClick={sendMessage} />
             </div>

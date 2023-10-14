@@ -11,11 +11,10 @@ const Login = () => {
   });
   const [checked, setChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-
   const [err, setErr] = useState(null);
-
+ 
   const navigate = useNavigate();
-
+ 
   const handleCheck = () => {
     setChecked(!checked);
   };
@@ -58,13 +57,13 @@ const Login = () => {
       }
     }
   };
-  
+
   const handleGuestLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setErr(null);
     try {
-      await guestLogin({username:"guest",password:"773008guest"});
+      await guestLogin({ username: "guest", password: "773008guest" });
       await new Promise((resolve) => setTimeout(resolve, 0));
       navigate("/");
       window.location.reload();
@@ -75,6 +74,7 @@ const Login = () => {
       setLoading(false);
     }
   }
+
   return (
     <div className="login">
       <div className="card">
@@ -93,12 +93,13 @@ const Login = () => {
         </div>
         <div className="right">
           <h1>Login</h1>
-          <form>
+          <form onSubmit={handleLogin}>
             <input
               type="text"
               placeholder="Username"
               name="username"
               onChange={handleChange}
+              autoComplete="username"
             />
             <input
               type="password"

@@ -11,7 +11,6 @@ export const getRelations = (req, res) => {
 };
 
 export const addRelation = (req, res) => {
-  console.log("follow initiated");
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
@@ -27,14 +26,12 @@ export const addRelation = (req, res) => {
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json("database error :"+err.message);
-      console.log("followed");
       return res.status(200).json("followed");
     });
   });
 };
 
 export const deleteRelation = (req, res) => {
-  console.log("unfollow initiated");
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
   jwt.verify(token, "cambuzzsecret", (err, userInfo) => {
@@ -48,7 +45,6 @@ export const deleteRelation = (req, res) => {
 
     db.query(q, [uInfo.username, req.query.username], (err, data) => {
       if (err) return res.status(500).json("database error :"+err.message);
-      console.log("unfollowed");
       return res.status(200).json("Unfollowed");
     });
   });
