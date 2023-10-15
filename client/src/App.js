@@ -24,6 +24,7 @@ import Menubar from "./components/menubar/Menubar";
 import Chats from "./components/chat/Chats";
 import Requests from "./pages/requests/Requests";
 import Events from "./pages/events/Events";
+import NotFound from "./pages/notfound/NotFound";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
@@ -112,6 +113,10 @@ function App() {
     {
       path: "/verifyemail",
       element: <VerifyMail/>,
+    },
+    {
+      path: "*",
+      element: <NotFound/>,
     },
   ]);
 
