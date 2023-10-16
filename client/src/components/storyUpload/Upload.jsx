@@ -12,6 +12,7 @@ const Upload = ({ setUploadOpen, currentUser }) => {
     try {
       const formData = new FormData();
       formData.append("file", file);
+      console.log("trying to upload");
       const res = await makeRequest.post("/storyupload", formData);
       return res.data;
     } catch (err) {
