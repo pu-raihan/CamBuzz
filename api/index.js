@@ -18,6 +18,12 @@ import classRoutes from "./routes/classes.js";
 import cors from "cors";
 import multer from "multer";
 import cookieParser from "cookie-parser";
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import fs from "fs";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -124,6 +130,21 @@ app.use("/api/requests", reqRoutes);
 app.use("/api/search", searchRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/classes", classRoutes);
+
+app.get("/public/stories/:id", (req, res) => {
+  const fileId = req.params.id;
+  const filePath = path.join(__dirname, 'public', 'stories', fileId);
+
+  // Check if the file exists
+  if (fs.existsSync(filePath)) {
+    // Send the file
+    res.sendFile(filePath);
+  } else {
+    // If the file doesn't exist, send a 404 status
+    res.status(404).send('File not found');
+  }
+});
+
 
 app.listen(8080, () => {
   console.log("Server Started...");
