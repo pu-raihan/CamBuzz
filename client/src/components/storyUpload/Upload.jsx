@@ -33,10 +33,13 @@ const Upload = ({ setUploadOpen, currentUser }) => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    console.log("upload started");
     if (currentUser.type !== "guest") {
       let imgUrl = "";
       if (file) imgUrl = await upload();
+      console.log("image uploaded");
       mutation.mutate({ img: imgUrl, type: currentUser.type });
+      console.log("upload completed");
       setFile(null);
       setUploadOpen(false)
     }

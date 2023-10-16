@@ -34,14 +34,11 @@ const Share = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
-    console.log("upload started");
     if (currentUser.type !== "guest") {
       let imgUrl = "";
       if (file) {
         imgUrl = await upload().then(() => {
-          console.log("image uploaded");
           mutation.mutate({ desc, img: imgUrl, type: currentUser.type })
-          console.log("upload completed");
           setDesc("");
           setFile(null);
         }).catch(error => {
