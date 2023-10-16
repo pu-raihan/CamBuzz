@@ -36,7 +36,7 @@ const Share = () => {
   );
   const handleClick = async (e) => {
     e.preventDefault();
-    if (!currentUser.type === "guest") {
+    if (currentUser.type !== "guest") {
       let imgUrl = "";
       if (file) imgUrl = await upload();
       mutation.mutate({ desc, img: imgUrl, type: currentUser.type });
