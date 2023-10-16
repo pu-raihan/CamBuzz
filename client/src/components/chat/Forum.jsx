@@ -52,6 +52,12 @@ const Forum = ({ setForumOpen }) => {
         }
     };
 
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            sendMessage(event);
+        }
+    }
+    
     return (
         <div className="chatbox ">
             <div className="forumtop">
@@ -77,6 +83,7 @@ const Forum = ({ setForumOpen }) => {
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
+                    onKeyDown={handleKeyPress}
                 />
                 <SendIcon style={{ color: "#fff" }} onClick={sendMessage} />
             </div>
