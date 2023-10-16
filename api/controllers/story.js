@@ -44,7 +44,7 @@ export const addStory = (req, res) => {
   if (!token) return res.status(401).json("Not logged in");
   if (secret === "faculty") secret = "facultysecret";
   if (secret === "student") secret = "cambuzzsecret";
-
+  console.log("story upload");
   jwt.verify(token, secret, (err, userInfo) => {
     if (err) return res.status(403).json("Token invalid!");
 
