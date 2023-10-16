@@ -7,6 +7,7 @@
   "description": "social media and resource locator",
   "main": "public/electron.js",
   "dependencies": {
+    "@azure/storage-blob": "^12.16.0",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@googlemaps/js-api-loader": "^1.15.1",

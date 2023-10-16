@@ -16,11 +16,13 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
 import Loader from "../../components/loader/Loader";
+import Dialog from "../../components/dialog/Dialog";
 
 const Profile = () => {
 
   const [updateOpen, setUpdateOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   const username = useLocation().pathname.split("/")[2];
 
@@ -56,6 +58,22 @@ const Profile = () => {
       },
     }
   );
+
+  const message = async (e) => {
+    try {
+      await makeRequest.post("/chats", {
+        sender: currentUser.username,
+        receiver: username,
+        message: 'Hi',
+        forum: false
+      });
+      await new Promise((resolve) => setTimeout(resolve, 0));
+    } catch (err) {
+      console.log(err);
+    } finally {
+      window.location.reload()
+    }
+  };
 
   const handleFollow = () => {
     if (currentUser.type !== "guest") {
@@ -134,7 +152,7 @@ const Profile = () => {
                     ><EmailIcon /></Link>
                     <MoreIcon onClick={() => setMoreOpen(!moreOpen)} />
                     {moreOpen &&
-                      <button>Chat</button>
+                      <button onClick={() => setDialogOpen(true)}>Chat</button>
                     }</div>
                   <div className="rBottom">
                     <ClassIcon /> {data.class}
@@ -146,6 +164,7 @@ const Profile = () => {
           </>
         )}
       {updateOpen && <Update setUpdateOpen={setUpdateOpen} user={data} />}
+      {dialogOpen && <Dialog setDialogOpen={setDialogOpen} dFunction={message} qst="Do you wanna send 'Hi' " value={"to '" + username + "' ?"} />}
     </div>
   );
 };

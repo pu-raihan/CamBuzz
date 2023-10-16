@@ -31,7 +31,7 @@ function App() {
 
   const { darkMode } = useContext(DarkModeContext);
 
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient();
 
   const Layout = () => {
     return (
@@ -44,7 +44,7 @@ function App() {
               <Outlet />
             </div>
             <div className="rightbar">
-            <Chats />
+              <Chats sidebar={true} />
             </div>
           </div>
           <Menubar />
@@ -56,8 +56,7 @@ function App() {
   const ProtectedRoute = ({ children }) => {
     if (!currentUser) {
       return <Navigate to="/login" />;
-    }
-    else if (!currentUser.emailVerified) {
+    } else if (!currentUser.emailVerified) {
       return <Navigate to="/verifyemail" />;
     }
     return children;
@@ -90,7 +89,11 @@ function App() {
         },
         {
           path: "/chats",
-          element: <Chats />,
+          element: <Chats sidebar={false}/>,
+        },
+        {
+          path: "/chats/:id",
+          element:  <Chats sidebar={false}/>,
         },
         {
           path: "/requests",
@@ -108,15 +111,20 @@ function App() {
     },
     {
       path: "/register",
-      element:(<QueryClientProvider client={queryClient}> <Register /></QueryClientProvider>),
+      element: (
+        <QueryClientProvider client={queryClient}>
+          {" "}
+          <Register />
+        </QueryClientProvider>
+      ),
     },
     {
       path: "/verifyemail",
-      element: <VerifyMail/>,
+      element: <VerifyMail />,
     },
     {
       path: "*",
-      element: <NotFound/>,
+      element: <NotFound />,
     },
   ]);
 

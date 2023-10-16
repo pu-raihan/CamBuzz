@@ -11,33 +11,33 @@ $brown-darker: #aa512e;
 $purple-dark: #691016;
 
 /* base colors */
-body {
+.notfound {
   background: #28083c;
-
+  height: 100vh;
   .wrapper {
-	width: 60vw;
-	margin: auto;
-	margin-top: 10vh;
+    width: 60vw;
+    margin: auto;
+    padding-top: 10vh;
   }
   #gohome {
     display: flex;
     justify-content: center;
-	align-items: center;
+    align-items: center;
 
     #leftArr {
       color: #09a096;
-	  width: 1.5vw;
+      width: 1.5vw;
       height: 1.5vw;
     }
     button {
       display: flex;
       align-items: center;
-      font-family: 'Capriola';
+      font-family: "Capriola";
       font-size: 1vw;
       font-weight: 700;
-      background:transparent;
+      background: transparent;
       border: none;
-	  padding: 0;
+      padding: 0;
       border-radius: 2rem;
       color: $yellow;
     }

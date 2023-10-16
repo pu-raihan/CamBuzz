@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./chats.scss"
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
@@ -7,10 +7,12 @@ import moment from "moment";
 import Chat from "./Chat";
 import Forum from "./Forum";
 import Loader from "../loader/Loader";
+import { useLocation } from "react-router";
 
-const Chats = () => {
+const Chats = ({ sidebar }) => {
 
     const { currentUser } = useContext(AuthContext);
+
     const { isLoading, error, data } = useQuery(["chats", currentUser.username], () =>
         makeRequest.get("/chats/all?username=" + currentUser.username).then((res) => {
             return res.data;
@@ -18,8 +20,15 @@ const Chats = () => {
     );
 
     const [user, setUser] = useState(null);
+    const [show, setshow] = useState(null);
     const [chatOpen, setChatOpen] = useState(false);
     const [ForumOpen, setForumOpen] = useState(false);
+
+    const chaturl = useLocation().pathname.split("/") ;
+
+    useEffect(() => {
+        chaturl[1]=== 'chats' ? setshow(!sidebar) : setshow(sidebar)
+    }, [chaturl, sidebar]);
 
     const gotoChat = (username, profilePic) => {
         setUser({ username, profilePic })
@@ -27,7 +36,7 @@ const Chats = () => {
     }
 
     return (
-        <div className="chats">
+        <div className="chats">{show &&
             <div className="container">
                 {!chatOpen && !ForumOpen && <>
                     <div className="item" >
@@ -62,7 +71,7 @@ const Chats = () => {
                 }{
                     ForumOpen && <Forum setForumOpen={setForumOpen} />
                 }
-            </div>
+            </div>}
         </div>
     )
 }

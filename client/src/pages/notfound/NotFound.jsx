@@ -5,7 +5,7 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <>
+    <div className='notfound'>
       <div class="wrapper">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" id='notfound'>
           <title>404</title>
@@ -138,7 +138,7 @@ const NotFound = () => {
         </svg>
         <button onClick={() => navigate("/")}>TAKE ME HOME</button>
       </div>
-    </>
+    </div>
   );
 };
 
