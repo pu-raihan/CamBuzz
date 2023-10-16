@@ -39,7 +39,7 @@ app.use(cookieParser());
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/posts");
+    cb(null, "public/posts");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -47,7 +47,7 @@ const storage = multer.diskStorage({
 });
 const storageStory = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/stories");
+    cb(null, "public/stories");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -55,7 +55,7 @@ const storageStory = multer.diskStorage({
 });
 const storageEvent = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/events");
+    cb(null, "public/events");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -63,7 +63,7 @@ const storageEvent = multer.diskStorage({
 });
 const storageProf = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/profile");
+    cb(null, "public/profile");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -71,7 +71,7 @@ const storageProf = multer.diskStorage({
 });
 const storageCover = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "../client/public/cover");
+    cb(null, "public/cover");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
