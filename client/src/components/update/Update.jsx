@@ -57,7 +57,7 @@ const Update = ({ setUpdateOpen, user }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!currentUser.type === "guest") {
+    if (currentUser.type !== "guest") {
       let coverUrl;
       let profileUrl;
       coverUrl = cover ? await upload(cover, "coverupload") : user.coverPic;

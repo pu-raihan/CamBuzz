@@ -41,7 +41,7 @@ const Forum = ({ setForumOpen }) => {
     );
     const sendMessage = async (e) => {
         e.preventDefault();
-        if (!currentUser.type === "guest") {
+        if (currentUser.type !== "guest") {
             const messageData = {
                 sender: currentUser.username,
                 message: newMessage,
