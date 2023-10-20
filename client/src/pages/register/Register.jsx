@@ -30,7 +30,7 @@ const Register = () => {
     setErr(null)
   };
 
-  const handleClick = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (inputs.username === "" || inputs.email === "" || inputs.clas === "" || inputs.password === "") {
       setErr("Fill all the fields")
@@ -51,56 +51,63 @@ const Register = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="register">
-        <div className="card">
+      <div className="h-screen flex items-center justify-center bg-loginbg">
+        <div className="shadow-lg relative flex flex-col-reverse sm:flex-row-reverse min-h-[500px] sm:h-3/5 w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 rounded-2xl bg-gradient-to-r from-[#fff1f1] to-[#f7e7e7] overflow-hidden">
           {loading && <Loader lColor={"white"} dColor={"white"} />}
-          <div className="left">
-            <img src="/lightLogo.png" alt="" />
-            <p>
+          <div className="left flex sm:flex-1 sm:flex-col justify-center p-5 sm:p-12 gap-5 sm:gap-8 text-white" style={{ background: 'linear-gradient(#38011a8e, #47002e92), url("/loginbg.jpg") center', backgroundSize: 'cover' }}>
+            <img className="w-20 sm:w-3/5 md:w-1/2" src="/lightLogo.png" alt="" />
+            <p className="text-xxs sm:text-sm">
               An exclusive Social Media partner and Resource locator for pondicherry University.
             </p>
-            <div className="log">
-              <span>Already have an account?</span>
+            <div className="flex flex-col gap-2 sm:gap-8">
+              <span className="text-xxs sm:text-xs">Already have an account?</span>
               <Link to="/login">
-                <button>Login</button>
+                <button className="w-full sm:w-24 p-2.5 border-none rounded-md text-sm font-bold bg-btnlight text-btn1 hover:bg-rose-300 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</button>
               </Link>
             </div>
           </div>
-          <div className="right">
-            <h1>Register</h1>
-            <form>
+          <div className="right flex flex-1 sm:flex-1 flex-col justify-center p-12 gap-6 sm:gap-8">
+            <h1 className="text-stone-600 text-3xl font-black">Register</h1>
+            <form className="flex flex-col gap-2.5" onSubmit={handleRegister}>
               <input
+                className="text-sm px-2.5 py-5 bg-transparent placeholder:text-slate-500 border-gray-600 border-b"
                 type="text"
                 placeholder="Username"
                 name="username"
                 onChange={handleChange}
+                autoComplete="username"
               />
               <input
+                className="text-sm peer px-2.5 py-5 bg-transparent placeholder:text-slate-500 border-gray-600 border-b invalid:[&:not(:placeholder-shown):not(:focus)]:text-red-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
                 type="email"
                 placeholder="Email"
                 name="email"
                 autocomplete="email"
                 onChange={handleChange}
               />
+              <span className="peer-valid:hidden peer-[&:not(:focus):not(:placeholder-shown):invalid]:block text-xs text-red-500">Please provide a valid email address</span>
               <input
+                className="text-sm peer px-2.5 py-5 bg-transparent placeholder:text-slate-500 border-gray-600 border-b invalid:[&:not(:placeholder-shown):not(:focus)]:text-red-500 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500"
                 type="password"
                 placeholder="Password"
                 name="password"
                 autocomplete="current-password"
                 onChange={handleChange}
+                pattern=".{6,}"
               />
-              <select name="clas" onChange={handleChange} value={inputs.clas}>
-                <option value="">Select Class</option>
+              <span className="peer-valid:hidden peer-[&:not(:focus):not(:placeholder-shown):invalid]:block text-xs text-red-500">Password should be atleast 6 characters</span>
+              <select className="text-sm px-2 py-5 bg-transparent border-gray-600 border-b" name="clas" onChange={handleChange} value={inputs.clas}>
+                <option className="text-sm px-2.5 py-4 bg-transparent border-gray-600 border-b" value="">Select Class</option>
                 {isLoading ? "Loading" :
                   data ? data.map((option) => (
-                    <option key={option.id} value={option.name}>
+                    <option className="text-sm px-2.5 py-4 bg-transparent border-gray-600 border-b" key={option.id} value={option.name}>
                       {option.name} - {option.dept}
                     </option>
                   )) : error + "error"
                 }
               </select>
-              <p style={{ color: "red", fontSize: "small" }}>{err && err.response.data}</p>
-              <button onClick={handleClick}>Register</button>
+              <p className="text-red-500 text-xs">{err && err}</p>
+              <button className="w-1/2 p-2.5 border-none bg-btn2 text-white text-sm font-bold hover:bg-btn1" onClick={handleRegister}>Register</button>
             </form>
           </div>
         </div>
