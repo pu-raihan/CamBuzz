@@ -99,7 +99,7 @@ const Register = () => {
                   )) : error + "error"
                 }
               </select>
-              <p style={{ color: "red", fontSize: "small" }}>{err && err.response.data}</p>
+              <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
               <button onClick={handleClick}>Register</button>
             </form>
           </div>
