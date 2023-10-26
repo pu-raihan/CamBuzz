@@ -65,11 +65,11 @@ export const register = (req, res) => {
       });
     } else
       return res
-        .status(500)
+        .status(400)
         .json(
           "This email does not belongs to a pondicherry university student"
         );
-  } else return res.status(500).json("This is not a valid email");
+  } else return res.status(400).json("This is not a valid email");
 };
 
 export const login = (req, res) => {
@@ -90,7 +90,7 @@ export const login = (req, res) => {
       
       if (data.length === 0) return res.status(404).json("User not found!");
       if (data[0].type !== "student")
-        return res.status(404).json("Not a student! check the faculty box");
+        return res.status(400).json("Not a student! check the faculty box");
 
       const checkPwd = bcrypt.compareSync(req.body.password, data[0].password);
       if (!checkPwd) return res.status(400).json("Wrong username or password!");
