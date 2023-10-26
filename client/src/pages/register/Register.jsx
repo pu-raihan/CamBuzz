@@ -30,7 +30,7 @@ const Register = () => {
     setErr(null)
   };
 
-  const handleClick = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     if (inputs.username === "" || inputs.email === "" || inputs.clas === "" || inputs.password === "") {
       setErr("Fill all the fields")
@@ -42,7 +42,11 @@ const Register = () => {
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/login");
       } catch (err) {
-        setErr(err.response.data);
+        console.log(err);
+        if (err.response)
+          setErr(err.response.data);
+        else
+          setErr(err.message);
       } finally {
         setLoading(false);
       }
@@ -68,7 +72,7 @@ const Register = () => {
           </div>
           <div className="right">
             <h1>Register</h1>
-            <form>
+            <form onSubmit={handleRegister}>
               <input
                 type="text"
                 placeholder="Username"
@@ -100,7 +104,7 @@ const Register = () => {
                 }
               </select>
               <p style={{ color: "red", fontSize: "small" }}>{err && err}</p>
-              <button onClick={handleClick}>Register</button>
+              <button onClick={handleRegister}>Register</button>
             </form>
           </div>
         </div>
