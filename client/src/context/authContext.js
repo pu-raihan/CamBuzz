@@ -8,13 +8,6 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
 
-  const register = async (inputs) => {
-    await axios.post(
-      `${process.env.REACT_APP_SERVER_ADD}/api/auth/register`,
-      inputs
-    );
-  };
-
   const login = async (inputs) => {
     const res = await axios.post(
       `${process.env.REACT_APP_SERVER_ADD}/api/auth/login`,
@@ -66,15 +59,7 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{
-        currentUser,
-        register,
-        login,
-        facLogin,
-        guestLogin,
-        update,
-        logout,
-      }}
+      value={{ currentUser, login, facLogin, guestLogin, update, logout }}
     >
       {children}
     </AuthContext.Provider>

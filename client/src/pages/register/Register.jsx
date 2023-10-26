@@ -1,11 +1,10 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
 import { makeRequest } from "../../axios";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";
 import Loader from "../../components/loader/Loader";
-import { AuthContext } from "../../context/authContext";
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -15,7 +14,6 @@ const Register = () => {
     clas: "",
   });
   const queryClient = new QueryClient()
-  const { register } = useContext(AuthContext);
 
   const navigate = useNavigate();
   const [err, setErr] = useState(null);
@@ -40,15 +38,11 @@ const Register = () => {
     else {
       setLoading(true);
       try {
-        await register(inputs)
+        await axios.post(`${process.env.REACT_APP_SERVER_ADD}/api/auth/register`, inputs);
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/login");
       } catch (err) {
-        console.log(err);
-        if (err.response)
-          setErr(err.response.data);
-        else
-          setErr(err.message);
+        setErr(err.response.data);
       } finally {
         setLoading(false);
       }
