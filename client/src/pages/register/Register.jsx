@@ -42,7 +42,8 @@ const Register = () => {
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/login");
       } catch (err) {
-        setErr(err.response.data);
+        // setErr(err.response.data);
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -79,14 +80,14 @@ const Register = () => {
                 type="email"
                 placeholder="Email"
                 name="email"
-                autocomplete="email"
+                autoComplete="email"
                 onChange={handleChange}
               />
               <input
                 type="password"
                 placeholder="Password"
                 name="password"
-                autocomplete="current-password"
+                autoComplete="current-password"
                 onChange={handleChange}
               />
               <select name="clas" onChange={handleChange} value={inputs.clas}>
