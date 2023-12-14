@@ -36,12 +36,12 @@ const Chats = ({ sidebar }) => {
     }
 
     return (
-        <div className="chats sticky top-[112px] h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft dark:text-white overflow-scroll no-scrollbar">{show &&
-            <div className="container p-5">
+        <div className="chats sticky top-[112px] h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft dark:text-white overflow-scroll no-scrollbar">{show &&
+            <div className="container sm:p-5">
                 {!chatOpen && !ForumOpen && <>
-                    <div className="item shadow-lg p-5 bg-bg1 dark:bg-dbg1 mb-3.5" >
+                    <div className="item h-[calc(30vh)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 sm:mb-3.5" >
                         <span>Groups</span>
-                        <div className="user" onClick={() => setForumOpen(true)}>
+                        <div className="user flex items-center justify-between my-5" onClick={() => setForumOpen(true)}>
                             <div className="userInfo">
                                 <img src="/DarkRound.png" alt="" />
                                 {/* <div className="online" /> */}
@@ -50,18 +50,18 @@ const Chats = ({ sidebar }) => {
                         </div>
                     </div>
 
-                    <div className="item relative h-[55vh] shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar">
+                    <div className="item relative h-[calc(70vh-192px)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : data&&data.length>0 ? data.map((item) => (
-                                <div key={item.time} className="user" onClick={() => gotoChat(item.username, item.profilePic)}>
+                                <div key={item.time} className="user flex items-center justify-between my-5" onClick={() => gotoChat(item.username, item.profilePic)}>
                                     <div className="userInfo">
                                         <img src={"/profile/" + item.profilePic} alt="" />
                                         <span>{item.username}</span>
                                     </div>
-                                    <span>{moment(item.time).fromNow()}</span>
+                                    <span className="text-[11px] text-gray-400">{moment(item.time).fromNow()}</span>
                                 </div>
-                            )) : <p className="noData">No chats</p>
+                            )) : <p className="m-auto font-semibold">No chats</p>
                         }
                         {error && error.message}
                     </div>
