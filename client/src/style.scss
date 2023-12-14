@@ -2,19 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    font-family: "Poppins", system-ui, sans-serif;
+  }
+}
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+  }
+}
+
 $themes: (
   light: (
     tColor: black,
     bg: white,
     bgInv: #1a0711,
-    bg2:rgb(238, 221, 233),
-    bg3:rgb(235, 209, 209),
+    bg2:#eedde9,
+    bg3:#ebd1d1,
     bg4:#53102f,
-    bgSoft: rgb(238, 228, 232),
+    bgSoft: #eee4e8,
     bgGrey:#fcfcfc,
     bgTrans:#360913b8,
-    colorSoft: #555,
-    border: lightgray,
+    colorSoft: #555555,
+    border: #d3d3d3,
     btn:#761a51,
     btn2:#761a51,
     btn3:#ca1919,
@@ -23,12 +46,12 @@ $themes: (
     tColor: white,
     bg: #1d1a25, 
     bgInv: white,
-    bg2:rgb(92, 17, 52),
-    bg3:rgb(77, 23, 49),
+    bg2:#5c1134,
+    bg3:#4d1731,
     bg4:#531336,
     bgGrey:#201f22,
     bgTrans:#360c1eb8,
-    bgSoft: rgb(62, 58, 58),
+    bgSoft: #3e3a3a,
     colorSoft: lightgray,
     border: #444,
     btn:#761a51,
@@ -71,9 +94,9 @@ $themes: (
   }
 }
 
-.rightbar{
-  flex: 4;
-  @include mobile {
-    display: none;
-  }
-}
+// .rightbar{
+//   flex: 4;
+//   @include mobile {
+//     display: none;
+//   }
+// }

@@ -5,8 +5,8 @@ const NotFound = () => {
   const navigate = useNavigate();
 
   return (
-    <div className='notfound'>
-      <div class="wrapper">
+    <div className='notfound bg-[#28083c] h-screen'>
+      <div class="wrapper w-3/5 m-auto pt-[30vh] sm:pt-[10vh]">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" id='notfound'>
           <title>404</title>
           <g id="Layer_12 yellow-back-fig" data-name="Layer 12">
@@ -132,11 +132,11 @@ const NotFound = () => {
         </svg>
       </div>
 
-      <div id='gohome'>
-        <svg id='leftArr' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+      <div className='flex items-center justify-center'>
+        <svg className='text-[#09a096] w-5 h-5' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
           <path d="M28 38l-12-16 12-16" />
         </svg>
-        <button onClick={() => navigate("/")}>TAKE ME HOME</button>
+        <button className='text-md font-bold border-none text-[#ffc541]' onClick={() => navigate("/")}>TAKE ME HOME</button>
       </div>
     </div>
   );

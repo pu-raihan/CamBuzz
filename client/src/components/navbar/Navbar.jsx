@@ -11,7 +11,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForwardIos';
 import ReqIcon from '@mui/icons-material/PendingActions';
 import NotificationsIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 import { makeRequest } from "../../axios";
@@ -84,35 +84,40 @@ const Navbar = () => {
     setLoading(false);
   };
 
-  const div1Ref = useRef(null);
-  const [div1Width, setDiv1Width] = useState(0);
-  const [distanceFromLeft, setDistanceFromLeft] = useState(0);
+  const [width, setWidth] = useState(0);
+  const [left, setLeft] = useState(0);
 
   useEffect(() => {
-    const rect = div1Ref.current.getBoundingClientRect();
-    const width = div1Ref.current.clientWidth;
-    setDistanceFromLeft(rect.left);
-    setDiv1Width(width);
+    const refDiv = document.getElementById('refDiv');
+
+    if (refDiv) {
+      const rect = refDiv.getBoundingClientRect();
+      setWidth(rect.width);
+      setLeft(rect.left);
+    }
   }, []);
 
   return (
-    <div className="navbar">
-      <div className="left">
-        <Link to="/" style={{ textDecoration: "none" }}>
+    <div className="navbar sticky flex items-center justify-between top-0 h-28 px-5 py-4 bg-bg1 dark:bg-dbg1 dark:text-white border-b border-border1 dark:border-dborder1 z-999">
+      <div className="left flex items-center gap-3 sm:gap-5">
+        <Link to="/" className="no-underline w-[60px] h-[50px] object-cover">
           {darkMode ? (
-            <img src="/lightLogo.png" alt="CamBuzz" />
+            <img className="" src="/lightLogo.png" alt="CamBuzz" />
           ) : (
             <img src="/dark.png" alt="CamBuzz" />
           )}
         </Link>
-        {darkMode ? (
-          <LightMode onClick={toggle} />
-        ) : (
-          <NightMode onClick={toggle} />
-        )}
-        <div className="search" ref={div1Ref}>
+        <div className="hidden xs:block">
+          {darkMode ? (
+            <LightMode className='transition ease-in hover:scale-110 duration-200' onClick={toggle} />
+          ) : (
+            <NightMode className='transition ease-in hover:scale-110 duration-200' onClick={toggle} />
+          )}
+        </div>
+        <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5" >
           <SearchIcon />
           <input
+            className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none"
             type="text"
             name="search"
             value={searchText}
@@ -120,50 +125,48 @@ const Navbar = () => {
             onChange={handleChange} placeholder="Search..." />
         </div>
       </div>
-      <div className="mid">
+      <div className="hidden xs:flex xs:flex-1 px-5 items-center justify-start gap-5">
         {currentUser.type === 'faculty' &&
           <ReqIcon onClick={gotoRequests} />
         }
-        <NotificationsIcon onClick={() => setNotificationOpen(true)} />
+        <NotificationsIcon className="hover:animate-wiggle" onClick={() => setNotificationOpen(true)} />
       </div>
-      <div className="right">
-        <div className="profcard" onClick={() => setProfOpen(!profOpen)}>
-          {profOpen && (
-            <div className="profil">
-              <div className="goto" onClick={() => gotoProf()}>
-                <AccountIcon style={{ fontSize: "medium" }} />
-                <span>Profile</span>
-              </div>
-              <div className="logout" onClick={() => setDialogOpen(true)}>
-                <PowerIcon style={{ fontSize: "medium" }} />
-                <span>Logout</span>
-              </div>
+      <div className="right flex items-center justify-end gap-5 text-white">
+        <div className="profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full sm:rounded-xl p-1 sm:p-3 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3" onClick={() => setProfOpen(!profOpen)}>
+          <div className={`${profOpen ? "animate-openL" : "animate-closeL"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
+            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-xl bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
+              <AccountIcon style={{ fontSize: 'medium' }} />
+              <span className={`${profOpen ? "animate-openIcons":"animate-closeIcons"}`}>Profile</span>
             </div>
-          )}
+            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-xl bg-btn2 dark:bg-dbtn text-white" onClick={() => setDialogOpen(true)}>
+              <PowerIcon style={{ fontSize: 'medium' }} />
+              <span className={`${profOpen ?  "animate-openIcons":"animate-closeIcons"}`}>Logout</span>
+            </div>
+          </div>
           {err && err.response.data}
-          <div className="prof">
-            <div className="user">
+          <div className="flex items-center gap-2.5">
+            <div className="hidden md:flex flex-col items-start text-black dark:text-white font-bold gap-1">
               <span>{currentUser.username}</span>
-              <p>{currentUser.fullname}</p>
+              <p className="text-xxs font-normal truncate">{currentUser.fullname}</p>
             </div>
-            <img src={"/profile/" + currentUser.profilePic} alt="" />
+            <img className="w-16 h-16 rounded-full md:rounded-xl object-cover border-2 md:border-none border-black dark:border-white" src={"/profile/" + currentUser.profilePic} alt="" />
           </div>
         </div>
       </div>
       {dialogOpen && <Dialog setDialogOpen={setDialogOpen} dFunction={handleLogout} qst="Do you really wanna logout?" />}
       {notificationOpen && <Notification setNotificationOpen={setNotificationOpen} qst="Do you really wanna logout?" />}
       {resultOpen &&
-        <div className="results" style={{ left: distanceFromLeft, width: div1Width }}>
-          <div className="close">
+        <div className={`results fixed flex flex-col gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-sm`} style={{ left: left, width: width }}>
+          <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
             {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
-            <span>{data && searchText && data.length + " results"} </span>
-            <CloseIcon style={{ fontSize: "medium" }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
+            <span className="text-xs">{data && searchText && data.length + " results"} </span>
+            <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
           {searchText ? data ? data.map((result) =>
-            <div className={result.type === 'faculty' ? "result faculty" : "result"} key={result.id} onClick={() => gotoProf(result.username)}>
-              <img src={"/profile/" + result.profilePic} alt="" />
-              <p className="name">{result.username}</p>
-              <p className="type">{result.type}</p>
-              <ArrowForwardIcon style={{ right: "0" }} className="arrowForward" />
+            <div className={`result flex items-center w-11/12 p-2 sm:p-4 gap-2 sm:gap-5 rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
+              <img className="w-7 h-7 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
+              <p className="name overflow-hidden text-zinc-300 w-2/5">{result.username}</p>
+              <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
+              <ArrowForwardIcon className="arrowForward" />
             </div>) : loading ? 'Loading' : error : `Search users`}
         </div>}
     </div>

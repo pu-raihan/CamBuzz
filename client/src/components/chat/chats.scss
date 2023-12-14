@@ -2,32 +2,32 @@
 
 .chats {
   @include themify($themes) {
-    position: sticky;
-    top: 111px;
-    height: calc(100vh - 111px);
-    overflow: scroll;
-    background: themed("bgSoft");
-    color: themed("tColor");
+    // position: sticky;
+    // top: 111px;
+    // height: calc(100vh - 112px);
+    // overflow: scroll;
+    // background: themed("bgSoft");
+    // color: themed("tColor");
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
     .container {
-      padding: 20px;
+      // padding: 20px;
 
       .item {
-        -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-        padding: 20px;
-        background: themed("bg");
-        margin-bottom: 15px;
+        // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        // -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+        // padding: 20px;
+        // background: themed("bg");
+        // margin-bottom: 15px;
 
-        &:last-child {
-          position: relative;
-          height: 50vh;
-        }
+        // &:last-child {
+        //   position: relative;
+        //   height: 50vh;
+        // }
         .noData {
           margin: auto;
           font-weight: 600;

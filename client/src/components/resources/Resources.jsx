@@ -22,7 +22,7 @@ const Resources = () => {
 
     };
     return (
-        <div className="resources">
+        <div className="resources h-[calc(100vh-112px)]">
             <h1>Find in PU</h1>
 
             <div className="list">

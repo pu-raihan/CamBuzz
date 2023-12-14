@@ -42,7 +42,11 @@ const Register = () => {
         await new Promise((resolve) => setTimeout(resolve, 0));
         navigate("/login");
       } catch (err) {
-        setErr(err.response.data);
+        console.log(err);
+        if (err.response)
+          setErr(err.response.data);
+        else
+          setErr(err.message);
       } finally {
         setLoading(false);
       }
@@ -62,7 +66,7 @@ const Register = () => {
             <div className="flex flex-col gap-2 sm:gap-8">
               <span className="text-xxs sm:text-xs">Already have an account?</span>
               <Link to="/login">
-                <button className="w-full sm:w-24 p-2.5 border-none rounded-md text-sm font-bold bg-btnlight text-btn1 hover:bg-rose-300 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Login</button>
+                <button className="w-full sm:w-24 p-2.5 border-none rounded-md text-sm font-bold bg-btnlight text-btn hover:bg-rose-300 transition ease-in-out hover:scale-105 duration-300">Login</button>
               </Link>
             </div>
           </div>
@@ -107,7 +111,7 @@ const Register = () => {
                 }
               </select>
               <p className="text-red-500 text-xs">{err && err}</p>
-              <button className="w-1/2 p-2.5 border-none bg-btn2 text-white text-sm font-bold hover:bg-btn1" onClick={handleRegister}>Register</button>
+              <button className="w-1/2 p-2.5 border-none text-white text-sm font-bold bg-btn hover:bg-dbtn transition ease-in-out hover:scale-105 duration-300" onClick={handleRegister}>Register</button>
             </form>
           </div>
         </div>

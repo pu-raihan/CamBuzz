@@ -1,41 +1,41 @@
-@import "../../style.scss";
+// @import "../../style.scss";
 
-.leftBar {
-  @include themify($themes) {
-    flex: 3;
-    position: sticky;
-    top: 111px;
-    height: calc(100vh - 111px);
-    overflow: scroll;
-    background: themed("bg");
-    color: themed("tColor");
+// .leftBar {
+  // @include themify($themes) {
+    // flex: 3;
+    // position: sticky;
+    // top: 111px;
+    // height: calc(100vh - 111px);
+    // overflow: scroll;
+    // background: themed("bg");
+    // color: themed("tColor");
 
-    @include mobile {
-      display: none;
-    }
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    // @include mobile {
+    //   display: none;
+    // }
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
-    .container {
-      padding: 20px;
-      hr {
-        margin: 20px 0px;
-        border: none;
-        height: 0.4px;
-        background-color: themed("border");
-      }
-      .menu {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
+    // .container {
+      // padding: 20px;
+      // hr {
+        // margin: 20px 0px;
+        // border: none;
+        // height: 0.4px;
+        // background-color: themed("border");
+      // }
+      // .menu {
+        // display: flex;
+        // flex-direction: column;
+        // gap: 20px;
 
-        &:last-child {
-          position: relative;
-        }
-        span {
-          font-size: 12px;
-        }
+        // &:last-child {
+        //   position: relative;
+        // }
+        // span {
+        //   font-size: 12px;
+        // }
         // .resCard {
         //   display: flex;
         //   flex-direction: column;
@@ -77,20 +77,20 @@
         //   }
         // }
 
-        .item {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+        // .item {
+          // display: flex;
+          // align-items: center;
+          // gap: 10px;
 
-          img {
-            width: 30px;
-            height: 30px;
-          }
-          span {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-  }
-}
+          // img {
+          //   width: 30px;
+          //   height: 30px;
+          // }
+      //     span {
+      //       font-size: 14px;
+      //     }
+      //   }
+      // }
+    // }
+  // }
+// }

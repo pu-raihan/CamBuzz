@@ -18,7 +18,7 @@ const Chats = ({ sidebar }) => {
             return res.data;
         })
     );
-
+        console.log(data);
     const [user, setUser] = useState(null);
     const [show, setshow] = useState(null);
     const [chatOpen, setChatOpen] = useState(false);
@@ -36,10 +36,10 @@ const Chats = ({ sidebar }) => {
     }
 
     return (
-        <div className="chats">{show &&
-            <div className="container">
+        <div className="chats sticky top-[112px] h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft dark:text-white overflow-scroll no-scrollbar">{show &&
+            <div className="container p-5">
                 {!chatOpen && !ForumOpen && <>
-                    <div className="item" >
+                    <div className="item shadow-lg p-5 bg-bg1 dark:bg-dbg1 mb-3.5" >
                         <span>Groups</span>
                         <div className="user" onClick={() => setForumOpen(true)}>
                             <div className="userInfo">
@@ -50,10 +50,10 @@ const Chats = ({ sidebar }) => {
                         </div>
                     </div>
 
-                    <div className="item">
+                    <div className="item relative h-[55vh] shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                            : data ? data.map((item) => (
+                            : data&&data.length>0 ? data.map((item) => (
                                 <div key={item.time} className="user" onClick={() => gotoChat(item.username, item.profilePic)}>
                                     <div className="userInfo">
                                         <img src={"/profile/" + item.profilePic} alt="" />
@@ -63,7 +63,7 @@ const Chats = ({ sidebar }) => {
                                 </div>
                             )) : <p className="noData">No chats</p>
                         }
-                        {error && error.response.data}
+                        {error && error.message}
                     </div>
                 </>
                 }{

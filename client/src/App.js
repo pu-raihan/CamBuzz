@@ -36,14 +36,14 @@ function App() {
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
-        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+        <div className={`theme-${darkMode ? "dark dark" : "light"}`}>
           <Navbar />
-          <div style={{ display: "flex" }}>
+          <div className="flex">
             <LeftBar />
-            <div style={{ flex: 7 }}>
+            <div className="flex-7">
               <Outlet />
             </div>
-            <div className="rightbar">
+            <div className="flex-4 hidden md:block">
               <Chats sidebar={true} />
             </div>
           </div>

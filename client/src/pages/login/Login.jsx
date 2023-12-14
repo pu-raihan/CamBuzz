@@ -83,7 +83,7 @@ const Login = () => {
           <div className="flex flex-col gap-2 sm:gap-8">
             <span className="text-xxs sm:text-xs">Don't you have an account?</span>
             <Link to="/register">
-              <button className="w-full sm:w-24 p-2.5 border-none rounded-md text-sm font-bold bg-btnlight text-btn1 hover:bg-rose-300 transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">Register</button>
+              <button className="w-full sm:w-24 p-2.5 border-none rounded-md text-sm font-bold bg-btnlight text-btn hover:bg-rose-300 transition ease-in-out hover:scale-105 duration-300">Register</button>
             </Link>
           </div>
         </div>
@@ -114,10 +114,10 @@ const Login = () => {
                 onChange={() =>
                   setChecked(!checked)
                 } />
-              <label for="checkbox1" className="cursor-pointer text-sm text-gray-700 peer-checked:text-gray-500 "> Are you a faculty ? </label>
+              <label htmlFor="checkbox1" className="cursor-pointer text-sm text-gray-700 peer-checked:text-gray-500 "> Are you a faculty ? </label>
             </div>
-            <button className="w-1/2 p-2.5 border-none bg-btn2 hover:bg-btn1 text-white text-sm font-bold" onClick={handleLogin}>Login</button>
-            <p className="text-gray-500 text-sm pl-1 cursor-pointer hover:text-gray-800" onClick={handleGuestLogin}>Guest Login</p>
+            <button className="w-1/2 p-2.5 border-none bg-btn hover:bg-dbtn text-white text-sm font-bold transition ease-in-out hover:scale-105 duration-300" onClick={handleLogin}>Login</button>
+            <p className="text-gray-500 text-sm pl-1 cursor-pointer hover:text-gray-800 " onClick={handleGuestLogin}>Guest Login</p>
             <p className="text-red-500 text-xs">{err && err}</p>
           </form>
         </div>

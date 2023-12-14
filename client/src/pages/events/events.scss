@@ -6,7 +6,7 @@
     flex-direction: column;
     background: themed("bgSoft");
     gap: 20px;
-    height: 82vh;
+    height: calc(100vh - 112px);
     padding: 30px 20px;
     overflow: scroll;
     position: relative;

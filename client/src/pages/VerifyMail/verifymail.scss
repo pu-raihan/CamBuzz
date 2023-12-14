@@ -1,62 +1,63 @@
-@import "../../style.scss";
+// @import "../../style.scss";
 
-.body {
-  height: 100vh;
-  background: #be959be8;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
+// .body {
+//   height: 100vh;
+//   background: #be959be8;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 20px;
 
-  img {
-    width: 200px;
-    margin-bottom: 10px;
-    @include mobile {
-      width: 100px;
-    }
-  }
-  p {
-    color: #4b5064;
-    font-size: 25px;
-    text-align: center;
-    font-weight: bold;
-    @include mobile {
-      padding: 10px;
-      font-size: 20px;
-    }
-  }
-  button {
-    width: 60px;
-    padding: 5px;
-    border-radius: 5px;
-    color: #f7e7e7;
-    background: #790303;
-    border: none;
-  }
-  .sendmail {
-    display: flex;
-    flex-direction: column;
-    padding: 40px;
-    gap: 20px;
+//   img {
+//     width: 200px;
+//     margin-bottom: 10px;
+//     @include mobile {
+//       width: 100px;
+//     }
+//   }
+//   p {
+//     color: #4b5064;
+//     font-size: 25px;
+//     text-align: center;
+//     font-weight: bold;
+//     @include mobile {
+//       padding: 10px;
+//       font-size: 20px;
+//     }
+//   }
+//   button {
+//     width: 60px;
+//     padding: 5px;
+//     border-radius: 5px;
+//     color: #f7e7e7;
+//     background: #790303;
+//     border: none;
+//   }
 
-    span {
-      color: #5c5c5b;
-      font-size: 15px;
-    }
-    input {
-      border-radius: 5px;
-      border: none;
-      padding: 5px;
-    }
-    button {
-      width: 50%;
-      padding: 5px;
-      border-radius: 5px;
-      color: #f7e7e7;
-      background: #6a0947;
-      border: none;
-      margin: auto;
-    }
-  }
-}
+//   .sendmail {
+//     display: flex;
+//     flex-direction: column;
+//     padding: 40px;
+//     gap: 20px;
+
+//     span {
+//       color: #5c5c5b;
+//       font-size: 15px;
+//     }
+//     input {
+//       border-radius: 5px;
+//       border: none;
+//       padding: 5px;
+//     }
+//     button {
+//       width: 50%;
+//       padding: 5px;
+//       border-radius: 5px;
+//       color: #f7e7e7;
+//       background: #6a0947;
+//       border: none;
+//       margin: auto;
+//     }
+//   }
+// }
