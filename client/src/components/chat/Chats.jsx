@@ -18,7 +18,7 @@ const Chats = ({ sidebar }) => {
             return res.data;
         })
     );
-        console.log(data);
+
     const [user, setUser] = useState(null);
     const [show, setshow] = useState(null);
     const [chatOpen, setChatOpen] = useState(false);
@@ -37,9 +37,9 @@ const Chats = ({ sidebar }) => {
 
     return (
         <div className="chats sticky top-[112px] h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft dark:text-white overflow-scroll no-scrollbar">{show &&
-            <div className="container sm:p-5">
+            <div className="container sm:p-5 flex flex-col h-full">
                 {!chatOpen && !ForumOpen && <>
-                    <div className="item h-[calc(30vh)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 sm:mb-3.5" >
+                    <div className="item max-h-[calc(30vh)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 sm:mb-3.5 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1" >
                         <span>Groups</span>
                         <div className="user flex items-center justify-between my-5" onClick={() => setForumOpen(true)}>
                             <div className="userInfo">
@@ -47,10 +47,10 @@ const Chats = ({ sidebar }) => {
                                 {/* <div className="online" /> */}
                                 <span>PU Forum</span>
                             </div>
-                        </div>
+                        </div> 
                     </div>
 
-                    <div className="item relative h-[calc(70vh-192px)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar">
+                    <div className="item flex-1 flex-col relative shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : data&&data.length>0 ? data.map((item) => (
@@ -59,7 +59,7 @@ const Chats = ({ sidebar }) => {
                                         <img src={"/profile/" + item.profilePic} alt="" />
                                         <span>{item.username}</span>
                                     </div>
-                                    <span className="text-[11px] text-gray-400">{moment(item.time).fromNow()}</span>
+                                    <span className="text-[9px] lg:text-[10px] text-gray-400 pr-5 md:pr-0 lg:pr-5">{moment(item.time).fromNow()}</span>
                                 </div>
                             )) : <p className="m-auto font-semibold">No chats</p>
                         }

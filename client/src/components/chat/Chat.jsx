@@ -63,35 +63,36 @@ const Chat = ({ user, setChatOpen }) => {
     }
 
     return (
-        <div className="chatbox ">
-            <div className="top">
+        <div className="chatbox sticky top-[112px] h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] sm:rounded-xl bg-bg1 dark:bg-dbg1 dark:text-white overflow-scroll no-scrollbar">
+            <div className="top flex items-center justify-between p-4 bg-bg4 dark:bg-dbg4 text-white h-20 border-bg1 dark:border-dbg1 border-b text-lg">
                 <BackIcon onClick={() => setChatOpen(false)} />
                 <span>{user.username}</span>
-                <div className="image" onClick={() => { navigate("/profile/" + user.username); window.location.reload() }}>
-                    <img src={"/profile/" + user.profilePic} alt="" />
+                <div className="flex items-center w-11 h-11 bg-white rounded-full" onClick={() => { navigate("/profile/" + user.username); window.location.reload() }}>
+                    <img className="object-cover rounded-full m-auto w-10 h-10" src={"/profile/" + user.profilePic} alt="" />
                 </div>
             </div>
-            <div className="messages">
+            <div className="messages relative flex flex-col-reverse p-7 h-[calc(100vh-336px)] sm:h-[calc(100vh-296px)] overflow-scroll no-scrollbar">
                 {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                     : data.map((message) => (
                         <div
                             key={message.time}
-                            className={`${message.sender === currentUser.username ? "me" : "other"}`}
+                            className={`flex flex-col max-w-[70%] mb-1 text-sm ${message.sender === currentUser.username ? "me self-end [&>*]:self-end first:[&>*]:bg-bg4 dark:first:[&>*]:bg-dbg4 text-white last:[&>*]:text-black dark:last:[&>*]:text-white" : "other font-medium [&>*]:self-start first:[&>*]:bg-white text-black dark:last:[&>*]:text-white"}`}
                         >
-                            <div className="message-content">{message.message}</div>
-                            <div className="message-time">{formattedDate(message.time)}</div>
+                            <div className="message-content p-2.5 rounded-md shadow-ful1">{message.message}</div>
+                            <div className="text-xxs mt-1">{formattedDate(message.time)}</div>
                         </div>
                     ))}
                 {error && error.response.data}
             </div>
-            <div className="send">
+            <div className="send flex items-center justify-between h-16 pt-2.5 pb-3 px-4 gap-5 text-black bg-dbg4 dark:bg-transparent">
                 <input
+                    className="w-full h-full rounded-full px-4"
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
                 />
-                <SendIcon style={{ color: "#fff" }} onClick={sendMessage} />
+                <SendIcon className="text-3xl" style={{ color: "#fff" }} onClick={sendMessage} />
             </div>
         </div>
 

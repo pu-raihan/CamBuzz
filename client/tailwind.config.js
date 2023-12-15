@@ -61,7 +61,7 @@ export const theme = {
       },
       wiggle: {
         "0%, 100%": { transform: "rotate(-15deg)" },
-        "50%": { transform: "rotate(15deg)" }
+        "50%": { transform: "rotate(15deg)" },
       },
     },
     fontSize: {
@@ -78,6 +78,9 @@ export const theme = {
     zIndex: {
       998: "998",
       999: "999",
+    },
+    boxShadow: {
+      "ful1": "1px 1px 1px 1px rgba(0, 0, 0, 0.1)",
     },
   },
 };

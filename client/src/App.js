@@ -43,7 +43,7 @@ function App() {
             <div className="flex-7">
               <Outlet />
             </div>
-            <div className="flex-4 hidden md:block">
+            <div className="flex-5 lg:flex-4 hidden md:block">
               <Chats sidebar={true} />
             </div>
           </div>
