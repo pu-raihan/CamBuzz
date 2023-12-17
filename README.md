@@ -45,5 +45,6 @@ happening on campus <br><br>
 * [Presentation](https://github.com/pu-raihan/CamBuzz/blob/main/Cambuzz-Presentation.pptx)
 * [Report](https://github.com/pu-raihan/CamBuzz/blob/main/21352030-CamBuzz-Final%20review%20report.pdf) <br><br>
 ## Demo
-Goto demo website -> [CamBuzz](https://cambuzz.netlify.app)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/04ad319c-60e3-4af9-8cf9-87fc631e2af7/deploy-status)](https://app.netlify.com/sites/cambuzz/deploys)
+Goto website with scss -> [CamBuzz](https://cambuzz-css.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/ef3e8c2e-ced4-4b78-851b-30e6d347d172/deploy-status)](https://app.netlify.com/sites/cambuzz-css/deploys)
+<br>
+Goto website with tailwind-css -> [CamBuzz](https://cambuzz.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/04ad319c-60e3-4af9-8cf9-87fc631e2af7/deploy-status)](https://app.netlify.com/sites/cambuzz/deploys)
