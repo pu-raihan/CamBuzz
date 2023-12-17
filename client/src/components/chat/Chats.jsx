@@ -37,7 +37,7 @@ const Chats = ({ sidebar }) => {
 
     return (
         <div className="chats sticky top-[112px] h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft dark:text-white overflow-scroll no-scrollbar">{show &&
-            <div className="container sm:p-5 flex flex-col h-full">
+            <div className="sm:p-5 flex flex-col h-full">
                 {!chatOpen && !ForumOpen && <>
                     <div className="item max-h-[calc(30vh)] shadow-lg p-5 bg-bg1 dark:bg-dbg1 sm:mb-3.5 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1" >
                         <span className="text-xs text-gray-500 dark:text-gray-400">Groups</span>

@@ -35,7 +35,7 @@ export const getChats = (req, res) => {
 };
 
 export const getForum = (req, res) => {
-  const q = `select * from forum order by time DESC`;
+  const q = `SELECT forum.*, users.profilePic FROM forum JOIN users ON forum.sender = users.username ORDER BY forum.time DESC;`;
   db.query(q, (err, data) => {
     if (err) return res.status(500).json("database error :" + err.message);
     return res.status(200).json(data);

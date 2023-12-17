@@ -117,7 +117,7 @@ const Navbar = () => {
         <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
           onFocus={() => setResultOpen(true)}
           onBlur={() => { setTimeout(() => setResultOpen(false), 1000) }} >
-          
+
           <SearchIcon />
           <input
             className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none"
@@ -158,6 +158,14 @@ const Navbar = () => {
             <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => setDialogOpen(true)}>
               <PowerIcon style={{ fontSize: 'medium' }} />
               <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Logout</span>
+            </div>
+            <div className="flex xs:hidden transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={toggle}>
+              {darkMode ? (
+                <LightMode style={{ fontSize: "medium" }} className='transition ease-in hover:scale-110 duration-200' />
+              ) : (
+                <NightMode style={{ fontSize: "medium" }} className='transition ease-in hover:scale-110 duration-200' />
+              )}
+              <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Theme</span>
             </div>
           </div>
           {err && err.response.data}
