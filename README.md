@@ -41,6 +41,8 @@ happening on campus <br><br>
 * Google Maps API
 * Firebase authentication
 * Jason Web Token <br><br>
+**_- Later Added -_**
+* Tailwind-CSS <br><br>
 ## Documentation
 * [Presentation](https://github.com/pu-raihan/CamBuzz/blob/main/Cambuzz-Presentation.pptx)
 * [Report](https://github.com/pu-raihan/CamBuzz/blob/main/21352030-CamBuzz-Final%20review%20report.pdf) <br><br>
