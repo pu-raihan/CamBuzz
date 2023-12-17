@@ -30,6 +30,7 @@ export const theme = {
     },
     screens: {
       xs: "480px",
+      nm: "896px",
     },
     animation: {
       openL: "openL 0.1s linear forwards",

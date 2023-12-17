@@ -114,15 +114,32 @@ const Navbar = () => {
             <NightMode className='transition ease-in hover:scale-110 duration-200' onClick={toggle} />
           )}
         </div>
-        <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5" >
+        <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
+          onFocus={() => setResultOpen(true)}
+          onBlur={() => { setTimeout(() => setResultOpen(false), 1000) }} >
+          
           <SearchIcon />
           <input
             className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none"
             type="text"
             name="search"
             value={searchText}
-            onFocus={() => setResultOpen(true)}
+
             onChange={handleChange} placeholder="Search..." />
+          {resultOpen &&
+            <div className={`results absolute flex flex-col gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-sm`} style={{ left: left, width: width }} >
+              <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
+                {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
+                <span className="text-xs">{data && searchText && data.length + " results"} </span>
+                <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
+              {searchText ? data ? data.map((result) =>
+                <div className={`result flex items-center w-11/12 p-2 sm:p-4 gap-2 sm:gap-5 rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
+                  <img className="w-7 h-7 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
+                  <p className="name overflow-hidden text-zinc-300 w-2/5">{result.username}</p>
+                  <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
+                  <ArrowForwardIcon className="arrowForward" />
+                </div>) : loading ? 'Loading' : error : `Search users`}
+            </div>}
         </div>
       </div>
       <div className="hidden xs:flex xs:flex-1 px-5 items-center justify-start gap-5">
@@ -132,43 +149,29 @@ const Navbar = () => {
         <NotificationsIcon className="hover:animate-wiggle" onClick={() => setNotificationOpen(true)} />
       </div>
       <div className="right flex items-center justify-end gap-5 text-white">
-        <div className="profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full sm:rounded-xl p-1 sm:p-3 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3" onClick={() => setProfOpen(!profOpen)}>
+        <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3" onMouseOver={() => setProfOpen(true)} onMouseLeave={() => setProfOpen(false)}>
           <div className={`${profOpen ? "animate-openL" : "animate-closeL"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
-            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-xl bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
+            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
               <AccountIcon style={{ fontSize: 'medium' }} />
-              <span className={`${profOpen ? "animate-openIcons":"animate-closeIcons"}`}>Profile</span>
+              <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Profile</span>
             </div>
-            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-xl bg-btn2 dark:bg-dbtn text-white" onClick={() => setDialogOpen(true)}>
+            <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => setDialogOpen(true)}>
               <PowerIcon style={{ fontSize: 'medium' }} />
-              <span className={`${profOpen ?  "animate-openIcons":"animate-closeIcons"}`}>Logout</span>
+              <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Logout</span>
             </div>
           </div>
           {err && err.response.data}
           <div className="flex items-center gap-2.5">
-            <div className="hidden md:flex flex-col items-start text-black dark:text-white font-bold gap-1">
+            <div className="hidden md:flex md:max-nm:group-hover:hidden flex-col items-start text-black dark:text-white font-bold gap-1">
               <span>{currentUser.username}</span>
               <p className="text-xxs font-normal truncate">{currentUser.fullname}</p>
             </div>
-            <img className="w-16 h-16 rounded-full md:rounded-xl object-cover border-2 md:border-none border-black dark:border-white" src={"/profile/" + currentUser.profilePic} alt="" />
+            <img className="w-16 h-16 rounded-full object-cover border-2 md:border-none border-black dark:border-white" src={"/profile/" + currentUser.profilePic} alt="" />
           </div>
         </div>
       </div>
       {dialogOpen && <Dialog setDialogOpen={setDialogOpen} dFunction={handleLogout} qst="Do you really wanna logout?" />}
       {notificationOpen && <Notification setNotificationOpen={setNotificationOpen} qst="Do you really wanna logout?" />}
-      {resultOpen &&
-        <div className={`results fixed flex flex-col gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-sm`} style={{ left: left, width: width }}>
-          <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
-            {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
-            <span className="text-xs">{data && searchText && data.length + " results"} </span>
-            <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
-          {searchText ? data ? data.map((result) =>
-            <div className={`result flex items-center w-11/12 p-2 sm:p-4 gap-2 sm:gap-5 rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
-              <img className="w-7 h-7 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
-              <p className="name overflow-hidden text-zinc-300 w-2/5">{result.username}</p>
-              <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
-              <ArrowForwardIcon className="arrowForward" />
-            </div>) : loading ? 'Loading' : error : `Search users`}
-        </div>}
     </div>
   );
 };

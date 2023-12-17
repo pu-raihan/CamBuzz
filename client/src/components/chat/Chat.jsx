@@ -64,8 +64,11 @@ const Chat = ({ user, setChatOpen }) => {
 
     return (
         <div className="chatbox sticky top-[112px] h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] sm:rounded-xl bg-bg1 dark:bg-dbg1 dark:text-white overflow-scroll no-scrollbar">
-            <div className="top flex items-center justify-between p-4 bg-bg4 dark:bg-dbg4 text-white h-20 border-bg1 dark:border-dbg1 border-b text-lg">
-                <BackIcon onClick={() => setChatOpen(false)} />
+            <div className="top flex items-center justify-between py-4 px-6 bg-bg4 dark:bg-dbg4 text-white h-20 border-bg1 dark:border-dbg1 border-b-8 text-lg">
+                <div className="back inline-flex items-center justify-center group relative" onClick={() => setChatOpen(false)}>
+                    <BackIcon className="" />
+                    <span className="ml-1 absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-11 group-hover:h-11 opacity-10"></span>
+                </div>
                 <span>{user.username}</span>
                 <div className="flex items-center w-11 h-11 bg-white rounded-full" onClick={() => { navigate("/profile/" + user.username); window.location.reload() }}>
                     <img className="object-cover rounded-full m-auto w-10 h-10" src={"/profile/" + user.profilePic} alt="" />
@@ -84,7 +87,7 @@ const Chat = ({ user, setChatOpen }) => {
                     ))}
                 {error && error.response.data}
             </div>
-            <div className="send flex items-center justify-between h-16 pt-2.5 pb-3 px-4 gap-5 text-black bg-dbg4 dark:bg-transparent">
+            <div className="send flex items-center justify-between h-16 pt-2.5 pb-3 px-4 gap-4 text-black bg-dbg4 dark:bg-transparent">
                 <input
                     className="w-full h-full rounded-full px-4"
                     type="text"
@@ -92,7 +95,11 @@ const Chat = ({ user, setChatOpen }) => {
                     onChange={(e) => setNewMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
                 />
-                <SendIcon className="text-3xl" style={{ color: "#fff" }} onClick={sendMessage} />
+                <div className="sendbtn inline-flex items-center justify-center group relative" onClick={sendMessage} >
+                    <SendIcon className="text-3xl ml-2 z-20 transition ease-in group-hover:-rotate-12 duration-200" style={{ color: "#fff" }} />
+                    <span class="absolute w-11 z-10 h-11 sm:w-0 sm:h-0 transition-all duration-300 ease-out bg-white dark:bg-rose-500 rounded-full group-hover:w-11 group-hover:h-11 opacity-30 dark:opacity-10"></span>
+                    <span class="absolute w-11 z-0 h-11 dark:bg-dbg4 rounded-full group-hover:w-11 group-hover:h-11 opacity-100"></span>
+                </div>
             </div>
         </div>
 
