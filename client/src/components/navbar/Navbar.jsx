@@ -145,7 +145,7 @@ const Navbar = () => {
             </div>}
         </div>
       </div>
-      <div className="hidden xs:flex xs:flex-1 px-5 items-center justify-start gap-5">
+      <div className="hidden sm:flex sm:flex-1 px-5 items-center justify-start gap-5">
         {currentUser.type === 'faculty' &&
           <ReqIcon onClick={gotoRequests} />
         }
