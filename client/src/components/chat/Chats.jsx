@@ -50,7 +50,7 @@ const Chats = ({ sidebar }) => {
                         </div>
                     </div>
 
-                    <div className="item flex-1 flex-col relative shadow-lg px-5 pb-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
+                    <div className="item flex-1 flex-col relative shadow-lg p-5 pt-0 sm:pt-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : data && data.length > 0 ? data.map((item) => (
@@ -60,7 +60,7 @@ const Chats = ({ sidebar }) => {
                                         <span>{item.username}</span>
                                         {/* <div className="online top-0 left-7 w-3 h-3 bg-green-500 absolute rounded-full" /> */}
                                     </div>
-                                    <span className="text-[9px] lg:text-[10px] text-gray-400 pr-5 md:pr-0 lg:pr-5">{moment(item.time).fromNow()}</span>
+                                    <span className="text-[9px] lg:text-[10px] text-gray-400 pr-5 md:pr-0 lg:pr-5 text-right">{moment(item.time).fromNow()}</span>
                                 </div>
                             )) : <p className="m-auto font-semibold">No chats</p>
                         }

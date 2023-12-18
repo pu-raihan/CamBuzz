@@ -31,7 +31,7 @@ const Menubar = () => {
   }
 
   return (
-    <div className="menubar sticky flex sm:hidden items-center justify-evenly bottom-0 h-20 py-4 bg-bg1 dark:bg-dbg1 dark:text-white border-t border-border1 dark:border-dborder1 z-999">
+    <div className="menubar sticky flex sm:hidden items-center justify-evenly bottom-0 h-20 py-4 bg-bg1 dark:bg-dbg1 dark:text-white border-t border-border1 dark:border-dborder1 z-998">
       <div className="item" onClick={gotoRes}>
         <WidgetsIcon />
       </div>

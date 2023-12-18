@@ -116,7 +116,7 @@ const Navbar = () => {
         </div>
         <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
           onFocus={() => setResultOpen(true)}
-          onBlur={() => { setTimeout(() => setResultOpen(true), 1000) }} >
+          onBlur={() => { setTimeout(() => setResultOpen(false), 1000) }} >
 
           <SearchIcon />
           <input

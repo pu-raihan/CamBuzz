@@ -21,9 +21,9 @@ const LeftBar = () => {
       <div className="container p-5">
         <Link to="/chats" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="relative hidden sm:flex nm:hidden group opacity-90 hover:opacity-100 p-3 rounded-full items-center justify-center gap-2 bg-bg2 dark:bg-dbg2 overflow-hidden">
-            <span class="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-rose-800 opacity-60 group-hover:-translate-x-8"></span>
+            <span className="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-rose-300 dark:bg-rose-800 opacity-60 group-hover:-translate-x-8"></span>
             <ChatIcon className='z-10 transition ease-in group-hover: duration-200' />
-            <span className='z-10 text-sm transition ease-in group-hover: group-hover:font-semibold duration-100'>Goto Chats</span>
+            <span className='z-10 text-sm transition ease-in group-hover:font-semibold duration-100'>Goto Chats</span>
           </div>
         </Link>
         <Link to="/resources" style={{ textDecoration: "none", color: "inherit" }}>
