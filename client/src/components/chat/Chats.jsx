@@ -50,7 +50,7 @@ const Chats = ({ sidebar }) => {
                         </div>
                     </div>
 
-                    <div className="item flex-1 flex-col relative shadow-lg p-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
+                    <div className="item flex-1 flex-col relative shadow-lg px-5 pb-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
                         <span>Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : data && data.length > 0 ? data.map((item) => (

@@ -5,7 +5,7 @@ export const getResult = (req, res) => {
   const keyword = req.params.keyword;
   const token = req.cookies.accessToken;
   const q =
-    "select uId as id,type,username,profilePic from users where username LIKE '%" +
+    "select uId as id,type,username,profilePic,fullname from users where username LIKE '%" +
     keyword +
     "%' or fullname LIKE '%" +
     keyword +

@@ -116,7 +116,7 @@ const Navbar = () => {
         </div>
         <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
           onFocus={() => setResultOpen(true)}
-          onBlur={() => { setTimeout(() => setResultOpen(false), 1000) }} >
+          onBlur={() => { setTimeout(() => setResultOpen(true), 1000) }} >
 
           <SearchIcon />
           <input
@@ -124,20 +124,23 @@ const Navbar = () => {
             type="text"
             name="search"
             value={searchText}
-
             onChange={handleChange} placeholder="Search..." />
           {resultOpen &&
-            <div className={`results absolute flex flex-col gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-sm`} style={{ left: left, width: width }} >
+            <div className={`results absolute flex flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
               <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
                 {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
-                <span className="text-xs">{data && searchText && data.length + " results"} </span>
-                <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} /></div>
+                <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
+                <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} />
+              </div>
               {searchText ? data ? data.map((result) =>
-                <div className={`result flex items-center w-11/12 p-2 sm:p-4 gap-2 sm:gap-5 rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
-                  <img className="w-7 h-7 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
-                  <p className="name overflow-hidden text-zinc-300 w-2/5">{result.username}</p>
+                <div className={`result flex items-center justify-between w-11/12 p-1 sm:p-4 rounded-full sm:rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
+                  <img className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
+                  <div className="usr items-center justify-around w-1/2 overflow-hidden">
+                    <p className="name overflow-hidden text-zinc-300 ">{result.username}</p>
+                    <p className="fulname hidden sm:block text-xs font-light text-zinc-400">{result.fullname}</p>
+                  </div>
                   <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
-                  <ArrowForwardIcon className="arrowForward" />
+                  <ArrowForwardIcon className=" scale-75 justify-self-end text-zinc-400" />
                 </div>) : loading ? 'Loading' : error : `Search users`}
             </div>}
         </div>
