@@ -89,9 +89,9 @@ const Login = () => {
         </div>
         <div className="right flex flex-1 sm:flex-1 flex-col justify-center p-12 gap-6 sm:gap-8">
           <h1 className="text-stone-600 text-3xl font-black">Login</h1>
-          <form className="flex flex-col gap-2.5" onSubmit={handleLogin}>
+          <form className="flex flex-col gap-2.5 focus:[&>input]:ring-0 focus:[&>input]:border-bg4 [&>input]:border-0 [&>input]:border-b" onSubmit={handleLogin}>
             <input
-              className="text-sm px-2.5 py-5 bg-transparent placeholder:text-slate-500 border-gray-600 border-b"
+              className="text-sm px-2.5 py-5 bg-transparent placeholder:text-slate-500 "
               type="text"
               placeholder="Username"
               name="username"
@@ -109,7 +109,7 @@ const Login = () => {
             <div className="flex gap-4 my-2">
               <input type="checkbox" id="checkbox1" className="peer relative h-[18px] w-[18px] shrink-0 cursor-pointer appearance-none rounded-sm border bg-white after:absolute after:left-0 after:top-0 after:h-full after:w-full
               after:bg-[url('data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9JzMwMHB4JyB3aWR0aD0nMzAwcHgnICBmaWxsPSIjZmZmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgdmVyc2lvbj0iMS4xIiB4PSIwcHgiIHk9IjBweCI+PHRpdGxlPmljb25fYnlfUG9zaGx5YWtvdjEwPC90aXRsZT48ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz48ZyBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48ZyBmaWxsPSIjZmZmZmZmIj48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyNi4wMDAwMDAsIDI2LjAwMDAwMCkiPjxwYXRoIGQ9Ik0xNy45OTk5ODc4LDMyLjQgTDEwLjk5OTk4NzgsMjUuNCBDMTAuMjI2Nzg5MSwyNC42MjY4MDE0IDguOTczMTg2NDQsMjQuNjI2ODAxNCA4LjE5OTk4Nzc5LDI1LjQgTDguMTk5OTg3NzksMjUuNCBDNy40MjY3ODkxNCwyNi4xNzMxOTg2IDcuNDI2Nzg5MTQsMjcuNDI2ODAxNCA4LjE5OTk4Nzc5LDI4LjIgTDE2LjU4NTc3NDIsMzYuNTg1Nzg2NCBDMTcuMzY2ODIyOCwzNy4zNjY4MzUgMTguNjMzMTUyOCwzNy4zNjY4MzUgMTkuNDE0MjAxNCwzNi41ODU3ODY0IEw0MC41OTk5ODc4LDE1LjQgQzQxLjM3MzE4NjQsMTQuNjI2ODAxNCA0MS4zNzMxODY0LDEzLjM3MzE5ODYgNDAuNTk5OTg3OCwxMi42IEw0MC41OTk5ODc4LDEyLjYgQzM5LjgyNjc4OTEsMTEuODI2ODAxNCAzOC41NzMxODY0LDExLjgyNjgwMTQgMzcuNzk5OTg3OCwxMi42IEwxNy45OTk5ODc4LDMyLjQgWiI+PC9wYXRoPjwvZz48L2c+PC9nPjwvc3ZnPg==')] 
-              after:bg-[length:35px] after:bg-center after:bg-no-repeat after:content-[''] checked:bg-pink-950 focus:outline-none"
+              after:bg-[length:35px] after:bg-center after:bg-no-repeat after:content-[''] checked:bg-pink-950 focus:outline-none focus:ring-0 focus:ring-offset-0"
                 checked={checked}
                 onChange={() =>
                   setChecked(!checked)

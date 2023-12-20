@@ -120,7 +120,7 @@ const Navbar = () => {
 
           <SearchIcon />
           <input
-            className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none"
+            className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none focus:ring-0 p-0"
             type="text"
             name="search"
             value={searchText}
@@ -130,7 +130,9 @@ const Navbar = () => {
               <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
                 {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
                 <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
-                <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} />
+                <div className="transition ease-in hover:rotate-90 duration-100">
+                  <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} />
+                </div>
               </div>
               {searchText ? data ? data.map((result) =>
                 <div className={`result flex items-center justify-between w-11/12 p-1 sm:p-4 rounded-full sm:rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>

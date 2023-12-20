@@ -22,7 +22,7 @@ const Dialog = ({ setDialogOpen, dFunction, value, qst }) => {
             <span class="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-red-900 dark:bg-red-600 opacity-60 group-hover:-translate-x-8"></span>
           </div>
         </div>
-        <button className="close" onClick={() => setDialogOpen(false)}>
+        <button className="close transition ease-in hover:rotate-90 duration-100" onClick={() => setDialogOpen(false)}>
           <CloseIcon />
         </button>
       </div>

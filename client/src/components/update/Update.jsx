@@ -73,7 +73,7 @@ const Update = ({ setUpdateOpen, user }) => {
     <div className="update">
       <div className="wrapper">
         <h1>Update Your Profile</h1>
-        <form>
+        <form className="focus:[&>*]:ring-bgSoft">
           <div className="files">
             <label htmlFor="cover">
               <span>Cover Picture</span>

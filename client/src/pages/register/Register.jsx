@@ -72,7 +72,7 @@ const Register = () => {
           </div>
           <div className="right flex flex-1 sm:flex-1 flex-col justify-center p-12 gap-6 sm:gap-8">
             <h1 className="text-stone-600 text-3xl font-black">Register</h1>
-            <form className="flex flex-col gap-2.5" onSubmit={handleRegister}>
+            <form className="flex flex-col gap-2.5 focus:[&>input]:outline-none focus:[&>input]:ring-0 focus:[&>input]:border-bg4 [&>input]:border-0 [&>input]:border-b" onSubmit={handleRegister}>
               <input
                 className="text-sm px-2.5 py-5 bg-transparent placeholder:text-slate-500 border-gray-600 border-b"
                 type="text"
@@ -100,11 +100,11 @@ const Register = () => {
                 pattern=".{6,}"
               />
               <span className="peer-valid:hidden peer-[&:not(:focus):not(:placeholder-shown):invalid]:block text-xs text-red-500">Password should be atleast 6 characters</span>
-              <select className="text-sm px-2 py-5 bg-transparent border-gray-600 border-b" name="clas" onChange={handleChange} value={inputs.clas}>
-                <option className="text-sm px-2.5 py-4 bg-transparent border-gray-600 border-b" value="">Select Class</option>
+              <select className="text-sm px-2 py-5 bg-transparent focus:outline-none focus:ring-0 focus:border-bg4 border-0 border-b" name="clas" onChange={handleChange} value={inputs.clas}>
+                <option className="text-sm px-2.5 py-4 bg-transparent" value="">Select Class</option>
                 {isLoading ? "Loading" :
                   data ? data.map((option) => (
-                    <option className="text-sm px-2.5 py-4 bg-transparent border-gray-600 border-b" key={option.id} value={option.name}>
+                    <option className="text-sm px-2.5 py-4 bg-transparent" key={option.id} value={option.name}>
                       {option.name} - {option.dept}
                     </option>
                   )) : error + "error"

@@ -55,6 +55,7 @@ const Share = () => {
           <div className="left">
             <img src={"/profile/" + currentUser.profilePic} alt="" />
             <textarea
+              className="focus:ring-0"
               maxLength="400"
               type="text"
               placeholder={`What's on your mind ${currentUser.username}?`}

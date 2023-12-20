@@ -43,6 +43,8 @@ const Comments = ({ postid, comments }) => {
         <img src={"/profile/" + currentUser.profilePic} alt="" />
         <input
           type="text"
+          autoFocus
+          className="focus:ring-bgSoft"
           placeholder="Add a comment"
           value={desc}
           onChange={(e) => setDesc(e.target.value)}

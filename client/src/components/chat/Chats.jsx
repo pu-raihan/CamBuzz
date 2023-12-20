@@ -51,7 +51,7 @@ const Chats = ({ sidebar }) => {
                     </div>
 
                     <div className="item flex-1 flex-col relative shadow-lg p-5 pt-0 sm:pt-5 bg-bg1 dark:bg-dbg1 overflow-scroll no-scrollbar border-b-4 border-bg1 dark:border-dbg1">
-                        <span>Chats</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400">Chats</span>
                         {isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : data && data.length > 0 ? data.map((item) => (
                                 <div key={item.time} className="user flex items-center justify-between my-5" onClick={() => gotoChat(item.username, item.profilePic)}>

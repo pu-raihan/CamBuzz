@@ -1,4 +1,8 @@
-export const content = ["./src/**/*.{js,jsx,ts,tsx}"];
+export const content = [
+  "./src/**/*.{js,jsx,ts,tsx}",
+  "./node_modules/flowbite/**/*.js",
+  "node_modules/flowbite-react/lib/esm/**/*.js",
+];
 export const theme = {
   extend: {
     colors: {
@@ -81,9 +85,9 @@ export const theme = {
       999: "999",
     },
     boxShadow: {
-      "ful1": "1px 1px 1px 1px rgba(0, 0, 0, 0.1)",
+      ful1: "1px 1px 1px 1px rgba(0, 0, 0, 0.1)",
     },
   },
 };
-export const plugins = [];
+export const plugins = [require("flowbite/plugin")];
 export const darkMode = ["class"];

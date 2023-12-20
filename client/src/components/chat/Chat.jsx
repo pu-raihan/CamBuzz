@@ -89,7 +89,8 @@ const Chat = ({ user, setChatOpen }) => {
             </div>
             <div className="send flex items-center justify-between h-16 pt-2.5 pb-3 px-4 gap-4 text-black bg-dbg4 dark:bg-transparent">
                 <input
-                    className="w-full h-full rounded-full px-4"
+                    autoFocus
+                    className="w-full h-full rounded-full px-4 focus:ring-0"
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}

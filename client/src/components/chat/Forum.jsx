@@ -80,7 +80,7 @@ const Forum = ({ setForumOpen }) => {
                         >
                             {message.sender !== currentUser.username &&
                                 <div className="othusr flex items-center justify-center mb-0.5 gap-2 cursor-pointer" onClick={() => { navigate("/profile/" + message.sender); window.location.reload() }}>
-                                    <img className="w-4 h-4 object-cover rounded-full" src={"profile/" + message.profilePic} alt="" />
+                                    <img className="w-4 h-4 object-cover rounded-full" src={"/profile/" + message.profilePic} alt="" />
                                     <div className="message-user dark:text-white font-semibold text-xs">{message.sender}</div>
                                 </div>
                             }
@@ -92,7 +92,8 @@ const Forum = ({ setForumOpen }) => {
             </div>
             <div className="send flex items-center justify-between h-16 pt-2.5 pb-3 px-4 gap-4 text-black bg-dbg4 dark:bg-transparent">
                 <input
-                    className="w-full h-full rounded-full px-4"
+                    autoFocus
+                    className="w-full h-full rounded-full px-4 focus:ring-0"
                     type="text"
                     value={newMessage}
                     onChange={(e) => setNewMessage(e.target.value)}

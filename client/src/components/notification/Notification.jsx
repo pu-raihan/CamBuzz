@@ -7,7 +7,7 @@ const Notification = ({ setNotificationOpen, dFunction, value, qst }) => {
     <div className="notification">
       <div className="wrapper">
         <h1>No notifications</h1>
-        <button className="close" onClick={() => setNotificationOpen(false)}>
+        <button className="close transition ease-in hover:rotate-90 duration-100" onClick={() => setNotificationOpen(false)}>
           <CloseIcon />
         </button>
       </div>
