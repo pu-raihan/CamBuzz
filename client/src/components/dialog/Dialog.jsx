@@ -15,11 +15,11 @@ const Dialog = ({ setDialogOpen, dFunction, value, qst }) => {
         <div className="buttons flex items-center justify-evenly w-full text-white">
           <div className="cancel p-2.5 bg-btn dark:bg-dbtn group inline-flex cursor-pointer relative overflow-hidden" onClick={() => setDialogOpen(false)}>
             <span className="z-10">Cancel</span>
-            <span class="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-black opacity-30 group-hover:-translate-x-8"></span>
+            <span className="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-black opacity-30 group-hover:-translate-x-8"></span>
           </div>
           <div className="proceed p-2.5 bg-red-600 dark:bg-red-900 group inline-flex relative overflow-hidden cursor-pointer" onClick={() => { dFunction(); setDialogOpen(false) }} >
             <span className="z-10">Proceed</span>
-            <span class="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-red-900 dark:bg-red-600 opacity-60 group-hover:-translate-x-8"></span>
+            <span className="absolute z-0 top-0 left-0 w-56 h-64 -mt-1 transition-all duration-500 ease-in-out rotate-45 -translate-x-72 -translate-y-24 bg-red-900 dark:bg-red-600 opacity-60 group-hover:-translate-x-8"></span>
           </div>
         </div>
         <button className="close transition ease-in hover:rotate-90 duration-100" onClick={() => setDialogOpen(false)}>

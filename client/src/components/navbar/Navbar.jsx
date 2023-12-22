@@ -11,7 +11,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForwardIos';
 import ReqIcon from '@mui/icons-material/PendingActions';
 import NotificationsIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { AuthContext } from "../../context/authContext";
 import { makeRequest } from "../../axios";
@@ -23,11 +23,13 @@ const Navbar = () => {
   const { toggle, darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
   const [profOpen, setProfOpen] = useState(false);
+  const [profClose, setProfClose] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [resultOpen, setResultOpen] = useState();
+  const [clickedOutside, setClickedOutside] = useState(false);
 
-  const [searchText, setSearchText] = useState();
+  const [searchText, setSearchText] = useState("");
   const [err, setErr] = useState(null);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
@@ -84,6 +86,7 @@ const Navbar = () => {
     setLoading(false);
   };
 
+  const searchRef = useRef(null);
   const [width, setWidth] = useState(0);
   const [left, setLeft] = useState(0);
 
@@ -95,7 +98,20 @@ const Navbar = () => {
       setWidth(rect.width);
       setLeft(rect.left);
     }
-  }, []);
+    
+    const handleClickOutside = (event) => {
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setResultOpen(false);
+        setClickedOutside(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [searchRef]);
 
   return (
     <div className="navbar sticky flex items-center justify-between top-0 h-28 px-5 py-4 bg-bg1 dark:bg-dbg1 dark:text-white border-b border-border1 dark:border-dborder1 z-999">
@@ -107,17 +123,16 @@ const Navbar = () => {
             <img src="/dark.png" alt="CamBuzz" />
           )}
         </Link>
-        <div className="hidden xs:block">
+        <div className="hidden xs:block cursor-pointer">
           {darkMode ? (
             <LightMode className='transition ease-in hover:scale-110 duration-200' onClick={toggle} />
           ) : (
             <NightMode className='transition ease-in hover:scale-110 duration-200' onClick={toggle} />
           )}
         </div>
-        <div id="refDiv" className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
-          onFocus={() => setResultOpen(true)}
-          onBlur={() => { setTimeout(() => setResultOpen(false), 1000) }} >
 
+        <div id="refDiv" ref={searchRef} className="search flex items-center border border-border1 dark:border-dborder1 rounded-full sm:rounded-md px-1.5 py-1 gap-2.5"
+          onFocus={() => setResultOpen(true)} >
           <SearchIcon />
           <input
             className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none focus:ring-0 p-0"
@@ -125,13 +140,12 @@ const Navbar = () => {
             name="search"
             value={searchText}
             onChange={handleChange} placeholder="Search..." />
-          {resultOpen &&
-            <div className={`results absolute flex flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
+            <div className={`results absolute ${resultOpen?"flex":"hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
               <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
                 {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
                 <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
                 <div className="transition ease-in hover:rotate-90 duration-100">
-                  <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setData(null); setResultOpen(false) }} />
+                  <CloseIcon style={{ fontSize: 'medium' }} onClick={() => {setResultOpen(false) }} />
                 </div>
               </div>
               {searchText ? data ? data.map((result) =>
@@ -144,18 +158,18 @@ const Navbar = () => {
                   <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
                   <ArrowForwardIcon className=" scale-75 justify-self-end text-zinc-400" />
                 </div>) : loading ? 'Loading' : error : `Search users`}
-            </div>}
+            </div>
         </div>
       </div>
       <div className="hidden sm:flex sm:flex-1 px-5 items-center justify-start gap-5">
         {currentUser.type === 'faculty' &&
-          <ReqIcon onClick={gotoRequests} />
+          <ReqIcon className="cursor-pointer" onClick={gotoRequests} />
         }
-        <NotificationsIcon className="hover:animate-wiggle" onClick={() => setNotificationOpen(true)} />
+        <NotificationsIcon className="hover:animate-wiggle cursor-pointer" onClick={() => setNotificationOpen(true)} />
       </div>
       <div className="right flex items-center justify-end gap-5 text-white">
-        <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3" onMouseOver={() => setProfOpen(true)} onMouseLeave={() => setProfOpen(false)}>
-          <div className={`${profOpen ? "animate-openL" : "animate-closeL"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
+        <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3 cursor-pointer" onMouseOver={() => { setProfOpen(true); setProfClose(false) }} onMouseLeave={() => { setProfOpen(false); setProfClose(false) }}>
+          <div className={`${profOpen ? "animate-openL" :profClose? "animate-closeL":"hidden"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
             <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
               <AccountIcon style={{ fontSize: 'medium' }} />
               <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Profile</span>

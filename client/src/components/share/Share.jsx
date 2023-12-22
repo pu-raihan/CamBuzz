@@ -49,13 +49,13 @@ const Share = () => {
   }
 
   return (
-    <div className="share">
-      <div className="container">
-        <div className="top">
-          <div className="left">
-            <img src={"/profile/" + currentUser.profilePic} alt="" />
+    <div className="share shadow-lg mb-5 bg-bg1 dark:bg-dbg1 dark:text-white rounded-2xl">
+      <div className="p-5">
+        <div className="top flex items-center justify-between">
+          <div className="left flex items-center flex-3">
+            <img className="w-12 h-12 rounded-full object-cover" src={"/profile/" + currentUser.profilePic} alt="" />
             <textarea
-              className="focus:ring-0"
+              className="px-5 w-full bg-transparent text-sm sm:text-base resize-none border-none outline-none overflow-scroll no-scrollbar focus:ring-0"
               maxLength="400"
               type="text"
               placeholder={`What's on your mind ${currentUser.username}?`}
@@ -63,15 +63,15 @@ const Share = () => {
               value={desc}
             />
           </div>
-          <div className="right">
+          <div className="right flex justify-end">
             {file && (
-              <img className="file" alt="" src={URL.createObjectURL(file)} />
+              <img className="file w-24 h-24 object-cover" alt="" src={URL.createObjectURL(file)} />
             )}
           </div>
         </div>
-        <hr />
-        <div className="bottom">
-          <div className="left">
+        <hr className="my-5 h-[0.5px] border-0 bg-border1 dark:bg-dborder1" />
+        <div className="bottom flex items-center justify-between">
+          <div className="left flex items-center gap-5">
             <input
               type="file"
               id="file"
@@ -79,14 +79,15 @@ const Share = () => {
               onChange={(e) => setFile(e.target.files[0])}
             />
             <label htmlFor="file">
-              <div className="item">
+              <div className="flex items-center gap-2.5 cursor-pointer">
                 <Image />
-                <span>Add Image</span>
+                <span className="text-xs text-gray-500">Add Image</span>
               </div>
             </label>
           </div>
-          <div className="right">
-            <button onClick={handleClick}>Share</button>
+          <div className="sharebtn group inline-flex relative bg-btn dark:bg-dbtn rounded overflow-hidden cursor-pointer"  onClick={handleClick}>
+            <span className="p-1.5 z-10 text-white">Share</span>
+            <span className="absolute z-0 top-0 left-0 w-32 h-32 transition-all duration-500 ease-in-out rotate-45 -translate-x-32 -translate-y-20 bg-rose-800 group-hover:translate-x-0 group-hover:rotate-90 group-active:bg-black group-active:opacity-50"></span>
           </div>
         </div>
       </div>

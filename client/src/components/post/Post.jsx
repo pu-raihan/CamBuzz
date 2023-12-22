@@ -7,7 +7,7 @@ import LikeIcon from "@mui/icons-material/FavoriteBorderRounded";
 import LikedIcon from "@mui/icons-material/FavoriteRounded";
 import Comments from "../comments/Comments";
 import moment from "moment";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
@@ -16,6 +16,7 @@ import Loader from "../loader/Loader";
 const Post = ({ post }) => {
   const [commentOpen, setCommentOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [clickedOutside, setClickedOutside] = useState(false);
   const { currentUser } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
@@ -63,30 +64,54 @@ const Post = ({ post }) => {
   };
 
   const handleDelete = () => {
-
     delMutation.mutate({ postid: post.postid, type: currentUser.type });
   };
 
+  const optbarRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (optbarRef.current && !optbarRef.current.contains(event.target)) {
+        setMoreOpen(false);
+        setClickedOutside(true);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [optbarRef]);
+
+
   return (
-    <div className="post">
-      <div className="container" >
-        <div className="user">
-          <div className="userInfo">
-            <img src={"/profile/" + post.profilePic} alt="" />
-            <div className="detail">
+    <div className="post shadow-lg bg-bg1 dark:bg-dbg1 rounded-2xl">
+      <div className="container p-5" >
+        <div className="top relative flex items-center justify-between dark:text-white">
+          <div className="userInfo flex gap-5">
+            <img className="w-10 h-10 object-cover rounded-full" src={"/profile/" + post.profilePic} alt="" />
+            <div className="detail flex flex-col">
               <Link
                 to={`/profile/${post.username}`}
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                <span className="name">{post.username}</span>
+                <span className="font-medium">{post.username}</span>
               </Link>
-              <span className="date">{moment(post.createdAt).fromNow()}</span>
+              <span className="text-zinc-500 text-xs">{moment(post.createdAt).fromNow()}</span>
             </div>
           </div>
-          <MoreIcon onClick={() => setMoreOpen(!moreOpen)} />
-          {moreOpen && post.username === currentUser.username && (
-            <button onClick={handleDelete}>Delete</button>
-          )}
+          <div ref={optbarRef}>
+            <MoreIcon className="cursor-pointer " onClick={() => { setMoreOpen(!moreOpen);moreOpen? setClickedOutside(true):setClickedOutside(false) }} />
+            <div className={`${moreOpen ? "animate-openL" : clickedOutside ? "animate-closeL":"hidden"} absolute top-8 py-1.5 right-0 flex-col text-white bg-black rounded overflow-hidden`}>
+              {post.username === currentUser.username ? (
+                <button className="px-3 py-1.5 hover:bg-gray-500" onClick={handleDelete}>Delete</button>
+              ) :
+                <button className="px-3 py-1.5 hover:bg-gray-500">Report</button>
+              }
+            </div>
+          </div>
+          {/* } */}
         </div>
         <div className="content">
           <img src={"/posts/" + post.img} alt="Unable to load" />

@@ -2,56 +2,56 @@
 
 .post {
   @include themify($themes) {
-    -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-    -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-    box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-    border-radius: 20px;
-    background: themed("bg");
+    // -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    // -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    // box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+    // border-radius: 20px;
+    // background: themed("bg");
     .container {
-      padding: 20px;
+      // padding: 20px;
 
-      .user {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        color: themed("tColor");
-        position: relative;
+      // .user {
+        // display: flex;
+        // align-items: center;
+        // justify-content: space-between;
+        // color: themed("tColor");
+        // position: relative;
 
-        .userInfo {
-          display: flex;
-          gap: 20px;
+        // .userInfo {
+          // display: flex;
+          // gap: 20px;
 
-          img {
-            width: 40px;
-            height: 40px;
-            object-fit: cover;
-            border-radius: 50%;
-          }
-          .detail {
-            display: flex;
-            flex-direction: column;
+          // img {
+            // width: 40px;
+            // height: 40px;
+            // object-fit: cover;
+            // border-radius: 50%;
+          // }
+          // .detail {
+            // display: flex;
+            // flex-direction: column;
             
-            .name {
-              font-weight: 500;
-            }
-            .date {
-              color: themed("colorSoft");
-              font-size: 12px;
-            }
-          }
-        }
-        button{
-          position: absolute;
-          top: 30px;
-          right: 0;
-          border: none;
-          border-radius: 3px;
-          background: themed("btn3");
-          padding: 5px;
-          color: white;
-          cursor: pointer;
-        }
-      }
+          //   .name {
+          //     font-weight: 500;
+          //   }
+          //   .date {
+          //     color: themed("colorSoft");
+          //     font-size: 12px;
+          //   }
+          // }
+        // }
+      //   button{
+      //     position: absolute;
+      //     top: 30px;
+      //     right: 0;
+      //     border: none;
+      //     border-radius: 3px;
+      //     background: themed("btn3");
+      //     padding: 5px;
+      //     color: white;
+      //     cursor: pointer;
+      //   }
+      // }
       .content{
         margin: 20px 0px;
         

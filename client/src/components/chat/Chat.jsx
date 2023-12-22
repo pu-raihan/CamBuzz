@@ -97,7 +97,7 @@ const Chat = ({ user, setChatOpen }) => {
                     onKeyDown={handleKeyPress}
                 />
                 <div className="sendbtn inline-flex items-center justify-center group relative cursor-pointer" onClick={sendMessage} >
-                    <SendIcon className="ml-2 z-20 transition ease-in group-hover:-rotate-12 duration-200 dark:text-white" />
+                    <SendIcon className="ml-2 z-20 transition ease-in group-active:-rotate-12 duration-200 dark:text-white" />
                     <span className="absolute z-10 w-0 h-0 transition-all duration-300 ease-out bg-pink-950 dark:bg-rose-500 rounded-full group-hover:w-11 group-hover:h-11 opacity-30 dark:opacity-10"></span>
                     <span className="absolute w-11 z-0 h-11 bg-white dark:bg-dbg4 rounded-full opacity-100"></span>
                 </div>

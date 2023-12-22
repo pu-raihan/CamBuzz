@@ -16,7 +16,7 @@ const Posts = ({username}) => {
   );
   
   return (
-    <div className="posts">
+    <div className="posts flex flex-col gap-5">
       {error
         ? "Something went wrong!"
         : isLoading
