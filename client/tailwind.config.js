@@ -37,6 +37,8 @@ export const theme = {
       nm: "896px",
     },
     animation: {
+      openD: "openD 0.1s linear forwards",
+      closeD: "closeD 0.1s linear forwards",
       openL: "openL 0.1s linear forwards",
       closeL: "closeL 0.1s linear forwards",
       openIcons: "openIcons 0.1s linear",
@@ -44,6 +46,20 @@ export const theme = {
       wiggle: "wiggle 300ms ease-in-out",
     },
     keyframes: {
+      openD: {
+        "0%": { height: "0px", display: "flex" },
+        "30%": { height: "30%", display: "flex" },
+        "50%": { height: "50%", display: "flex" },
+        "70%": { height: "70%", display: "flex" },
+        "100%": { height: "fit-content", display: "flex" },
+      },
+      closeD: {
+        "0%": { height: "fit-content", display: "flex" },
+        "30%": { height: "70%", display: "flex" },
+        "70%": { height: "30%", display: "flex" },
+        "95%": { height: "5%", display: "flex" },
+        "100%": { height: "0px", display: "none" },
+      },
       openL: {
         "0%": { width: "0px", display: "flex" },
         "50%": { width: "40px", display: "flex" },

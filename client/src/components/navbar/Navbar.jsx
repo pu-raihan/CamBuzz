@@ -140,7 +140,7 @@ const Navbar = () => {
             name="search"
             value={searchText}
             onChange={handleChange} placeholder="Search..." />
-            <div className={`results absolute ${resultOpen?"flex":"hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
+            <div className={`results absolute ${resultOpen?"animate-openD":clickedOutside?"animate-closeD":"hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
               <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
                 {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
                 <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
@@ -168,7 +168,7 @@ const Navbar = () => {
         <NotificationsIcon className="hover:animate-wiggle cursor-pointer" onClick={() => setNotificationOpen(true)} />
       </div>
       <div className="right flex items-center justify-end gap-5 text-white">
-        <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3 cursor-pointer" onMouseOver={() => { setProfOpen(true); setProfClose(false) }} onMouseLeave={() => { setProfOpen(false); setProfClose(false) }}>
+        <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3 cursor-pointer" onMouseOver={() => { setProfOpen(true); setProfClose(false) }} onMouseLeave={() => { setProfOpen(false); setProfClose(true) }}>
           <div className={`${profOpen ? "animate-openL" :profClose? "animate-closeL":"hidden"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
             <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
               <AccountIcon style={{ fontSize: 'medium' }} />

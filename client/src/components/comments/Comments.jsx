@@ -38,7 +38,7 @@ const Comments = ({ postid, comments }) => {
 }
 
   return (
-    <div className="comments">
+    <div className="comments w-full">
       <div className="write">
         <img src={"/profile/" + currentUser.profilePic} alt="" />
         <input

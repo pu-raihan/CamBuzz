@@ -60,7 +60,7 @@ const Chats = ({ sidebar }) => {
                                         <span>{item.username}</span>
                                         {/* <div className="online top-0 left-7 w-3 h-3 bg-green-500 absolute rounded-full" /> */}
                                     </div>
-                                    <span className="text-[9px] lg:text-[10px] text-gray-400 pr-5 md:pr-0 lg:pr-5 text-right">{moment(item.time).fromNow()}</span>
+                                    <span className="text-[9px] lg:text-[10px] text-gray-400 pr-5 md:pr-0 lg:pr-5 text-right p-1">{moment(item.time).fromNow()}</span>
                                 </div>
                             )) : <p className="m-auto font-semibold">No chats</p>
                         }
