@@ -24,7 +24,7 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-const Map = ({ currentLoc, location, zoomLevel, icon }) => {
+const Map = ({currentLoc, location, zoomLevel, icon }) => {
 
     const [currentLocation, setCurrentLocation] = useState(currentLoc);
 
@@ -69,7 +69,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
 
     const API_KEY = process.env.REACT_APP_GOOGLE_API;
     const LocationPin = ({ text, icon }) => (
-        <div className="pin">
+        <div className="flex w-28 items-center text-bg4">
             {icon === "you" && <MyLocationIcon className="pin-icon" style={{ color: "blue" }} />}
             {icon === "water" && <WaterDropIcon className="pin-icon" />}
             {icon === "printer" && <PrinterIcon className="pin-icon" />}
@@ -83,7 +83,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
             {icon === "lab" && <LabIcon className="pin-icon" />}
             {icon === "library" && <LibraryIcon className="pin-icon" />}
             {icon === "gym" && <GymIcon className="pin-icon" />}
-            <p className="pin-text">{text}</p>
+            <p className="pin-text break-words font-bold">{text}</p>
         </div>
     )
     const handleGetDirections = () => {
@@ -153,7 +153,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
                         }}
                     />
                     {directions && <DirectionsRenderer directions={directions} />}
-                    <button className='getDirBtn' onClick={handleGetDirections}><RefreshIcon /> Refresh</button>
+                    <button className='shadow-xl absolute flex bg-white items-center justify-center w-28 h-10 bottom-7 left-16' onClick={handleGetDirections}><RefreshIcon /> Refresh</button>
                 </GoogleMap>
             );
         })
@@ -161,7 +161,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
 
     return (
         <div className="gmap" >
-            <div className="google-map" >
+            <div className="google-map relative w-[90vw] h-[90vh] sm:w-[80vw] sm:h-[80vh] flex flex-col " >
                 {!isdir && <>
                     <GoogleMapReact
                         center={center}
@@ -184,10 +184,10 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
                             />}
                         {directions && <DirectionsRenderer directions={directions} />}
                     </GoogleMapReact>
-                    <button className='centerBtn' onClick={handleCenterMap}>
+                    <button className='shadow-xl absolute flex bg-white items-center justify-center w-10 h-10 bottom-7 left-5' onClick={handleCenterMap}>
                         <MyLocationIcon style={{ color: "blue" }} />
                     </button>
-                    <button className='getDirBtn' onClick={handleGetDirections} >
+                    <button className='shadow-xl absolute flex bg-white items-center justify-center w-28 h-10 bottom-7 left-16' onClick={handleGetDirections} >
                         <DirectionsIcon />  Directions
                     </button></>}
                 {isdir && <>
@@ -199,7 +199,7 @@ const Map = ({ currentLoc, location, zoomLevel, icon }) => {
                         location={location[0]}
                         currentLocation={currentLocation}
                     />
-                    <button className='centerBtn' onClick={handleCenterMap}>
+                    <button className='shadow-xl absolute flex bg-white items-center justify-center w-10 h-10 bottom-7 left-5' onClick={handleCenterMap}>
                         <MyLocationIcon style={{ color: "blue" }} />
                     </button>
 

@@ -127,45 +127,45 @@ const Details = () => {
         setMapopen(true)
     };
     return (
-        <div className={`details ${isLoading && "reltv"}`} >
+        <div className={`details h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] flex flex-col items-center justify-start gap-1.5 p-4 bg-bgSoft dark:bg-dbgSoft overflow-scroll no-scrollbar ${isLoading && "relative"}`} >
             {locErr ?
-                <div className="error" >
-                    <span>{locErr}</span>
+                <div className="flex flex-col w-4/5 items-center m-auto gap-5" >
+                    <span className='text-red-600 text-xs'>{locErr}</span>
                     <p>Please allow your location access</p>
                 </div> : <>
                     {headError
                         ? "Titles couldn't load!"
                         : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                            : <>
-                                <h1>{headData[0].heading}</h1>
-                                <div className="allbtn" onClick={() => handleClick(sortedData, true)} >
+                            : <div className='flex w-full items-center justify-between'>
+                                <h1 className='self-center text-gray-600 dark:text-gray-300'>{headData[0].heading}</h1>
+                                <div className="allbtn self-end" onClick={() => handleClick(sortedData, true)} >
                                     <span>View All</span><MapFilledIcon />
                                 </div>
-                            </>}
+                            </div>}
                     {error
                         ? "Something went wrong!"
                         : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
                             : sortedData ? sortedData.map((resitem) => (
-                                <div className="resourceItem" resitem={resitem} key={resitem.id}>
-                                    <div className="itemTop">
-                                        <p className='name'>{resitem.name}</p>
-                                        <p className='remarks'>{resitem.remarks}</p>
+                                <div className="resourceItem flex flex-col items-center w-full p-5 bg-bgGrey dark:bg-dbgGrey text-gray-700 dark:text-gray-300 rounded-md" resitem={resitem} key={resitem.id}>
+                                    <div className="itemTop flex gap-2.5 p-2.5 justify-between w-full">
+                                        <p className='name font-semibold text-sm xs:text-base dark:text-white w-1/2'>{resitem.name}</p>
+                                        <p className='distance flex items-center font-medium text-xxs xs:text-xs w-1/4'>{(resitem.distance / 1000).toFixed(1)} <span className='text-xxs font-normal'>&nbsp; KMs away</span></p>
+                                        <span className={`text-xs flex items-center font-medium ${resitem.avail === 0?"text-red-600":"text-lime-600"}`} >{resitem.avail === 0 ?"Unavailable": "Available"}</span>
+                                        <MapIcon className='flex items-center scale-75' onClick={() => handleClick(resitem, false)} />
                                     </div>
-                                    <div className="itemBottom">
-                                        <p className='distance'>{resitem.distance / 1000}<span style={{ fontSize: "10px", fontWeight: "400" }} > KMs away</span></p>
-                                        {resitem.avail === 0 ? <span style={{ color: "red" }}> Not Available</span> : <span style={{ color: "green" }}> Available</span>}
-                                        <MapIcon onClick={() => handleClick(resitem, false)} />
+                                    <div className="itemBottom flex justify-start px-2.5 w-full">
+                                        <p className='remarks text-gray-600 dark:text-gray-400 text-xs'>{resitem.remarks}</p>
                                     </div>
                                 </div>
-                            )) : <span style={{ margin: "auto" }}>No resources in database</span>
+                            )) : <span className='m-auto'>No resources in database</span>
                     }
                     {mapOpen &&
-                        <div className="map" >
-                            <div className="close">
+                        <div className={`map absolute w-screen h-screen top-0 right-0 z-999 flex items-center justify-evenly flex-col overflow-hidden bg-black bg-opacity-70`} >
+                            <div className="close flex justify-end w-screen text-gray-200 pr-[5vw] sm:pr-[10vw]">
                                 <CloseIcon onClick={() => setMapopen(false)} />
                             </div>
                             <Map
-                                currentLocation={currentLocation}
+                                currentLoc={currentLocation}
                                 location={itemRes}
                                 zoomLevel={mapOpt.zoomLevel}
                                 icon={resource}

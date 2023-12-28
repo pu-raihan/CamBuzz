@@ -125,26 +125,26 @@ const Post = ({ post }) => {
           <img className="w-full max-h-96 object-cover rounded-sm" src={"/posts/" + post.img} alt="Unable to load" />
           {post.desc && <p className="pt-3 text-base font-medium dark:text-white">{post.desc}</p>}
         </div>
-        <div className="info flex items-center justify-between gap-5">
-          <div className="item relative flex items-center gap-2.5 cursor-pointer text-sm dark:text-gray-200">
+        <div className="info flex items-center justify-evenly gap-5">
+          <div className="item relative flex items-center gap-2.5 cursor-pointer text-xs xs:text-sm dark:text-gray-200">
             <div className="likeico" style={{ position: "relative" }}>
               {isLoading ?
                 (<Loader size={35} color={"black"} noBg={true} />)
                 : data?.includes(currentUser.username) ? <>
-                  <LikedIcon style={{ color: "#6b173e" }} onClick={handleLike} />
+                  <LikedIcon className="max-xs:scale-90" style={{ color: "#6b173e" }} onClick={handleLike} />
                   {loading && <Loader size={10} dColor={"white"} lColor={"white"} noBg={true} />}</>
                   : <>
-                    <LikeIcon style={{ color: "#6b173e" }} onClick={handleLike} />
+                    <LikeIcon className="max-xs:scale-90" style={{ color: "#6b173e" }} onClick={handleLike} />
                     {loading && <Loader size={10} lColor={"black"} dColor={"white"} noBg={true} />}</>
               }
             </div>
             {data ? data.length + " Likes" : error}
           </div>
-          <div ref={cmtbtnRef} className="item relative flex items-center gap-2.5 cursor-pointer text-sm dark:text-gray-200" onClick={() => setCommentOpen(!commentOpen)} >
-            <CommentIcon />{cLoading ? <Loader size={15} lColor={"white"} dColor={"white"} noBg={false} /> : cData ? cData.length + " Comments" : cError}
+          <div ref={cmtbtnRef} className="item relative flex items-center gap-2.5 cursor-pointer text-xs xs:text-sm dark:text-gray-200" onClick={() => setCommentOpen(!commentOpen)} >
+            <CommentIcon className="max-xs:scale-90" />{cLoading ? <Loader size={15} lColor={"white"} dColor={"white"} noBg={false} /> : cData ? cData.length + " Comments" : cError}
           </div>
-          <div className="item relative flex items-center gap-2.5 cursor-pointer text-sm dark:text-gray-200">
-            <ShareIcon />
+          <div className="item relative flex items-center gap-2.5 cursor-pointer text-xs xs:text-sm dark:text-gray-200">
+            <ShareIcon className="max-xs:scale-90" />
             Share
           </div>
         </div>

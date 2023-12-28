@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from "../../axios";
 import Loader from "../loader/Loader";
 
-const LeftBar = () => {
+const LeftBar = ({ setCurrRes }) => {
   const { isLoading, error, data } = useQuery(["events"], () =>
     makeRequest.get("/events").then((res) => {
       return res.data;
@@ -27,25 +27,26 @@ const LeftBar = () => {
           </div>
         </Link>
         <Link to="/resources" style={{ textDecoration: "none", color: "inherit" }}>
-          <div className="flex flex-col">
-            <span className='text-xs py-2.5'>Find in PU</span>
-            <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5">
-              <WaterDropIcon className='transition ease-in group-hover:scale-125 duration-200' />
-              <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Water Resources</span>
-            </div>
-            <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5">
-              <PrinterIcon className='transition ease-in group-hover:scale-125 duration-200' />
-              <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Printers</span>
-            </div>
-            <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5">
-              <FoodIcon className='transition ease-in group-hover:scale-125 duration-200' />
-              <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Food Outlets</span>
-            </div>
-            <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5">
-              <ToiletIcon className='transition ease-in group-hover:scale-125 duration-200' />
-              <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Toilets</span>
-            </div>
-          </div></Link>
+        <div className="flex flex-col">
+          <span className='text-xs py-2.5'>Find in PU</span>
+          <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5" onClick={()=>setCurrRes("water")}>
+            <WaterDropIcon className='transition ease-in group-hover:scale-125 duration-200' />
+            <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Water Resources</span>
+          </div>
+          <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5" onClick={()=>setCurrRes("printer")}>
+            <PrinterIcon className='transition ease-in group-hover:scale-125 duration-200' />
+            <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Printers</span>
+          </div>
+          <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5" onClick={()=>setCurrRes("food")}>
+            <FoodIcon className='transition ease-in group-hover:scale-125 duration-200' />
+            <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Food Outlets</span>
+          </div>
+          <div className="flex group opacity-90 hover:opacity-100 py-2.5 items-center gap-2.5" onClick={()=>setCurrRes("toilet")}>
+            <ToiletIcon className='transition ease-in group-hover:scale-125 duration-200' />
+            <span className='text-sm transition ease-in group-hover:scale-110 group-hover:font-semibold duration-100'>Toilets</span>
+          </div>
+        </div>
+        </Link>
         <hr className='my-5 mx-0 border-none h-[0.4px] bg-border1 dark:bg-dborder1' />
         <Link to="/events" style={{ textDecoration: "none", color: "inherit" }}>
           <div className="flex flex-col relative gap-5">

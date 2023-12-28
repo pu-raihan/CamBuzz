@@ -12,54 +12,67 @@ import LibraryIcon from '@mui/icons-material/AutoStories';
 import GymIcon from '@mui/icons-material/FitnessCenter';
 import "./resources.scss"
 import { useNavigate } from "react-router-dom";
+import { useEffect } from 'react';
 
-const Resources = () => {
+const Resources = ({ currRes }) => {
 
     const navigate = useNavigate();
 
     const handleClick = (targetRes) => {
         navigate("/resources/" + targetRes);
-
     };
-    return (
-        <div className="resources h-[calc(100vh-112px)]">
-            <h1>Find in PU</h1>
 
-            <div className="list">
-                <div className="item" name="water" onClick={() => handleClick("water")}>
+    useEffect(() => {
+        const targetDivById = document.getElementById(currRes);
+        if (targetDivById) {
+            targetDivById.style.filter = 'brightness(1.3)'
+            targetDivById.style.transform = 'scale(1.05)';
+            setTimeout(() => {
+                targetDivById.style.filter = ''; 
+                targetDivById.style.transform = '';
+            }, 300);
+        }
+
+    }, [currRes])
+
+    return (
+        <div className="resources h-[calc(100vh-192px)] sm:h-[calc(100vh-112px)] flex flex-col items-center justify-center xs:gap-5 bg-bgSoft dark:bg-dbgSoft">
+            <h1 className='text-sm xs:text-2xl px-2 pt-2 xs:font-semibold text-gray-600 dark:text-gray-300' >Find in PU</h1>
+            <div className="flex flex-row p-2 justify-center gap-2 flex-wrap overflow-scroll no-scrollbar">
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" id="water" onClick={() => handleClick("water")}>
                     <WaterDropIcon /> <span>Drinking Water</span>
                 </div>
-                <div className="item" name="printer" onClick={() => handleClick("printer")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" id="printer" onClick={() => handleClick("printer")}>
                     <PrinterIcon />  <span>Printers</span>
                 </div>
-                <div className="item" name="toilet" onClick={() => handleClick("toilet")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" id="toilet" onClick={() => handleClick("toilet")}>
                     <ToiletIcon /> <span>Toilets / Washrooms</span>
                 </div>
-                <div className="item" name="food" onClick={() => handleClick("food")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" id="food" onClick={() => handleClick("food")}>
                     <FoodIcon /> <span>Food Outlets</span>
                 </div>
-                <div className="item" name="health" onClick={() => handleClick("health")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="health" onClick={() => handleClick("health")}>
                     <HealthIcon /> <span>Health Center</span>
                 </div>
-                <div className="item" name="atm" onClick={() => handleClick("atm")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="atm" onClick={() => handleClick("atm")}>
                     <AtmIcon />  <span>ATM / Bank</span>
                 </div>
-                <div className="item" name="dept" onClick={() => handleClick("dept")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="dept" onClick={() => handleClick("dept")}>
                     <SchoolIcon />   <span>Departments</span>
                 </div>
-                <div className="item" name="hostel" onClick={() => handleClick("hostel")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="hostel" onClick={() => handleClick("hostel")}>
                     <HostelIcon />  <span>Hostels</span>
                 </div>
-                <div className="item" name="bus" onClick={() => handleClick("bus")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="bus" onClick={() => handleClick("bus")}>
                     <BusIcon />  <span>Bus Stops</span>
                 </div>
-                <div className="item" name="lab" onClick={() => handleClick("lab")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="lab" onClick={() => handleClick("lab")}>
                     <LabIcon />  <span>Labs</span>
                 </div>
-                <div className="item" name="library" onClick={() => handleClick("library")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="library" onClick={() => handleClick("library")}>
                     <LibraryIcon />   <span>Reading Rooms / Libraries</span>
                 </div>
-                <div className="item" name="gym" onClick={() => handleClick("gym")}>
+                <div className="item w-[45%] xs:w-auto flex items-center shadow-lg gap-2.5 p-6 dark:text-white bg-bgGrey dark:bg-dbgGrey rounded-lg transition ease-in duration-75 hover:scale-105 hover:bg-zinc-500 hover:text-white dark:hover:bg-zinc-900 active:bg-zinc-900 cursor-pointer" name="gym" onClick={() => handleClick("gym")}>
                     <GymIcon /> <span>Gyms</span>
                 </div>
             </div>

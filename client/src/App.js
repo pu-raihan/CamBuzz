@@ -14,7 +14,7 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -30,16 +30,16 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const { darkMode } = useContext(DarkModeContext);
-
+  const [currRes, setCurrRes] = useState("");
   const queryClient = new QueryClient();
 
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
-        <div className={`theme-${darkMode ? "dark dark" : "light"}`}>
+        <div className={`${darkMode ? "theme-dark dark" : "theme-light"}`}>
           <Navbar />
           <div className="flex">
-            <LeftBar />
+            <LeftBar setCurrRes={setCurrRes} />
             <div className="flex-7">
               <Outlet />
             </div>
@@ -81,7 +81,7 @@ function App() {
         },
         {
           path: "/resources",
-          element: <Resources />,
+          element: <Resources currRes={currRes} />,
         },
         {
           path: "/resources/:resource",
@@ -89,11 +89,11 @@ function App() {
         },
         {
           path: "/chats",
-          element: <Chats sidebar={false}/>,
+          element: <Chats sidebar={false} />,
         },
         {
           path: "/chats/:id",
-          element:  <Chats sidebar={false}/>,
+          element: <Chats sidebar={false} />,
         },
         {
           path: "/requests",

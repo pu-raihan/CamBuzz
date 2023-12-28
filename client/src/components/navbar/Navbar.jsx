@@ -27,7 +27,6 @@ const Navbar = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [notificationOpen, setNotificationOpen] = useState(false);
   const [resultOpen, setResultOpen] = useState();
-  const [clickedOutside, setClickedOutside] = useState(false);
 
   const [searchText, setSearchText] = useState("");
   const [err, setErr] = useState(null);
@@ -98,11 +97,10 @@ const Navbar = () => {
       setWidth(rect.width);
       setLeft(rect.left);
     }
-    
+
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setResultOpen(false);
-        setClickedOutside(true);
       }
     };
 
@@ -137,28 +135,29 @@ const Navbar = () => {
           <input
             className="bg-transparent flex border-none w-36 xs:w-36 sm:w-64 text-xs sm:text-sm font-light focus:outline-none focus:ring-0 p-0"
             type="text"
-            name="search"
+            name="searchbar"
             value={searchText}
+            autoComplete="off"
             onChange={handleChange} placeholder="Search..." />
-            <div className={`results absolute ${resultOpen?"animate-openD":clickedOutside?"animate-closeD":"hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
-              <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
-                {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
-                <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
-                <div className="transition ease-in hover:rotate-90 duration-100">
-                  <CloseIcon style={{ fontSize: 'medium' }} onClick={() => {setResultOpen(false) }} />
-                </div>
+          <div className={`results absolute ${resultOpen ? "animate-openD" : "hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
+            <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
+              {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
+              <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
+              <div className="transition ease-in hover:rotate-90 duration-100">
+                <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setResultOpen(false) }} />
               </div>
-              {searchText ? data ? data.map((result) =>
-                <div className={`result flex items-center justify-between w-11/12 p-1 sm:p-4 rounded-full sm:rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
-                  <img className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
-                  <div className="usr items-center justify-around w-1/2 overflow-hidden">
-                    <p className="name overflow-hidden text-zinc-300 ">{result.username}</p>
-                    <p className="fulname hidden sm:block text-xs font-light text-zinc-400">{result.fullname}</p>
-                  </div>
-                  <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
-                  <ArrowForwardIcon className=" scale-75 justify-self-end text-zinc-400" />
-                </div>) : loading ? 'Loading' : error : `Search users`}
             </div>
+            {searchText ? data ? data.map((result) =>
+              <div className={`result flex items-center justify-between w-11/12 p-1 sm:p-4 rounded-full sm:rounded-xl ${result.type === 'faculty' ? 'bg-bg4' : 'bg-dbgGrey'}`} key={result.id} onClick={() => gotoProf(result.username)}>
+                <img className="w-8 h-8 sm:w-10 sm:h-10 object-cover rounded-full" src={"/profile/" + result.profilePic} alt="" />
+                <div className="usr items-center justify-around w-1/2 overflow-hidden">
+                  <p className="name overflow-hidden text-zinc-300 ">{result.username}</p>
+                  <p className="fulname hidden sm:block text-xs font-light text-zinc-400">{result.fullname}</p>
+                </div>
+                <p className="type text-[10px] text-zinc-400 hidden sm:block">{result.type}</p>
+                <ArrowForwardIcon className=" scale-75 justify-self-end text-zinc-400" />
+              </div>) : loading ? 'Loading' : error : `Search users`}
+          </div>
         </div>
       </div>
       <div className="hidden sm:flex sm:flex-1 px-5 items-center justify-start gap-5">
@@ -169,7 +168,7 @@ const Navbar = () => {
       </div>
       <div className="right flex items-center justify-end gap-5 text-white">
         <div className="group profcard flex items-center gap-2.5 relative md:static flex-col-reverse md:flex-row md:shadow-md rounded-full p-1 sm:p-3 sm:pl-5 bg-transparent md:bg-gradient-to-r from-bg2 to-bg3 dark:from-dbg2 dark:to-dbg3 cursor-pointer" onMouseOver={() => { setProfOpen(true); setProfClose(false) }} onMouseLeave={() => { setProfOpen(false); setProfClose(true) }}>
-          <div className={`${profOpen ? "animate-openL" :profClose? "animate-closeL":"hidden"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
+          <div className={`${profOpen ? "animate-openL" : profClose ? "animate-closeL" : "hidden"} profil absolute md:static flex-col items-center top-20 gap-1 bg-transparent text-xs`}>
             <div className="transition ease-in hover:scale-105 duration-100 hover:font-semibold w-full flex items-center justify-center p-1 md:p-1.5 gap-1 rounded-full bg-btn2 dark:bg-dbtn text-white" onClick={() => gotoProf()}>
               <AccountIcon style={{ fontSize: 'medium' }} />
               <span className={`${profOpen ? "animate-openIcons" : "animate-closeIcons"}`}>Profile</span>
