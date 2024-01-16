@@ -1,128 +1,128 @@
-@import "../../style.scss";
+// @import "../../style.scss";
 
-.stryupload {
-  @include themify($themes) {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 999;
+// .stryupload {
+//   @include themify($themes) {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100vw;
+//     height: 100vh;
+//     background-color: rgba(0, 0, 0, 0.5);
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     z-index: 999;
 
-    .wrapper {
-      margin: auto;
-      width: 40%;
-      height: 70%;
-      background-color: themed("bg");
-      padding: 20px;
-      z-index: 999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 20px;
-      -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-      -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-      box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
-      position: relative;
-      overflow: scroll;
+//     .wrapper {
+//       margin: auto;
+//       width: 40%;
+//       height: 70%;
+//       background-color: themed("bg");
+//       padding: 20px;
+//       z-index: 999;
+//       display: flex;
+//       justify-content: center;
+//       align-items: center;
+//       flex-direction: column;
+//       gap: 20px;
+//       -webkit-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//       -moz-box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//       box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
+//       position: relative;
+//       overflow: scroll;
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      @include tablet {
-        width: 70%;
-        height: 70%;
-      }
-      @include mobile {
-        width: 100%;
-        height: 100%;
-      }
-      h1 {
-        color: themed("colorSoft");
+//       &::-webkit-scrollbar {
+//         display: none;
+//       }
+//       @include tablet {
+//         width: 70%;
+//         height: 70%;
+//       }
+//       @include mobile {
+//         width: 100%;
+//         height: 100%;
+//       }
+//       h1 {
+//         color: themed("colorSoft");
 
-        @include mobile {
-          font-size: 20px;
-        }
-      }
+//         @include mobile {
+//           font-size: 20px;
+//         }
+//       }
 
-      form {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
-        gap: 20px;
+//       form {
+//         display: flex;
+//         flex-direction: column;
+//         flex-wrap: wrap;
+//         gap: 20px;
 
-        .stryfiles {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 50px;
-        }
+//         .stryfiles {
+//           display: flex;
+//           flex-wrap: wrap;
+//           gap: 50px;
+//         }
 
-        label {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          color: gray;
-          font-size: 14px;
+//         label {
+//           display: flex;
+//           flex-direction: column;
+//           gap: 10px;
+//           color: gray;
+//           font-size: 14px;
 
-          .imgContainer {
-            position: relative;
-            img {
-              width: 200px;
-              height: 300px;
-              object-fit: cover;
+//           .imgContainer {
+//             position: relative;
+//             img {
+//               width: 200px;
+//               height: 300px;
+//               object-fit: cover;
 
-              @include mobile {
-                width: 70vw;
-                height: 50vh;
-              }
-            }
+//               @include mobile {
+//                 width: 70vw;
+//                 height: 50vh;
+//               }
+//             }
 
-            .icon {
-              position: absolute;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              margin: auto;
-              font-size: 30px;
-              color: lightgray;
-              cursor: pointer;
-            }
-          }
-        }
+//             .icon {
+//               position: absolute;
+//               top: 0;
+//               bottom: 0;
+//               left: 0;
+//               right: 0;
+//               margin: auto;
+//               font-size: 30px;
+//               color: lightgray;
+//               cursor: pointer;
+//             }
+//           }
+//         }
 
-        input {
-          padding: 5px;
-          border: none;
-          border-bottom: 1px solid themed("border");
-          color: gray;
-          background-color: transparent;
-        }
+//         input {
+//           padding: 5px;
+//           border: none;
+//           border-bottom: 1px solid themed("border");
+//           color: gray;
+//           background-color: transparent;
+//         }
 
-        button {
-          border: none;
-          padding: 10px;
-          cursor: pointer;
-          color: white;
-          background-color: themed("btn2");
-        }
-      }
+//         button {
+//           border: none;
+//           padding: 10px;
+//           cursor: pointer;
+//           color: white;
+//           background-color: themed("btn2");
+//         }
+//       }
 
-      .close {
-        position: absolute;
-        top: 10px;
-        right: 20px;
-        border: none;
-        background-color: transparent;
-        padding: 5px;
-        cursor: pointer;
-        color: themed("tColor");
-      }
-    }
-  }
-}
+//       .close {
+//         position: absolute;
+//         top: 10px;
+//         right: 20px;
+//         border: none;
+//         background-color: transparent;
+//         padding: 5px;
+//         cursor: pointer;
+//         color: themed("tColor");
+//       }
+//     }
+//   }
+// }

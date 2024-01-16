@@ -16,7 +16,7 @@ const Posts = ({username}) => {
   );
   
   return (
-    <div className="posts flex flex-col gap-5">
+    <div className="posts flex flex-col gap-5 no-scrollbar">
       {error
         ? "Something went wrong!"
         : isLoading

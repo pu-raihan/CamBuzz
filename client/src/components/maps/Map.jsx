@@ -21,10 +21,9 @@ import LibraryIcon from '@mui/icons-material/AutoStories';
 import GymIcon from '@mui/icons-material/FitnessCenter';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
-const Map = ({currentLoc, location, zoomLevel, icon }) => {
+const Map = ({ currentLoc, location, zoomLevel, icon }) => {
 
     const [currentLocation, setCurrentLocation] = useState(currentLoc);
 
@@ -33,7 +32,7 @@ const Map = ({currentLoc, location, zoomLevel, icon }) => {
             (position) => {
                 const { latitude, longitude } = position.coords;
                 setCurrentLocation({
-                    lat: latitude, lng: longitude 
+                    lat: latitude, lng: longitude
                 });
             },
             (error) => {

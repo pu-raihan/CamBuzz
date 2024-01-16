@@ -5,7 +5,7 @@ import "./details.scss"
 import { useLocation } from "react-router-dom";
 import { makeRequest } from "../../axios";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Map from "../maps/Map";
 import Loader from "../loader/Loader";
 
@@ -39,6 +39,7 @@ const Details = () => {
     const [sortedData, setSortedData] = useState(data);
 
     const [currentLocation, setCurrentLocation] = useState(null);
+    const mapdiv = useRef(null);
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -72,7 +73,22 @@ const Details = () => {
                 }
             }
         );
-    }, [locErr]);
+        const handleClickOutside = (event) => {
+            if (mapdiv.current && !mapdiv.current.contains(event.target)) {
+                setMapopen(false);
+                // setOptOutside(true);
+            }
+            // if (cmtbarRef.current && !cmtbarRef.current.contains(event.target) && !cmtbtnRef.current.contains(event.target)) {
+            //     setCommentOpen(false);
+            //     setCmtOutside(true);
+            // }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [locErr, mapdiv]);
 
     useEffect(() => {
         setSortedData([])
@@ -131,15 +147,15 @@ const Details = () => {
             {locErr ?
                 <div className="flex flex-col w-4/5 items-center m-auto gap-5" >
                     <span className='text-red-600 text-xs'>{locErr}</span>
-                    <p>Please allow your location access</p>
+                    <p className='text-black dark:text-white'>Please allow your location access</p>
                 </div> : <>
                     {headError
                         ? "Titles couldn't load!"
                         : headLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
-                            : <div className='flex w-full items-center justify-between'>
-                                <h1 className='self-center text-gray-600 dark:text-gray-300'>{headData[0].heading}</h1>
-                                <div className="allbtn self-end" onClick={() => handleClick(sortedData, true)} >
-                                    <span>View All</span><MapFilledIcon />
+                            : <div className='flex w-full items-center justify-evenly'>
+                                <h1 className='flex-2 pr-2 text-right text-gray-600 font-bold dark:text-gray-300'>{headData[0].heading}</h1>
+                                <div className="flex flex-1 items-center justify-end gap-1 font-semibold text-xs dark:text-zinc-300 cursor-pointer" onClick={() => handleClick(sortedData, true)} >
+                                    <span>View All</span><MapFilledIcon className='scale-75' />
                                 </div>
                             </div>}
                     {error
@@ -150,8 +166,8 @@ const Details = () => {
                                     <div className="itemTop flex gap-2.5 p-2.5 justify-between w-full">
                                         <p className='name font-semibold text-sm xs:text-base dark:text-white w-1/2'>{resitem.name}</p>
                                         <p className='distance flex items-center font-medium text-xxs xs:text-xs w-1/4'>{(resitem.distance / 1000).toFixed(1)} <span className='text-xxs font-normal'>&nbsp; KMs away</span></p>
-                                        <span className={`text-xs flex items-center font-medium ${resitem.avail === 0?"text-red-600":"text-lime-600"}`} >{resitem.avail === 0 ?"Unavailable": "Available"}</span>
-                                        <MapIcon className='flex items-center scale-75' onClick={() => handleClick(resitem, false)} />
+                                        <span className={`text-xs flex items-center font-medium ${resitem.avail === 0 ? "text-red-600" : "text-lime-600"}`} >{resitem.avail === 0 ? "Unavailable" : "Available"}</span>
+                                        <MapIcon className='flex items-center scale-75 cursor-pointer' onClick={() => handleClick(resitem, false)} />
                                     </div>
                                     <div className="itemBottom flex justify-start px-2.5 w-full">
                                         <p className='remarks text-gray-600 dark:text-gray-400 text-xs'>{resitem.remarks}</p>
@@ -164,12 +180,14 @@ const Details = () => {
                             <div className="close flex justify-end w-screen text-gray-200 pr-[5vw] sm:pr-[10vw]">
                                 <CloseIcon onClick={() => setMapopen(false)} />
                             </div>
-                            <Map
-                                currentLoc={currentLocation}
-                                location={itemRes}
-                                zoomLevel={mapOpt.zoomLevel}
-                                icon={resource}
-                            />
+                            <div ref={mapdiv} className="mapdiv">
+                                <Map
+                                    currentLoc={currentLocation}
+                                    location={itemRes}
+                                    zoomLevel={mapOpt.zoomLevel}
+                                    icon={resource}
+                                />
+                            </div>
                         </div>
                     }
                 </>

@@ -36,7 +36,6 @@ app.use(express.json());
 app.use(
   cors({
     origin: process.env.CLIENT_ADD,
-    //"https://cambuzz.onrender.com",
     credentials: true,
   })
 );

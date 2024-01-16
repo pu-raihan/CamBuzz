@@ -53,7 +53,7 @@ const LeftBar = ({ setCurrRes }) => {
             <span className='text-xs'>Events</span>
             {error
               ? "Something went wrong!"
-              : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
+              : isLoading ? <Loader noBg={true} size={25} lColor={"black"} dColor={"white"} />
                 : data.length ? data.map((event) =>
                   <div className="flex opacity-80 hover:opacity-100 items-center gap-2.5" key={event.id}>
                     <img className='w-8 h-8 object-cover' src={"/events/" + event.img} alt="" />

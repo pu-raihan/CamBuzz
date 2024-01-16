@@ -74,7 +74,7 @@ const Login = () => {
   return (
     <div className="h-screen flex items-center justify-center bg-loginbg">
       <div className="shadow-lg relative flex flex-col sm:flex-row min-h-[500px] sm:h-3/5 w-11/12 md:w-4/5 lg:w-3/5 xl:w-1/2 rounded-2xl bg-gradient-to-r from-[#fff1f1] to-[#f7e7e7] overflow-hidden">
-        {loading && <Loader lColor={"white"} dColor={"white"} />}
+        {loading && <Loader lColor={"white"} dColor={"white"} bgc={"#53234199"} />}
         <div className="flex sm:flex-1 sm:flex-col justify-center p-5 sm:p-12 gap-5 sm:gap-8 text-white" style={{ background: 'linear-gradient(#38011a8e, #47002e92), url("/loginbg.jpg") center', backgroundSize: 'cover' }}>
           <img className="w-20 sm:w-3/5 md:w-1/2" src="/lightLogo.png" alt="" />
           <p className="text-xxs sm:text-sm">

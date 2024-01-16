@@ -61,7 +61,7 @@ const Stories = ({ username }) => {
         : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />
           : data.map((story, index) => (
             <div className="story inline-block flex-none w-[18%] sm:w-[calc(21%)] lg:w-[22%] xl:w-[calc(17%+1px)] rounded-xl xs:rounded-2xl overflow-hidden relative" key={story.sid}>
-              <img className="w-full h-full object-cover" src={`${process.env.REACT_APP_SERVER_ADD}/public/stories/` + story.img} alt="" onClick={() => handleImage(story.img, index)} />
+              <img className="w-full h-full object-cover" src={`/public/stories/` + story.img} alt="" onClick={() => handleImage(story.img, index)} />
               <span className="absolute left-0 right-0 mx-auto w-fit bottom-1 sm:bottom-2 px-2 font-light text-center text-white text-xxs xs:text-xs shadow-md bg-bgTrans rounded-full">{story.username}</span>
             </div>
           ))}

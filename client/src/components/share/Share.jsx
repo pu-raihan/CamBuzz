@@ -12,9 +12,8 @@ const Share = () => {
   const upload = async () => {
     const formData = new FormData();
     formData.append("file", file);
-    const res = await makeRequest.post("/upload", formData).then(() => { return res.data }).catch(err => {
-      return err;
-    })
+    const res = await makeRequest.post("/upload", formData)
+    return res.data
   };
 
   const { currentUser } = useContext(AuthContext);
@@ -37,13 +36,11 @@ const Share = () => {
     if (currentUser.type !== "guest") {
       let imgUrl = "";
       if (file) {
-        imgUrl = await upload().then(() => {
-          mutation.mutate({ desc, img: imgUrl, type: currentUser.type })
-          setDesc("");
-          setFile(null);
-        }).catch(error => {
-          console.log(error);
-        })
+        imgUrl = await upload()
+        console.log("image" + imgUrl);
+        mutation.mutate({ desc, img: imgUrl, type: currentUser.type })
+        setDesc("");
+        setFile(null);
       }
     }
   }
@@ -85,7 +82,7 @@ const Share = () => {
               </div>
             </label>
           </div>
-          <div className="sharebtn group inline-flex relative bg-btn dark:bg-dbtn rounded overflow-hidden cursor-pointer"  onClick={handleClick}>
+          <div className="sharebtn group inline-flex relative bg-btn dark:bg-dbtn rounded overflow-hidden cursor-pointer" onClick={handleClick}>
             <span className="p-1.5 z-10 text-white">Share</span>
             <span className="absolute z-0 top-0 left-0 w-32 h-32 transition-all duration-500 ease-in-out rotate-45 -translate-x-32 -translate-y-20 bg-rose-800 group-hover:translate-x-0 group-hover:rotate-90 group-active:bg-black group-active:opacity-50"></span>
           </div>

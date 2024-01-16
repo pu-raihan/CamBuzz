@@ -141,7 +141,7 @@ const Navbar = () => {
             onChange={handleChange} placeholder="Search..." />
           <div className={`results absolute ${resultOpen ? "animate-openD" : "hidden"} flex-col gap-0.5 sm:gap-2 items-center justify-start z-998 px-0 pt-2.5 pb-5 overflow-scroll no-scrollbar overflow-x-auto top-20 max-h-[40vh] sm:max-h-[60vh] min-h-[4vh] rounded-lg bg-bgTrans border-2 border-border1 dark:border-dborder1 text-white text-xs sm:text-sm`} style={{ left: left, width: width }} >
             <div className="close flex w-11/12 text-zinc-300 items-center text-xs justify-between">
-              {loading && <Loader size={25} lColor={"white"} dColor={"white"} />}
+              {loading && <Loader size={25} lColor={"white"} dColor={"white"} bgc="#360913b8" />}
               <span className="text-xxs sm:text-xs">{data && searchText && data.length + " results"} </span>
               <div className="transition ease-in hover:rotate-90 duration-100">
                 <CloseIcon style={{ fontSize: 'medium' }} onClick={() => { setResultOpen(false) }} />

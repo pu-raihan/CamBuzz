@@ -33,7 +33,7 @@ const Requests = () => {
     }
 
     return (
-        <div className="requests">
+        <div className="requests relative flex flex-col p-4 min-h-[calc(100vh-192px)] sm:min-h-[calc(100vh-112px)] bg-bgSoft dark:bg-dbgSoft gap-1.5 overflow-scroll no-scrollbar">
             {error
                 ? "Something went wrong!"
                 : isLoading ? <Loader noBg={true} size={30} lColor={"black"} dColor={"white"} />

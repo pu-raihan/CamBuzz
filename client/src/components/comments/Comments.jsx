@@ -40,7 +40,7 @@ const Comments = ({ postid, comments }) => {
   return (
     <div className="comments w-full">
       <div className="write">
-        <img src={"/profile/" + currentUser.profilePic} alt="" />
+        <img className="w-10 h-10 rounded-full object-cover" src={"/profile/" + currentUser.profilePic} alt="" />
         <input
           type="text"
           autoFocus
@@ -57,7 +57,7 @@ const Comments = ({ postid, comments }) => {
           <Link
             to={`/profile/${comment.username}`}
             style={{ textDecoration: "none", color: "inherit" }}
-          ><img src={"/profile/" + comment.profilePic} alt="" />
+          ><img className="w-10 h-10 rounded-full object-cover" src={"/profile/" + comment.profilePic} alt="" />
           </Link><div className="info">
             <span>{comment.username}</span>
             <p>{comment.desc}</p>
