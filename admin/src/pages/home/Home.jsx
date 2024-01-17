@@ -6,7 +6,6 @@ const Home = () => {
     <div className="home">
       <Link
         to="/faculties"
-        style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="card">
           FACULTIES
@@ -14,7 +13,6 @@ const Home = () => {
       </Link>
       <Link
         to="/classes"
-        style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="card">
           CLASSES
@@ -22,7 +20,6 @@ const Home = () => {
       </Link>
       <Link
         to="/resources"
-        style={{ textDecoration: "none", color: "inherit" }}
       >
         <div className="card">
           RESOURCES

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import "./chats.scss"
+
 import { makeRequest } from "../../axios";
 import { AuthContext } from "../../context/authContext";
 import { useQuery } from "@tanstack/react-query";

@@ -1,4 +1,4 @@
-import "./profile.scss";
+
 import FacebookIcon from "@mui/icons-material/FacebookOutlined";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";

@@ -65,11 +65,12 @@ const Post = ({ post }) => {
       <div className="container" >
         <div className="user">
           <div className="userInfo">
-            <img src={"/profile/" + post.profilePic} alt="" />
+            <Link
+              to={`/profile/${post.username}`}
+            ><img src={"/profile/" + post.profilePic} alt="" /></Link>
             <div className="details">
               <Link
                 to={`/profile/${post.username}`}
-                style={{ textDecoration: "none", color: "inherit" }}
               >
                 <span className="name">{post.username}</span>
               </Link>
@@ -94,10 +95,10 @@ const Post = ({ post }) => {
             ) : (
               <LikeIcon style={{ color: "#6b173e" }} onClick={handleLike} />
             )}
-            {data?data.length+" Likes":error}
+            {data ? data.length + " Likes" : error}
           </div>
           <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-            <CommentIcon />{cLoading?"Loading...":cData?cData.length+" Comments":cError}
+            <CommentIcon />{cLoading ? "Loading..." : cData ? cData.length + " Comments" : cError}
           </div>
           <div className="item">
             <ShareIcon />

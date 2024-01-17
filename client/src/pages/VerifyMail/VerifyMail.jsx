@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./verifymail.scss";
+// 
 import { AuthContext } from "../../context/authContext";
 import {
     signInWithEmailAndPassword,

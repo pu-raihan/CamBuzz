@@ -1,7 +1,7 @@
 import MapIcon from '@mui/icons-material/MapOutlined';
 import MapFilledIcon from '@mui/icons-material/Map';
 import CloseIcon from "@mui/icons-material/CloseRounded";
-import "./details.scss"
+
 import { useLocation } from "react-router-dom";
 import { makeRequest } from "../../axios";
 import { useQuery } from "@tanstack/react-query";

@@ -22,7 +22,6 @@ const Faculties = () => {
         <button>
           <Link
             to={"/"}
-            style={{ textDecoration: "none", color: "inherit" }}
           ><BackIcon style={{ fontSize: "14px" }} />Back</Link></button>
         <span>Faculties List</span>
       </div>

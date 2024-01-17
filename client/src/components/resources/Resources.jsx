@@ -10,7 +10,7 @@ import BusIcon from '@mui/icons-material/DirectionsBus';
 import LabIcon from '@mui/icons-material/Science';
 import LibraryIcon from '@mui/icons-material/AutoStories';
 import GymIcon from '@mui/icons-material/FitnessCenter';
-import "./resources.scss"
+
 import { useNavigate } from "react-router-dom";
 import { useEffect } from 'react';
 

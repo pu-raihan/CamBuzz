@@ -99,7 +99,7 @@ const Profile = () => {
               </div>
               <div className="right">
                 <Link
-                  style={{ textDecoration: "none", color: "inherit" }}
+                  
                   to='#'
                   onClick={(e) => {
                     window.location.href = "mailto:" + data.email;

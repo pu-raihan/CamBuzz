@@ -1,4 +1,4 @@
-import "./share.scss";
+
 import Image from '@mui/icons-material/ImageOutlined';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";

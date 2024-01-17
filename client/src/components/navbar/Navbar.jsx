@@ -1,4 +1,4 @@
-import "./navbar.scss";
+
 import NightMode from "@mui/icons-material/DarkModeRounded";
 import LightMode from "@mui/icons-material/LightModeRounded";
 import SearchIcon from "@mui/icons-material/SearchOutlined";

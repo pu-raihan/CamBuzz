@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import "./register.scss";
+
 import axios from "axios";
 import { makeRequest } from "../../axios";
 import { QueryClient, QueryClientProvider, useQuery } from "@tanstack/react-query";

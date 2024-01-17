@@ -1,4 +1,4 @@
-import "./menubar.scss";
+
 import WidgetsIcon from '@mui/icons-material/Widgets';
 import EventIcon from '@mui/icons-material/EventNoteRounded';
 import ChatIcon from '@mui/icons-material/ChatRounded';

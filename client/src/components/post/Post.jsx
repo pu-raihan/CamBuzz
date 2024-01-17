@@ -1,4 +1,4 @@
-import "./post.scss";
+
 import MoreIcon from "@mui/icons-material/MoreVertRounded";
 import { Link } from "react-router-dom";
 import CommentIcon from "@mui/icons-material/ChatOutlined";
@@ -71,7 +71,7 @@ const Post = ({ post }) => {
   const optbarRef = useRef(null);
   const cmtbarRef = useRef(null);
   const cmtbtnRef = useRef(null);
-  
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (optbarRef.current && !optbarRef.current.contains(event.target)) {
@@ -88,7 +88,7 @@ const Post = ({ post }) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [optbarRef, cmtbarRef,cmtbtnRef]);
+  }, [optbarRef, cmtbarRef, cmtbtnRef]);
 
 
   return (
@@ -96,11 +96,15 @@ const Post = ({ post }) => {
       <div className="cont p-5 flex flex-col gap-2" >
         <div className="top relative flex items-center justify-between dark:text-white">
           <div className="userInfo flex gap-5">
-            <img className="w-10 h-10 object-cover rounded-full" src={"/profile/" + post.profilePic} alt="" />
+            <Link
+              to={`/profile/${post.username}`}
+
+            ><img className="w-10 h-10 object-cover rounded-full" src={"/profile/" + post.profilePic} alt="" />
+            </Link>
             <div className="detail flex flex-col">
               <Link
                 to={`/profile/${post.username}`}
-                style={{ textDecoration: "none", color: "inherit" }}
+
               >
                 <span className="font-medium">{post.username}</span>
               </Link>

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./dialog.scss";
+
 import CloseIcon from "@mui/icons-material/CloseRounded";
 // import { useState } from "react";
 // import Loader from '../loader/Loader';

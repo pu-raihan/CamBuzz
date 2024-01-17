@@ -1,4 +1,4 @@
-import "./posts.scss";
+
 import Post from "../post/Post";
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
@@ -16,7 +16,7 @@ const Posts = ({username}) => {
   );
   
   return (
-    <div className="posts flex flex-col gap-5 no-scrollbar">
+    <div className="posts flex flex-col gap-5 no-scrollbar relative min-h-[20vh]">
       {error
         ? "Something went wrong!"
         : isLoading

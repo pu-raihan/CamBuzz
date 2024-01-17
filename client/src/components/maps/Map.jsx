@@ -21,7 +21,7 @@ import LibraryIcon from '@mui/icons-material/AutoStories';
 import GymIcon from '@mui/icons-material/FitnessCenter';
 import DirectionsIcon from '@mui/icons-material/Directions';
 import RefreshIcon from '@mui/icons-material/Refresh';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 
 const Map = ({ currentLoc, location, zoomLevel, icon }) => {
 

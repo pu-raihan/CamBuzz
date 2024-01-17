@@ -1,5 +1,5 @@
 import { DotSpinner } from '@uiball/loaders'
-// import "./loader.scss";
+// 
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 

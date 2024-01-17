@@ -53,7 +53,6 @@ const Comments = ({ postid }) => {
             <div className="comment" key={comment.cid}>
                <Link
                 to={`/profile/${comment.username}`}
-                style={{ textDecoration: "none", color: "inherit" }}
               ><img src={"/profile/"+comment.profilePic} alt="" />
               </Link><div className="info">
                 <span>{comment.username}</span>

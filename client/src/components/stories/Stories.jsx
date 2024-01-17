@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/authContext";
-import "./stories.scss";
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 import BackIcon from '@mui/icons-material/ArrowBackIosNew';
@@ -15,7 +14,6 @@ const Stories = ({ username }) => {
   const { currentUser } = useContext(AuthContext);
   const [uploadOpen, setUploadOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false)
-  // const [image, setImage] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const { isLoading, error, data } = useQuery(["stories"], () =>
@@ -24,28 +22,7 @@ const Stories = ({ username }) => {
     })
   );
 
-  // const handlePrevImage = () => {
-  //   if (currentImageIndex === 0) {
-  //     setImageOpen(false);
-  //   } else {
-  //     const nextImage = data[currentImageIndex - 1].img;
-  //     setImage(nextImage);
-  //     setCurrentImageIndex(currentImageIndex - 1);
-  //   }
-  // };
-
-  // const handleNextImage = () => {
-  //   if (currentImageIndex === data.length - 1) {
-  //     setImageOpen(false);
-  //   } else {
-  //     const nextImage = data[currentImageIndex + 1].img;
-  //     setImage(nextImage);
-  //     setCurrentImageIndex(currentImageIndex + 1);
-  //   }
-  // };
-
-  const handleImage = (image, index) => {
-    // setImage(image)
+  const handleImage = (index) => {
     setCurrentImageIndex(index);
     setImageOpen(true)
   }
@@ -54,7 +31,9 @@ const Stories = ({ username }) => {
     <div className="stories relative flex justify-start gap-2.5 sm:gap-5 p-2.5 mb-2 sm:mb-3 h-24 xs:h-28 sm:h-44 overflow-x-scroll no-scrollbar">
       <div className="story inline-block flex-none  w-[18%] sm:w-[calc(21%)] lg:w-[22%] xl:w-[calc(17%+1px)] rounded-xl overflow-hidden relative">
         <img className="w-full h-full object-cover" src={"/profile/" + currentUser.profilePic} alt="" />
-        <button className="flex items-center justify-center absolute top-0 right-0 bottom-0 left-0 m-auto sm:right-auto sm:top-auto sm:bottom-2.5 sm:left-2.5 text-white bg-bg4 rounded-full bg-opacity-70 w-8 h-8 cursor-pointer text-3xl transition ease-in-out hover:rotate-180 duration-300" onClick={() => setUploadOpen(true)}>+</button>
+        <button className="flex items-center justify-center text-3xl text-center absolute top-0 right-0 bottom-0 left-0 m-auto sm:right-auto sm:top-auto sm:bottom-2.5 sm:left-2.5 text-white bg-bg4 rounded-full bg-opacity-70 w-8 h-8 cursor-pointer transition ease-in-out hover:rotate-180 duration-300" onClick={() => setUploadOpen(true)}>
+          <CloseIcon className="rotate-45"/>
+        </button>
       </div>
       {error
         ? "Something went wrong!"
@@ -90,14 +69,6 @@ const Stories = ({ username }) => {
             ))}
           </Carousel>
         </div>
-        // <div className="imagebox">
-        //   <BackIcon onClick={handlePrevImage} className="arrows" />
-        //   <img src={`${process.env.REACT_APP_SERVER_ADD}/public/stories/` + image} alt="" />
-        //   <button className="close" onClick={() => setImageOpen(false)}>
-        //     <CloseIcon />
-        //   </button>
-        //   <ForwardIcon onClick={handleNextImage} className="arrows" />
-        // </div>
       }
       {uploadOpen && <Upload setUploadOpen={setUploadOpen} currentUser={currentUser} />}
     </div>

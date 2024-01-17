@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import "./forum.scss"
+
 import BackIcon from '@mui/icons-material/ArrowBackIosNew';
 import SendIcon from "@mui/icons-material/SendOutlined";
 import { makeRequest } from "../../axios";

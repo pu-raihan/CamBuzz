@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./upload.scss";
+
 import { makeRequest } from "../../axios";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";

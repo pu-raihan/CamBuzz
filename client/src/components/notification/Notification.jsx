@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import "./notification.scss";
+
 import CloseIcon from "@mui/icons-material/CloseRounded";
 
 const Notification = ({ setNotificationOpen, dFunction, value, qst }) => {
