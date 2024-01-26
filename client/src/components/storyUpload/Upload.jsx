@@ -63,17 +63,15 @@ const Upload = ({ setUploadOpen, currentUser }) => {
 
   return (
     <div className="upload fixed flex top-0 left-0 w-screen h-screen bg-black bg-opacity-50 z-999">
-      <div ref={divRef} className="wrapper dark:text-white m-auto w-full xs:w-1/2 h-full xs:h-3/4 lg:w-2/5 p-10 pr-2 bg-bg1 dark:bg-dbg1 flex flex-col items-center justify-center max-xs:justify-center shadow-2xl relative">
+      <div ref={divRef} className="dark:text-white m-auto w-full xs:w-1/2 h-full xs:h-3/4 lg:w-2/5 p-10 bg-bg1 dark:bg-dbg1 flex flex-col items-center justify-center shadow-2xl relative">
         <h1 className="text-xl pb-5 font-semibold">Post your story</h1>
         <form className="flex flex-col items-center gap-5 w-full h-full">
-          <div className="stryfiles flex flex-wrap w-full h-full">
-            <label className="w-full h-full" htmlFor="stryFile">
-              <div className="imgContainer relative w-full h-full">
+          <div className="flex w-full h-full relative overflow-y-auto">
+            <label className="w-full relative" htmlFor="stryFile">
                 <img
                   className="w-full h-full object-cover"
                   src={file && URL.createObjectURL(file)} alt="" />
                 <CloudUploadIcon className="absolute top-0 left-0 right-0 bottom-0 m-auto text-3xl text-gray-200 shadow-lg cursor-pointer" />
-              </div>
             <input
               type="file"
               id="stryFile"
