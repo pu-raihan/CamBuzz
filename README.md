@@ -49,7 +49,7 @@ happening on campus <br><br>
 ## Demo
 * SCSS
   - Code branch -> [scss](https://github.com/pu-raihan/CamBuzz/tree/scss)<br>
-  - Demo -> [CamBuzz](https://cambuzz-css.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/ef3e8c2e-ced4-4b78-851b-30e6d347d172/deploy-status)](https://app.netlify.com/sites/cambuzz-css/deploys)<br>
+  - Demo -> [CamBuzz-SCSS](https://cambuzz-scss.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/ef3e8c2e-ced4-4b78-851b-30e6d347d172/deploy-status)](https://app.netlify.com/sites/cambuzz-css/deploys)<br>
 * Tailwind
   - Code branch -> [tailwind](https://github.com/pu-raihan/CamBuzz/tree/tailwind)<br>
-  - Demo -> [CamBuzz](https://cambuzz.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/04ad319c-60e3-4af9-8cf9-87fc631e2af7/deploy-status)](https://app.netlify.com/sites/cambuzz/deploys)<br>
+  - Demo -> [CamBuzz-tailwind](https://cambuzz.netlify.app) &emsp; [![Netlify Status](https://api.netlify.com/api/v1/badges/04ad319c-60e3-4af9-8cf9-87fc631e2af7/deploy-status)](https://app.netlify.com/sites/cambuzz/deploys)<br>
